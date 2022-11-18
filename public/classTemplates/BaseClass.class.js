@@ -1,5 +1,5 @@
 "use strict";
-class BaseObjectsClass {
+class BaseClass {
     constructor(name) {
         this.name = name;
     }

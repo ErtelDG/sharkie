@@ -1,4 +1,4 @@
-class Level extends BaseObjectsClass {
+class Level extends BaseClass {
    constructor() {
       super("LevelClass");
       this.createNewBackground();
