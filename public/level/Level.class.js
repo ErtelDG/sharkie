@@ -2,6 +2,10 @@
 let Level = class Level extends StaticObjectsClass {
     constructor() {
         super();
+        this.newBackground();
     }
-    backgrounds = [new Background(), new Background()];
+    background = [];
+    newBackground() {
+        this.background = [new Background1(0, 0)];
+    }
 };

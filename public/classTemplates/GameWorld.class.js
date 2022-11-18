@@ -9,7 +9,7 @@ class GameWorld {
         console.log("Draw:");
         if (this.ctx != null) {
             this.ctx.clearRect(0, 0, 720, 400);
-            this.ctx.drawImage(this.level.backgrounds[0].imgPath, this.level.backgrounds[0].x, this.level.backgrounds[0].y, this.level.backgrounds[0].width, this.level.backgrounds[0].height);
+            this.ctx.drawImage(this.level.background[0].arrayAllImages[0], this.level.background[0].x, this.level.background[0].y, this.level.background[0].width, this.level.background[0].height);
             this.requestAnimation();
         }
     }

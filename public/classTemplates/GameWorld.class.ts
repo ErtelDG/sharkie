@@ -1,5 +1,5 @@
 class GameWorld {
-   ctx: CanvasRenderingContext2D | null = ctx;
+   ctx: any = ctx;
    level = new Level();
 
    constructor() {
@@ -11,11 +11,11 @@ class GameWorld {
       if (this.ctx != null) {
          this.ctx.clearRect(0, 0, 720, 400);
          this.ctx.drawImage(
-            this.level.backgrounds[0].imgPath,
-            this.level.backgrounds[0].x,
-            this.level.backgrounds[0].y,
-            this.level.backgrounds[0].width,
-            this.level.backgrounds[0].height
+            this.level.background[0].arrayAllImages[0],
+            this.level.background[0].x,
+            this.level.background[0].y,
+            this.level.background[0].width,
+            this.level.background[0].height
          );
          this.requestAnimation();
       }
