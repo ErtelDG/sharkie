@@ -8,6 +8,7 @@ class GameWorld {
     }
     async draw() {
         if (this.ctx != null) {
+            this.ctx.clearRect(0, 0, canvas.width, canvas.height);
             this.drawStaticObject(this.level.backgrounds);
             this.drawStaticObject(this.level.coins);
         }

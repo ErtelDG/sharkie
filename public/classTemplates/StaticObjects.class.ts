@@ -3,13 +3,14 @@ class StaticObjectsClass {
       this.name = name;
    }
    name: string;
-   imgPath=new Image();
+   imgPath = new Image();
    imagesCach: any = [];
    arrayAllImages: string[] = [];
    width = 0;
    height = 0;
    y = 0;
    x = 0;
+   
 
    async loadAllImgInCach(array: string[]) {
       array.forEach(async (path: string) => {
@@ -21,8 +22,8 @@ class StaticObjectsClass {
    counterForLoadOneImgFromCachArray = 0;
 
    async loadOneImgFromCach() {
-      let positionArray = this.counterForLoadOneImgFromCachArray%this.imagesCach.length;
-            this.imgPath.src = await this.imagesCach[positionArray];
+      let positionArray = this.counterForLoadOneImgFromCachArray % this.imagesCach.length;
+      this.imgPath.src = await this.imagesCach[positionArray];
       this.counterForLoadOneImgFromCachArray++;
    }
 
@@ -31,4 +32,6 @@ class StaticObjectsClass {
          this.loadOneImgFromCach();
       }, time);
    }
+
+ 
 }

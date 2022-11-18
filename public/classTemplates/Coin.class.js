@@ -11,8 +11,34 @@ class Coin extends StaticObjectsClass {
         this.width = 50;
         this.height = 50;
         this.x = Math.random() * 6000;
-        this.y = Math.random() * 300;
+        this.y = Math.random() * (200 - 100) + 100;
         this.loadAllImgInCach(this.arrayAllImages);
         this.animation(100);
+        setInterval(() => {
+            this.lightUpAndDownAnimation();
+        }, 100);
+    }
+    timer = 0;
+    stopUp = false;
+    stopDown = false;
+    speedUpAndDown = Math.random() * 10;
+    lightUpAndDownAnimation() {
+        if (this.stopUp == false) {
+            this.y += this.speedUpAndDown;
+            this.timer++;
+            if (this.timer == 20) {
+                this.stopUp = true;
+            }
+        }
+        else if (this.stopDown == false) {
+            this.y -= this.speedUpAndDown;
+            this.timer--;
+            if (this.timer == 0) {
+                this.stopDown = true;
+            }
+        }
+        else {
+            (this.stopUp = false), (this.stopDown = false);
+        }
     }
 }
