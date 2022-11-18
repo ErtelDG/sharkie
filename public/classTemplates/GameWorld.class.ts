@@ -5,7 +5,7 @@ class GameWorld {
 
    constructor() {
       this.level = level1;
-      this.sharkie = new Sharkie();
+      this.sharkie = [new Sharkie()];
       this.draw();
    }
 
@@ -15,6 +15,7 @@ class GameWorld {
          this.drawStaticObject(this.level.backgrounds);
          this.drawStaticObject(this.level.coins);
          this.drawMovableObject(this.sharkie);
+         this.drawMovableObject(this.level.enemies);
       }
 
       this.requestAnimation();
@@ -40,7 +41,9 @@ class GameWorld {
       });
    }
 
-   drawMovableObject(movableObject: any) {
-      this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+   drawMovableObject(movableObjectArray: any) {
+      movableObjectArray.forEach((movableObject: { imgPath: any; x: any; y: any; width: any; height: any }) => {
+         this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+      });
    }
 }

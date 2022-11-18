@@ -6,9 +6,12 @@ class Enemy extends MovableClass {
         this.loadAllImgInCach(this.arrayAllImages);
         setInterval(() => {
             this.loadOneImgFromCach();
-        }, 100);
-        this.width = 300;
-        this.height = 250;
+            this.moveLeft(Math.random() * 12);
+        }, 50);
+        this.width = 100;
+        this.height = 80;
+        this.x = Math.random() * 6000;
+        this.y = Math.random() * 300;
     }
     setAllImagesInArray() {
         return (this.arrayAllImages = [

@@ -5,7 +5,7 @@ class GameWorld {
     sharkie;
     constructor() {
         this.level = level1;
-        this.sharkie = new Sharkie();
+        this.sharkie = [new Sharkie()];
         this.draw();
     }
     async draw() {
@@ -14,6 +14,7 @@ class GameWorld {
             this.drawStaticObject(this.level.backgrounds);
             this.drawStaticObject(this.level.coins);
             this.drawMovableObject(this.sharkie);
+            this.drawMovableObject(this.level.enemies);
         }
         this.requestAnimation();
     }
@@ -34,7 +35,9 @@ class GameWorld {
             this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
         });
     }
-    drawMovableObject(movableObject) {
-        this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+    drawMovableObject(movableObjectArray) {
+        movableObjectArray.forEach((movableObject) => {
+            this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+        });
     }
 }

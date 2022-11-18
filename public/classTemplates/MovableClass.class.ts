@@ -8,4 +8,8 @@ class MovableClass extends BaseClass {
       this.x = 10;
       this.y = 10;
    }
+
+   moveLeft(speed:number) {
+      this.x -= speed;
+   }
 }
