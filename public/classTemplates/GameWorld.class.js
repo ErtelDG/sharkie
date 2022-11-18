@@ -1,17 +1,19 @@
 "use strict";
 class GameWorld {
     ctx = ctx;
-    level = new Level();
+    level;
     constructor() {
+        this.level = level1;
         this.draw();
     }
-    draw() {
+    async draw() {
         console.log("Draw:");
         if (this.ctx != null) {
-            this.ctx.clearRect(0, 0, 720, 400);
-            this.ctx.drawImage(this.level.background[0].arrayAllImages[0], this.level.background[0].x, this.level.background[0].y, this.level.background[0].width, this.level.background[0].height);
-            this.requestAnimation();
+            this.level.background.forEach((backgroundElement) => {
+                this.ctx.drawImage(backgroundElement.imgPath, backgroundElement.x, backgroundElement.y, backgroundElement.width, backgroundElement.height);
+            });
         }
+        this.requestAnimation();
     }
     /**
      * set the request animation
@@ -21,5 +23,8 @@ class GameWorld {
         requestAnimationFrame(function () {
             self.draw();
         });
+    }
+    loadImage() {
+        this.level.background[0].loadOneImgFromCach(this.level.background[0].imageCach);
     }
 }

@@ -1,8 +1,7 @@
-class Background2 extends StaticObjectsClass {
-   constructor(x: number, y: number) {
+class Background extends StaticObjectsClass {
+   constructor(imgPath: string, x: number, y: number) {
       super();
-      this.imgPath = [];
-      this.arrayAllImages = [];
+      this.arrayAllImages = [imgPath];
       this.width = 720;
       this.height = 400;
       this.x = x;

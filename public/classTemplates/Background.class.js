@@ -1,11 +1,8 @@
 "use strict";
-class Background1 extends StaticObjectsClass {
-    constructor(x, y) {
+class Background extends StaticObjectsClass {
+    constructor(imgPath, x, y) {
         super();
-        this.imgPath = [];
-        this.arrayAllImages = [
-            "img/3.Background/Layers/5.Water/D1.png"
-        ];
+        this.arrayAllImages = [imgPath];
         this.width = 720;
         this.height = 400;
         this.x = x;

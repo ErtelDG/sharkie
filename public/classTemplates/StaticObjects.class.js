@@ -12,12 +12,12 @@ class StaticObjectsClass {
         array.forEach(async (path) => {
             let pathURL = path;
             await this.imageCach.push(pathURL);
-            console.log(this.imageCach);
         });
     }
-    async loadOneImgFromCach(imageCach) {
+    async loadOneImgFromCach(imageFromCach) {
         this.imgPath = new Image();
-        this.imgPath.src = await imageCach;
-        console.log(this.imgPath);
+        this.imgPath.src = await imageFromCach;
+        console.log("Created loadOneImgFromCach Static Objects", this.imgPath);
+        console.log("counterForLoadImagesFromCachToPath", this.imgPath);
     }
 }
