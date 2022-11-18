@@ -8,24 +8,14 @@ class GameWorld {
    }
 
    async draw() {
-      console.log("Draw:");
+     
       if (this.ctx != null) {
-         
-         this.level.background.forEach((backgroundElement: { imgPath: any; x: any; y: any; width: any; height: any; }) => {
-         this.ctx.drawImage(
-            backgroundElement.imgPath,
-            backgroundElement.x,
-            backgroundElement.y,
-            backgroundElement.width,
-            backgroundElement.height
-         );   
-         });
-         
+         this.drawStaticObject(this.level.backgrounds);
+        this.drawStaticObject(this.level.coins);
       }
 
       this.requestAnimation();
    }
-
 
    /**
     * set the request animation
@@ -39,5 +29,11 @@ class GameWorld {
 
    loadImage() {
       this.level.background[0].loadOneImgFromCach(this.level.background[0].imageCach);
+   }
+
+   drawStaticObject(objectToDraw: any) {
+      objectToDraw.forEach((objectElement: { imgPath: any; x: any; y: any; width: any; height: any }) => {
+         this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
+      });
    }
 }

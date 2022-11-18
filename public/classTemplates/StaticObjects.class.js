@@ -1,8 +1,11 @@
 "use strict";
 class StaticObjectsClass {
-    constructor() { }
-    imgPath;
-    imageCach = [];
+    constructor(name) {
+        this.name = name;
+    }
+    name;
+    imgPath = new Image();
+    imagesCach = [];
     arrayAllImages = [];
     width = 0;
     height = 0;
@@ -11,13 +14,18 @@ class StaticObjectsClass {
     async loadAllImgInCach(array) {
         array.forEach(async (path) => {
             let pathURL = path;
-            await this.imageCach.push(pathURL);
+            await this.imagesCach.push(pathURL);
         });
     }
-    async loadOneImgFromCach(imageFromCach) {
-        this.imgPath = new Image();
-        this.imgPath.src = await imageFromCach;
-        console.log("Created loadOneImgFromCach Static Objects", this.imgPath);
-        console.log("counterForLoadImagesFromCachToPath", this.imgPath);
+    counterForLoadOneImgFromCachArray = 0;
+    async loadOneImgFromCach() {
+        let positionArray = this.counterForLoadOneImgFromCachArray % this.imagesCach.length;
+        this.imgPath.src = await this.imagesCach[positionArray];
+        this.counterForLoadOneImgFromCachArray++;
+    }
+    animation(time) {
+        setInterval(() => {
+            this.loadOneImgFromCach();
+        }, time);
     }
 }
