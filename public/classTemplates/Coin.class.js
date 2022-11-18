@@ -1,5 +1,5 @@
 "use strict";
-class Coin extends StaticObjectsClass {
+class Coin extends BaseObjectsClass {
     constructor() {
         super("CoinClass");
         this.arrayAllImages = [

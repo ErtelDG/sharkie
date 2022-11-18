@@ -1,4 +1,4 @@
-class StaticObjectsClass {
+class BaseObjectsClass {
    constructor(name: string) {
       this.name = name;
    }

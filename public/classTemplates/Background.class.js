@@ -1,5 +1,5 @@
 "use strict";
-class Background extends StaticObjectsClass {
+class Background extends BaseObjectsClass {
     constructor(imgPath, x, y) {
         super("BackgroundClass");
         this.arrayAllImages = [imgPath];

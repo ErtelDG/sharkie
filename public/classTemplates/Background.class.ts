@@ -1,4 +1,4 @@
-class Background extends StaticObjectsClass {
+class Background extends BaseObjectsClass {
    constructor(imgPath: string, x: number, y: number) {
       super("BackgroundClass");
       this.arrayAllImages = [imgPath];

@@ -1,5 +1,5 @@
 "use strict";
-class Level extends StaticObjectsClass {
+class Level extends BaseObjectsClass {
     constructor() {
         super("LevelClass");
         this.createNewBackground();

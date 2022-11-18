@@ -1,5 +1,5 @@
 "use strict";
-class StaticObjectsClass {
+class BaseObjectsClass {
     constructor(name) {
         this.name = name;
     }
