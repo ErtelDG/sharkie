@@ -30,7 +30,7 @@ class Level extends BaseClass {
     createEnemies(num) {
         let howManyElementsToBuild = num;
         for (let i = 0; i < howManyElementsToBuild; i++) {
-            this.enemies.push(new Enemy());
+            this.enemies.push(new EnemyPufferFish());
         }
     }
     createStaticObject() {
