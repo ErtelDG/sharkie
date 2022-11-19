@@ -1,13 +1,12 @@
 "use strict";
-class EnemyPufferFish extends EnemyClass {
+class EnemyJellyFishLila extends EnemyClass {
     constructor() {
-        super("EnemyPufferFish");
+        super("EnemyJellyFishLila");
         this.setAllImagesInArray([
-            "img/2.Enemy/1PufferFish/1.Swim/3.swim1.png",
-            "img/2.Enemy/1PufferFish/1.Swim/3.swim2.png",
-            "img/2.Enemy/1PufferFish/1.Swim/3.swim3.png",
-            "img/2.Enemy/1PufferFish/1.Swim/3.swim4.png",
-            "img/2.Enemy/1PufferFish/1.Swim/3.swim5.png",
+            "img/2.Enemy/2JellyFish/RegularDamage/Lila1.png",
+            "img/2.Enemy/2JellyFish/RegularDamage/Lila2.png",
+            "img/2.Enemy/2JellyFish/RegularDamage/Lila3.png",
+            "img/2.Enemy/2JellyFish/RegularDamage/Lila4.png",
         ]);
         this.loadAllImgInCach(this.arrayAllImages);
         setInterval(() => {
