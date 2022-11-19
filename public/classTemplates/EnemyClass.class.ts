@@ -9,8 +9,8 @@ class Enemy extends MovableClass {
       }, 50);
       this.width = 100;
       this.height = 80;
-      this.x = Math.random() * 6000;
-      this.y = Math.random() * 300;
+      this.x = Math.random() * (6000 - 500) + 500;
+      this.y = Math.random() * 600;
    }
 
    setAllImagesInArray() {
