@@ -4,9 +4,9 @@ class StatusBar extends BaseClass {
         super("StatusBar");
         this.name = statusBarFor;
         this.setCorrectImageForStatusBarInAllArray(this.name);
-        this.width = 120;
+        this.width = 160;
         this.height = 60;
-        this.y = 10;
+        this.y = 5;
         this.loadAllImgInCach(this.arrayAllImages);
         this.loadOneImgFromCach();
     }
@@ -17,15 +17,18 @@ class StatusBar extends BaseClass {
         }
         else if (whichStatusBar == "coin") {
             this.arrayAllImages = this.imgStatusBarCoin;
-            this.x = 140;
+            this.x = 180;
         }
         else if (whichStatusBar == "bubble") {
             this.arrayAllImages = this.imgStatusBarBubble;
-            this.x = 270;
+            this.x = 350;
+        }
+        else if (whichStatusBar == "finalFish") {
+            this.arrayAllImages = this.imgStatusFinalFish;
+            this.x = 520;
         }
         else {
-            this.arrayAllImages = this.imgStatusFinalFish;
-            this.x = 400;
+            alert("Set for statusbar one the following parameters: life || coin || bubble || finalFish!");
         }
     }
     imgStatusBarLife = [

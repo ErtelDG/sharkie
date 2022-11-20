@@ -13,6 +13,7 @@ class GameWorld {
             this.ctx.clearRect(0, 0, canvas.width, canvas.height);
             this.drawStaticObject(this.level.backgrounds);
             this.drawStaticObject(this.level.coins);
+            this.drawStaticObject(this.level.statusbar);
             this.drawMovableObject(this.sharkie);
             this.drawMovableObject(this.level.enemies);
         }

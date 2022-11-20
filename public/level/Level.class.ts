@@ -6,11 +6,13 @@ class Level extends BaseClass {
       this.createEnemies(10, EnemyPufferFish);
       this.createEnemies(10, EnemyJellyFishLila);
       this.createEnemies(1, EnemyFinalFish);
+      this.createStatusBar();
    }
 
    backgrounds: any[] = [];
    coins: any[] = [];
    enemies: any[] = [];
+   statusbar: any[] = [];
 
    createNewBackground(num: number) {
       let howManyElementsToBuild = num;
@@ -43,5 +45,9 @@ class Level extends BaseClass {
       for (let i = 0; i < howManyElementsToBuild; i++) {
          arrayNameForCreateStaticObjectInLevel.push(new whichStaticObject());
       }
+   }
+
+   createStatusBar() {
+      this.statusbar.push(new StatusBar("life"), new StatusBar("coin"), new StatusBar("bubble"), new StatusBar("finalFish"));
    }
 }
