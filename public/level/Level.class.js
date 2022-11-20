@@ -3,7 +3,7 @@ class Level extends BaseClass {
     constructor() {
         super("LevelClass");
         this.createNewBackground(10);
-        this.createStaticObject();
+        this.createStaticObject(20, this.coins, Coin);
         this.createEnemies(10, EnemyPufferFish);
         this.createEnemies(10, EnemyJellyFishLila);
         this.createEnemies(1, EnemyFinalFish);
@@ -29,16 +29,16 @@ class Level extends BaseClass {
                 (coordinateForBackgroundImg += 719);
         }
     }
-    createEnemies(num, enemieObjectType) {
-        let howManyElementsToBuild = num;
+    createEnemies(quantity, enemieObjectType) {
+        let howManyElementsToBuild = quantity;
         for (let i = 0; i < howManyElementsToBuild; i++) {
             this.enemies.push(new enemieObjectType());
         }
     }
-    createStaticObject() {
-        let howManyElementsToBuild = 20;
+    createStaticObject(quantity, arrayNameForCreateStaticObjectInLevel, whichStaticObject) {
+        let howManyElementsToBuild = quantity;
         for (let i = 0; i < howManyElementsToBuild; i++) {
-            this.coins.push(new Coin());
+            arrayNameForCreateStaticObjectInLevel.push(new whichStaticObject());
         }
     }
 }
