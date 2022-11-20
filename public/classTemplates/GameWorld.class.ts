@@ -16,6 +16,7 @@ class GameWorld {
          this.ctx.clearRect(0, 0, canvas.width, canvas.height);
          this.drawStaticObject(this.level.backgrounds);
          this.drawStaticObject(this.level.coins);
+         this.drawRotateStaticObject(this.level.bubbles);
          this.drawStaticObject(this.level.statusBar);
          this.drawText(this.level.statusBarValue);
          this.drawMovableObject(this.sharkie);
@@ -45,8 +46,18 @@ class GameWorld {
       });
    }
 
+   drawRotateStaticObject(objectToDraw: any) {
+      objectToDraw.forEach((objectElement: { imgPath: any; x: any; y: any; width: any; height: any }) => {
+       ddthis.ctx.save();
+dd this.ctx.translate(canvas.width / 2, canvas.height / 2);
+ddthis.ctx.rotate((45 * Math.PI) / 180);
+         this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
+         //this.ctx.restore();
+      });
+   }
+
    drawText(objectToDraw: any) {
-      objectToDraw.forEach((objectElement: { currentCounterForThisObject: any; x: any; y: any; }) => {
+      objectToDraw.forEach((objectElement: { currentCounterForThisObject: any; x: any; y: any }) => {
          this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
       });
    }
