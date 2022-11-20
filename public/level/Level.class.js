@@ -6,6 +6,7 @@ class Level extends BaseClass {
         this.createStaticObject();
         this.createEnemies(10, EnemyPufferFish);
         this.createEnemies(10, EnemyJellyFishLila);
+        this.createEnemies(1, EnemyFinalFish);
     }
     backgrounds = [];
     coins = [];
