@@ -9,9 +9,6 @@ class StatusBar extends BaseClass {
         this.loadAllImgInCach(this.arrayAllImages);
         this.loadOneImgFromCach();
     }
-    counterLife = 0;
-    counterCoin = 0;
-    counterBubble = 0;
     setCorrectImageForStatusBarInAllArray(whichStatusBar) {
         if (whichStatusBar == "life") {
             this.arrayAllImages = this.imgStatusBarLife;
@@ -21,7 +18,7 @@ class StatusBar extends BaseClass {
         else if (whichStatusBar == "coin") {
             this.arrayAllImages = this.imgStatusBarCoin;
             this.x = 180;
-            this.y = 8;
+            this.y = 5;
         }
         else if (whichStatusBar == "bubble") {
             this.arrayAllImages = this.imgStatusBarBubble;

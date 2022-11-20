@@ -8,11 +8,13 @@ class Level extends BaseClass {
         this.createEnemies(10, EnemyJellyFishLila);
         this.createEnemies(1, EnemyFinalFish);
         this.createStatusBar();
+        this.createStatusBarValue();
     }
     backgrounds = [];
     coins = [];
     enemies = [];
-    statusbar = [];
+    statusBar = [];
+    statusBarValue = [];
     createNewBackground(num) {
         let howManyElementsToBuild = num;
         let coordinateForBackgroundImg = 0;
@@ -44,6 +46,9 @@ class Level extends BaseClass {
         }
     }
     createStatusBar() {
-        this.statusbar.push(new StatusBar("life"), new StatusBar("coin"), new StatusBar("bubble"), new StatusBar("finalFish"));
+        this.statusBar.push(new StatusBar("life"), new StatusBar("coin"), new StatusBar("bubble"), new StatusBar("finalFish"));
+    }
+    createStatusBarValue() {
+        this.statusBarValue.push(new StatusBarValue("life"), new StatusBarValue("coin"), new StatusBarValue("bubble"));
     }
 }

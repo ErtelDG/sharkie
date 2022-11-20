@@ -4,7 +4,8 @@ class GameWorld {
    sharkie: any;
 
    constructor() {
-      this.ctx.font = "";
+      this.ctx.font = "48px MyWebFont";
+      this.ctx.fillStyle = "white";
       this.level = level1;
       this.sharkie = [new Sharkie()];
       this.draw();
@@ -15,7 +16,8 @@ class GameWorld {
          this.ctx.clearRect(0, 0, canvas.width, canvas.height);
          this.drawStaticObject(this.level.backgrounds);
          this.drawStaticObject(this.level.coins);
-         this.drawStaticObject(this.level.statusbar);
+         this.drawStaticObject(this.level.statusBar);
+         this.drawText(this.level.statusBarValue);
          this.drawMovableObject(this.sharkie);
          this.drawMovableObject(this.level.enemies);
       }
@@ -40,6 +42,12 @@ class GameWorld {
    drawStaticObject(objectToDraw: any) {
       objectToDraw.forEach((objectElement: { imgPath: any; x: any; y: any; width: any; height: any }) => {
          this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
+      });
+   }
+
+   drawText(objectToDraw: any) {
+      objectToDraw.forEach((objectElement: { currentCounterForThisObject: any; x: any; y: any; }) => {
+         this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
       });
    }
 
