@@ -4,6 +4,7 @@ class GameWorld {
     level;
     sharkie;
     constructor() {
+        this.ctx.font = "";
         this.level = level1;
         this.sharkie = [new Sharkie()];
         this.draw();

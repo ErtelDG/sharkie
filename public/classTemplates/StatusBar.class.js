@@ -3,21 +3,25 @@ class StatusBar extends BaseClass {
     constructor(statusBarFor = "life" || "coin" || "bubble" || "finalFish") {
         super("StatusBar");
         this.name = statusBarFor;
+        this.width = 80;
+        this.height = 80;
         this.setCorrectImageForStatusBarInAllArray(this.name);
-        this.width = 160;
-        this.height = 60;
-        this.y = 5;
         this.loadAllImgInCach(this.arrayAllImages);
         this.loadOneImgFromCach();
     }
+    counterLife = 0;
+    counterCoin = 0;
+    counterBubble = 0;
     setCorrectImageForStatusBarInAllArray(whichStatusBar) {
         if (whichStatusBar == "life") {
             this.arrayAllImages = this.imgStatusBarLife;
             this.x = 10;
+            this.y = -3;
         }
         else if (whichStatusBar == "coin") {
             this.arrayAllImages = this.imgStatusBarCoin;
             this.x = 180;
+            this.y = 8;
         }
         else if (whichStatusBar == "bubble") {
             this.arrayAllImages = this.imgStatusBarBubble;
@@ -26,35 +30,15 @@ class StatusBar extends BaseClass {
         else if (whichStatusBar == "finalFish") {
             this.arrayAllImages = this.imgStatusFinalFish;
             this.x = 520;
+            this.width = 200;
         }
         else {
             alert("Set for statusbar one the following parameters: life || coin || bubble || finalFish!");
         }
     }
-    imgStatusBarLife = [
-        "img/4.Marcadores/green/Life/0_copia.png",
-        "img/4.Marcadores/green/Life/20_copia.png",
-        "img/4.Marcadores/green/Life/40_copia.png",
-        "img/4.Marcadores/green/Life/60_copia.png",
-        "img/4.Marcadores/green/Life/80_copia.png",
-        "img/4.Marcadores/green/Life/100_copia.png",
-    ];
-    imgStatusBarCoin = [
-        "img/4.Marcadores/green/Coin/0_copia.png",
-        "img/4.Marcadores/green/Coin/20_copia.png",
-        "img/4.Marcadores/green/Coin/40_copia.png",
-        "img/4.Marcadores/green/Coin/60_copia.png",
-        "img/4.Marcadores/green/Coin/80_copia.png",
-        "img/4.Marcadores/green/Coin/100_copia.png",
-    ];
-    imgStatusBarBubble = [
-        "img/4.Marcadores/green/poisoned_bubbles/0_copia.png",
-        "img/4.Marcadores/green/poisoned_bubbles/20_copia.png",
-        "img/4.Marcadores/green/poisoned_bubbles/40_copia.png",
-        "img/4.Marcadores/green/poisoned_bubbles/60_copia.png",
-        "img/4.Marcadores/green/poisoned_bubbles/80_copia.png",
-        "img/4.Marcadores/green/poisoned_bubbles/100_copia.png",
-    ];
+    imgStatusBarLife = ["img/4.Marcadores/green/100_copia_hp.png"];
+    imgStatusBarCoin = ["img/4.Marcadores/green/100_copia_coin.png"];
+    imgStatusBarBubble = ["img/4.Marcadores/green/100_copia_poisoned_bubble.png"];
     imgStatusFinalFish = [
         "img/4.Marcadores/green/FinalFish/0_copia.png",
         "img/4.Marcadores/green/FinalFish/20_copia.png",
