@@ -3,7 +3,8 @@ class Level extends BaseClass {
       super("LevelClass");
       this.createNewBackground(10);
       this.createStaticObject();
-      this.createEnemies(15);
+      this.createEnemies(10, EnemyPufferFish);
+      this.createEnemies(10, EnemyJellyFishLila);
    }
 
    backgrounds: any[] = [];
@@ -29,10 +30,10 @@ class Level extends BaseClass {
       }
    }
 
-   createEnemies(num: number) {
+   createEnemies(num: number, enemieObjectType: typeof EnemyPufferFish | typeof EnemyJellyFishLila) {
       let howManyElementsToBuild = num;
       for (let i = 0; i < howManyElementsToBuild; i++) {
-         this.enemies.push(new EnemyPufferFish());
+         this.enemies.push(new enemieObjectType());
       }
    }
 

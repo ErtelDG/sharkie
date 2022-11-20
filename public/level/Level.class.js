@@ -4,7 +4,8 @@ class Level extends BaseClass {
         super("LevelClass");
         this.createNewBackground(10);
         this.createStaticObject();
-        this.createEnemies(15);
+        this.createEnemies(10, EnemyPufferFish);
+        this.createEnemies(10, EnemyJellyFishLila);
     }
     backgrounds = [];
     coins = [];
@@ -27,10 +28,10 @@ class Level extends BaseClass {
                 (coordinateForBackgroundImg += 719);
         }
     }
-    createEnemies(num) {
+    createEnemies(num, enemieObjectType) {
         let howManyElementsToBuild = num;
         for (let i = 0; i < howManyElementsToBuild; i++) {
-            this.enemies.push(new EnemyPufferFish());
+            this.enemies.push(new enemieObjectType());
         }
     }
     createStaticObject() {

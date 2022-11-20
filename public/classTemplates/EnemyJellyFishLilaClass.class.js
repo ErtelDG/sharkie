@@ -12,10 +12,36 @@ class EnemyJellyFishLila extends EnemyClass {
         setInterval(() => {
             this.loadOneImgFromCach();
             this.moveLeft(Math.random() * 12);
-        }, 50);
-        this.width = 100;
-        this.height = 80;
+        }, 120);
+        this.width = 80;
+        this.height = 150;
         this.x = Math.random() * (6000 - 500) + 500;
-        this.y = Math.random() * 600;
+        this.y = Math.random() * 150;
+        setInterval(() => {
+            this.lightUpAndDownAnimation();
+        }, 80);
+    }
+    timer = 0;
+    stopUp = false;
+    stopDown = false;
+    speedUpAndDown = 8;
+    lightUpAndDownAnimation() {
+        if (this.stopUp == false) {
+            this.y += this.speedUpAndDown;
+            this.timer++;
+            if (this.timer == 20) {
+                this.stopUp = true;
+            }
+        }
+        else if (this.stopDown == false) {
+            this.y -= this.speedUpAndDown;
+            this.timer--;
+            if (this.timer == 0) {
+                this.stopDown = true;
+            }
+        }
+        else {
+            (this.stopUp = false), (this.stopDown = false);
+        }
     }
 }

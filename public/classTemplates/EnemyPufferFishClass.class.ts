@@ -17,6 +17,6 @@ class EnemyPufferFish extends EnemyClass {
         this.width = 100;
         this.height = 80;
         this.x = Math.random() * (6000 - 500) + 500;
-        this.y = Math.random() * 600;
+        this.y = Math.random() * 500;
     }
 }

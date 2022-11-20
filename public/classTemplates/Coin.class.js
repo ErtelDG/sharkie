@@ -10,7 +10,7 @@ class Coin extends BaseClass {
         ];
         this.width = 50;
         this.height = 50;
-        this.x = Math.random() * 6000;
+        this.x = Math.random() * (6000 - 500) + 500;
         this.y = Math.random() * (200 - 100) + 100;
         this.loadAllImgInCach(this.arrayAllImages);
         this.animation(100);
