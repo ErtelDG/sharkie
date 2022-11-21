@@ -2,13 +2,12 @@ class GameWorld {
    ctx: any = ctx;
    level;
    sharkie;
-   keyboardAndTouch;
 
    constructor() {
       this.ctx.font = "48px MyWebFont";
       this.ctx.fillStyle = "white";
       this.level = level1;
-      this.keyboardAndTouch = keyboard;
+
       this.sharkie = [new Sharkie()];
       this.draw();
    }
