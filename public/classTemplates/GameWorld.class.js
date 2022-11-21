@@ -18,7 +18,8 @@ class GameWorld {
             this.drawRotateStaticObject(this.level.bubbles);
             this.drawStaticObject(this.level.statusBar);
             this.drawText(this.level.statusBarValue);
-            this.drawMovableObject(this.sharkie);
+            keyboard.LEFT ? this.drawToCanvas(this.sharkie[0].imgPath, this.sharkie[0].width, this.sharkie[0].height) : this.drawMovableObject(this.sharkie);
+            this.ctx.restore();
             this.drawMovableObject(this.level.enemies);
         }
         this.requestAnimation();
@@ -31,6 +32,17 @@ class GameWorld {
         requestAnimationFrame(function () {
             self.draw();
         });
+    }
+    mirrowImg() {
+        this.ctx.save();
+        this.ctx.translate(this.sharkie, 0);
+        this.ctx.scale(-1, 1);
+    }
+    drawToCanvas(v, width, height) {
+        this.ctx.save();
+        this.ctx.scale(-1, 1);
+        this.ctx.drawImage(v, 0, 0, width * -1, height);
+        this.ctx.restore();
     }
     loadImage() {
         this.level.background[0].loadOneImgFromCach(this.level.background[0].imageCach);
