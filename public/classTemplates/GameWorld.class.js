@@ -44,7 +44,7 @@ class GameWorld {
         let counterForSetImgToLeftRight = 0;
         objectToDraw.forEach((objectElement) => {
             let value = counterForSetImgToLeftRight % 2 ? true : false;
-            objectElement.x = value ? objectElement.x : (objectElement.x = -65);
+            objectElement.x = value ? objectElement.x : (objectElement.x = -45);
             let rotate = value ? 45 : 315;
             counterForSetImgToLeftRight++;
             this.drawTheRotateStaticObject(objectElement, rotate);

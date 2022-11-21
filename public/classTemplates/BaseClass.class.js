@@ -12,6 +12,7 @@ class BaseClass {
     y = 0;
     x = 0;
     async loadAllImgInCach(array) {
+        this.imagesCach = [];
         array.forEach(async (path) => {
             let pathURL = path;
             await this.imagesCach.push(pathURL);

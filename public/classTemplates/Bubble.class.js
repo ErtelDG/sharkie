@@ -14,7 +14,7 @@ class Bubble extends BaseClass {
         ];
         this.randomTranslate = this.randomTranslate;
         this.width = 80;
-        this.height = 80;
+        this.height = 100;
         this.x = 0;
         this.y = 0;
         this.loadAllImgInCach(this.arrayAllImages);

@@ -10,9 +10,9 @@ class BaseClass {
    height = 0;
    y = 0;
    x = 0;
-   
 
    async loadAllImgInCach(array: string[]) {
+      this.imagesCach = [];
       array.forEach(async (path: string) => {
          let pathURL = path;
          await this.imagesCach.push(pathURL);
@@ -32,6 +32,4 @@ class BaseClass {
          this.loadOneImgFromCach();
       }, time);
    }
-
- 
 }

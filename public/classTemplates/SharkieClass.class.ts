@@ -2,10 +2,19 @@ class Sharkie extends MovableClass {
    constructor() {
       super("Sharkie");
       this.setAllImagesInArray();
-      this.loadAllImgInCach(this.arrayAllImages_IDLE);
+      setInterval(() => {
+         this.moveLeft(10);
+         this.moveRight(10);
+         this.moveDown(10);
+         this.moveUp(10);
+      }, 1000 / 30);
+
+      setInterval(() => {
+         this.loadAllImageArrayForCurrenttAnimation();
+      }, 100);
       setInterval(() => {
          this.loadOneImgFromCach();
-      }, 100);
+      }, 150);
       this.width = 300;
       this.height = 250;
    }
@@ -16,6 +25,19 @@ class Sharkie extends MovableClass {
    arrayAllImages_ATTACK_FIN_SLAP: string[] = [];
    arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE: string[] = [];
    arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY: string[] = [];
+
+   loadAllImageArrayForCurrenttAnimation() {
+      if (keyboard.LEFT || keyboard.RIGHT || keyboard.DOWN || keyboard.UP) {
+         console.log("keyboard.LEFT || keyboard.RIGHT || keyboard.DOWN || keyboard.UP");
+         this.loadAllImgInCach(this.arrayAllImages_SWIM);
+      } else if (keyboard.D) {
+         console.log("PRESS D");
+         this.loadAllImgInCach(this.arrayAllImages_ATTACK_FIN_SLAP);
+      } else {
+         console.log("IDLE");
+         this.loadAllImgInCach(this.arrayAllImages_IDLE);
+      }
+   }
 
    setAllImagesInArray() {
       this.arrayAllImages_IDLE = [

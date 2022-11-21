@@ -9,7 +9,25 @@ class MovableClass extends BaseClass {
       this.y = 10;
    }
 
-   moveLeft(speed:number) {
-      this.x -= speed;
+   moveLeft(speed: number) {
+      if (keyboard.LEFT) {
+         this.x -= speed;
+      }
+   }
+   moveRight(speed: number) {
+      if (keyboard.RIGHT) {
+         this.x += speed;
+      }
+   }
+
+   moveDown(speed: number) {
+      if (keyboard.DOWN) {
+         this.y += speed;
+      }
+   }
+   moveUp(speed: number) {
+      if (keyboard.UP) {
+         this.y -= speed;
+      }
    }
 }
