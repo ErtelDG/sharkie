@@ -23,10 +23,6 @@ class GameWorld {
             this.drawMovableObject(this.sharkie);
             this.drawMovableObject(this.level.enemies);
         }
-        if (this.keyboardAndTouch.DOWN) {
-            console.log("this.keyboardAndTouch.DOWN");
-        }
-        ;
         this.requestAnimation();
     }
     /**
