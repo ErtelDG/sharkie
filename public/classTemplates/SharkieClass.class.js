@@ -3,20 +3,29 @@ class Sharkie extends MovableClass {
     constructor() {
         super("Sharkie");
         this.setAllImagesInArray();
-        setInterval(() => {
-            this.moveLeft(10);
-            this.moveRight(10);
-            this.moveDown(10);
-            this.moveUp(10);
-        }, 1000 / 30);
-        setInterval(() => {
-            this.loadAllImageArrayForCurrenttAnimation();
-        }, 100);
+        this.checkDirectionOfMovement();
+        this.loadInIntervallAllImg();
+        this.loadInIntervallOneImg();
+        this.width = 300;
+        this.height = 250;
+    }
+    loadInIntervallOneImg() {
         setInterval(() => {
             this.loadOneImgFromCach();
         }, 150);
-        this.width = 300;
-        this.height = 250;
+    }
+    checkDirectionOfMovement() {
+        setInterval(() => {
+            keyboard.LEFT ? this.moveLeft(10) : false;
+            keyboard.RIGHT ? this.moveRight(10) : false;
+            keyboard.DOWN ? this.moveDown(10) : false;
+            keyboard.UP ? this.moveUp(10) : false;
+        }, 1000 / 30);
+    }
+    loadInIntervallAllImg() {
+        setInterval(() => {
+            this.loadAllImageArrayForCurrenttAnimation();
+        }, 100);
     }
     arrayAllImages_IDLE = [];
     arrayAllImages_LONG_IDLE = [];
@@ -26,15 +35,12 @@ class Sharkie extends MovableClass {
     arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY = [];
     loadAllImageArrayForCurrenttAnimation() {
         if (keyboard.LEFT || keyboard.RIGHT || keyboard.DOWN || keyboard.UP) {
-            console.log("keyboard.LEFT || keyboard.RIGHT || keyboard.DOWN || keyboard.UP");
             this.loadAllImgInCach(this.arrayAllImages_SWIM);
         }
         else if (keyboard.D) {
-            console.log("PRESS D");
             this.loadAllImgInCach(this.arrayAllImages_ATTACK_FIN_SLAP);
         }
         else {
-            console.log("IDLE");
             this.loadAllImgInCach(this.arrayAllImages_IDLE);
         }
     }

@@ -2,32 +2,25 @@ class MovableClass extends BaseClass {
    constructor(name: string) {
       super("MovableClass");
       this.name = name;
-
       this.width = 100;
       this.height = 50;
       this.x = 10;
       this.y = 10;
    }
 
-   moveLeft(speed: number) {
-      if (keyboard.LEFT) {
-         this.x -= speed;
-      }
+   speedStandard = 10;
+
+   moveLeft(speedObject: number) {
+      this.x -= speedObject;
    }
-   moveRight(speed: number) {
-      if (keyboard.RIGHT) {
-         this.x += speed;
-      }
+   moveRight(speedObject: number) {
+      this.x += speedObject;
    }
 
-   moveDown(speed: number) {
-      if (keyboard.DOWN) {
-         this.y += speed;
-      }
+   moveDown(speedObject: number) {
+      this.y += speedObject;
    }
-   moveUp(speed: number) {
-      if (keyboard.UP) {
-         this.y -= speed;
-      }
+   moveUp(speedObject: number) {
+      this.y -= speedObject;
    }
 }
