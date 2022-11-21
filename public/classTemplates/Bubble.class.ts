@@ -1,7 +1,7 @@
 class Bubble extends BaseClass {
    constructor(imgPath: string, x: number, y: number) {
       super("Bubble");
-      this.arrayAllImages = [      
+      this.arrayAllImages = [
          "img/4.Marcadores/PosionedBubble/Animada/1.png",
          "img/4.Marcadores/PosionedBubble/Animada/2.png",
          "img/4.Marcadores/PosionedBubble/Animada/3.png",
@@ -11,17 +11,19 @@ class Bubble extends BaseClass {
          "img/4.Marcadores/PosionedBubble/Animada/7.png",
          "img/4.Marcadores/PosionedBubble/Animada/8.png",
       ];
+      this.randomTranslate = this.randomTranslate;
+   
       this.width = 80;
       this.height = 80;
-      // this.x = Math.random() * (6000 - 500) + 500;
-      // this.y = Math.random() * (300 - 280) + 280;
-       ddthis.x = 400;
-       ddthis.y = 100;
+      this.x = 0;
+      this.y = 0;
 
-
-         this.loadAllImgInCach(this.arrayAllImages);
-           setInterval(() => {
-              this.loadOneImgFromCach();
-           }, 100);
+      this.loadAllImgInCach(this.arrayAllImages);
+      setInterval(() => {
+         this.loadOneImgFromCach();
+      }, 100);
    }
+
+   randomTranslate = Math.random() * (6000-500)+500;
+   
 }

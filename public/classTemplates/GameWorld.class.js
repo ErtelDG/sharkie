@@ -41,13 +41,21 @@ class GameWorld {
         });
     }
     drawRotateStaticObject(objectToDraw) {
+        let counterForSetImgToLeftRight = 0;
         objectToDraw.forEach((objectElement) => {
-            this.ctx.save();
-            this.ctx.translate(canvas.width / 2, canvas.height / 2);
-            this.ctx.rotate((45 * Math.PI) / 180);
-            this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
-            this.ctx.restore();
+            let value = counterForSetImgToLeftRight % 2 ? true : false;
+            objectElement.x = value ? objectElement.x : (objectElement.x = -65);
+            let rotate = value ? 45 : 315;
+            counterForSetImgToLeftRight++;
+            this.drawTheRotateStaticObject(objectElement, rotate);
         });
+    }
+    drawTheRotateStaticObject(objectElement, rotate) {
+        this.ctx.save();
+        this.ctx.translate(objectElement.randomTranslate, 300);
+        this.ctx.rotate((rotate * Math.PI) / 180);
+        this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
+        this.ctx.restore();
     }
     drawText(objectToDraw) {
         objectToDraw.forEach((objectElement) => {

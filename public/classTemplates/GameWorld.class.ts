@@ -47,13 +47,22 @@ class GameWorld {
    }
 
    drawRotateStaticObject(objectToDraw: any) {
-      objectToDraw.forEach((objectElement: { imgPath: any; x: any; y: any; width: any; height: any }) => {
-       ddthis.ctx.save();
-dd this.ctx.translate(canvas.width / 2, canvas.height / 2);
-ddthis.ctx.rotate((45 * Math.PI) / 180);
-         this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
-         //this.ctx.restore();
+      let counterForSetImgToLeftRight = 0;
+      objectToDraw.forEach((objectElement: { randomTranslate: any; imgPath: any; x: any; y: any; width: any; height: any }) => {
+         let value = counterForSetImgToLeftRight % 2 ? true : false;
+         objectElement.x = value ? objectElement.x : (objectElement.x = -65);
+         let rotate = value ? 45 : 315;
+         counterForSetImgToLeftRight++;
+         this.drawTheRotateStaticObject(objectElement, rotate);
       });
+   }
+
+   drawTheRotateStaticObject(objectElement: { randomTranslate: any; imgPath: any; x: any; y: any; width: any; height: any }, rotate: number) {
+      this.ctx.save();
+      this.ctx.translate(objectElement.randomTranslate, 300);
+      this.ctx.rotate((rotate * Math.PI) / 180);
+      this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
+      this.ctx.restore();
    }
 
    drawText(objectToDraw: any) {

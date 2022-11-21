@@ -12,15 +12,15 @@ class Bubble extends BaseClass {
             "img/4.Marcadores/PosionedBubble/Animada/7.png",
             "img/4.Marcadores/PosionedBubble/Animada/8.png",
         ];
+        this.randomTranslate = this.randomTranslate;
         this.width = 80;
         this.height = 80;
-        // this.x = Math.random() * (6000 - 500) + 500;
-        // this.y = Math.random() * (300 - 280) + 280;
-        this.x = 400;
-        this.y = 100;
+        this.x = 0;
+        this.y = 0;
         this.loadAllImgInCach(this.arrayAllImages);
         setInterval(() => {
             this.loadOneImgFromCach();
         }, 100);
     }
+    randomTranslate = Math.random() * (6000 - 500) + 500;
 }
