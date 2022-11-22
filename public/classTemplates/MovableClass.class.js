@@ -9,6 +9,9 @@ class MovableClass extends BaseClass {
         this.y = 10;
     }
     speedStandard = 10;
+    autoMoveLeft(speedObject) {
+        this.x -= speedObject;
+    }
     moveLeft(speedObject) {
         this.x -= speedObject;
     }
@@ -20,5 +23,16 @@ class MovableClass extends BaseClass {
     }
     moveUp(speedObject) {
         this.y -= speedObject;
+    }
+    setLimitPositionXandY(movableObject) {
+        if (movableObject.y < 10) {
+            movableObject.y = 0;
+        }
+        else if (movableObject.y > 200) {
+            movableObject.y = 200;
+        }
+        else {
+            false;
+        }
     }
 }

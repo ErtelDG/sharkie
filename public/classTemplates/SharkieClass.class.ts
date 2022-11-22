@@ -7,7 +7,11 @@ class Sharkie extends MovableClass {
       this.loadInIntervallOneImg();
       this.width = 300;
       this.height = 250;
+
+     
    }
+
+ 
 
    loadInIntervallOneImg() {
       setInterval(() => {

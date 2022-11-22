@@ -12,7 +12,7 @@ class EnemyPufferFish extends EnemyClass {
         this.loadAllImgInCach(this.arrayAllImages);
         setInterval(() => {
             this.loadOneImgFromCach();
-            this.moveLeft(Math.random() * 12);
+            this.autoMoveLeft(Math.random() * 12);
         }, 50);
         this.width = 100;
         this.height = 80;

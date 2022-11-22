@@ -20,7 +20,7 @@ class EnemyFinalFish extends EnemyClass {
       this.loadAllImgInCach(this.arrayAllImages);
       setInterval(() => {
          this.loadOneImgFromCach();
-         this.moveLeft(16);
+         this.autoMoveLeft(16);
       }, 100);
       this.width = 400;
       this.height = 400;
