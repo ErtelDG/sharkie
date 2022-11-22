@@ -6,7 +6,7 @@ class Level extends BaseClass {
       this.createEnemies(10, EnemyPufferFish);
       this.createEnemies(10, EnemyJellyFishLila);
       this.createEnemies(1, EnemyFinalFish);
-      this.createStaticObject(10, this.bubbles, Bubble);
+      this.createStaticObject(10, this.bubbleBottles, BubbleBottle);
       this.createStatusBar();
       this.createStatusBarValue();
    }
@@ -16,7 +16,7 @@ class Level extends BaseClass {
    enemies: any[] = [];
    statusBar: any[] = [];
    statusBarValue: any[] = [];
-   bubbles: any[] = [];
+   bubbleBottles: any[] = [];
 
    createNewBackground(num: number) {
       let howManyElementsToBuild = num;

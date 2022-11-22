@@ -16,7 +16,7 @@ class GameWorld {
             this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie);
             this.drawStaticObject(this.level.backgrounds);
             this.drawStaticObject(this.level.coins);
-            this.drawRotateStaticObject(this.level.bubbles);
+            this.drawRotateStaticObject(this.level.bubbleBottles);
             this.drawStaticObject(this.level.statusBar);
             this.drawText(this.level.statusBarValue);
             keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
@@ -24,12 +24,16 @@ class GameWorld {
             this.drawMovableObject(this.level.enemies);
             this.drawRectangle(ctx, this.sharkie[0].x + 60, this.sharkie[0].y + 120, this.sharkie[0].width - 120, this.sharkie[0].height - 180);
             for (let pufferFish = 0; pufferFish < 10; pufferFish++) {
-                const element = this.level.enemies[pufferFish];
-                this.drawRectangle(ctx, element.x, element.y, element.width - 10, element.height - 20);
+                const pufferFi = this.level.enemies[pufferFish];
+                this.drawRectangle(ctx, pufferFi.x, pufferFi.y, pufferFi.width - 10, pufferFi.height - 20);
             }
             for (let jellyFish = 11; jellyFish < 20; jellyFish++) {
-                const element = this.level.enemies[jellyFish];
-                this.drawRectangle(ctx, element.x + 10, element.y + 15, element.width - 15, element.height - 25);
+                const jellyFi = this.level.enemies[jellyFish];
+                this.drawRectangle(ctx, jellyFi.x + 10, jellyFi.y + 15, jellyFi.width - 15, jellyFi.height - 25);
+            }
+            for (let i = 0; i < this.level.coins.length; i++) {
+                const coin = this.level.coins[i];
+                this.drawRectangle(ctx, coin.x + 5, coin.y + 5, coin.width - 10, coin.height - 10);
             }
         }
         this.requestAnimation();
@@ -85,6 +89,7 @@ class GameWorld {
         this.ctx.translate(objectElement.randomTranslate, 300);
         this.ctx.rotate((rotate * Math.PI) / 180);
         this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
+        this.drawRectangle(ctx, objectElement.x + 10, objectElement.y + 10, objectElement.width - 20, objectElement.height - 20);
         this.ctx.restore();
     }
     drawText(objectToDraw) {

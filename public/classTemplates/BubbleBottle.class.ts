@@ -1,6 +1,6 @@
-class Bubble extends BaseClass {
+class BubbleBottle extends BaseClass {
    constructor(imgPath: string, x: number, y: number) {
-      super("Bubble");
+      super("BubbleBottle");
       this.arrayAllImages = [
          "img/4.Marcadores/PosionedBubble/Animada/1.png",
          "img/4.Marcadores/PosionedBubble/Animada/2.png",
