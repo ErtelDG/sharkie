@@ -1,7 +1,7 @@
 class Level extends BaseClass {
    constructor() {
       super("LevelClass");
-      this.createNewBackground(10);
+      this.createNewBackground(7);
       this.createStaticObject(20, this.coins, Coin);
       this.createEnemies(10, EnemyPufferFish);
       this.createEnemies(10, EnemyJellyFishLila);

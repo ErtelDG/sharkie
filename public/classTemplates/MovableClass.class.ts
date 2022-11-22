@@ -29,11 +29,11 @@ class MovableClass extends BaseClass {
       this.y -= speedObject;
    }
 
-   setLimitPositionXandY(movableObject: this) {
-      if (movableObject.y < 10) {
-         movableObject.y = 0;
-      } else if (movableObject.y > 200) {
-         movableObject.y = 200;
+   checkLimitPositionXandY(movableObject: { y: number; }, maxTopY: number, maxBottemY: number) {
+      if (movableObject.y < maxTopY) {
+         movableObject.y = maxTopY;
+      } else if (movableObject.y > maxBottemY) {
+         movableObject.y = maxBottemY;
       } else {
          false;
       }

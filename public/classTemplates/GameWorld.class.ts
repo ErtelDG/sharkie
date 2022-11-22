@@ -15,7 +15,7 @@ class GameWorld {
    async draw() {
       if (this.ctx != null) {
          this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-         this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie);
+         this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
          this.drawStaticObject(this.level.backgrounds);
          this.drawStaticObject(this.level.coins);
          this.drawRotateStaticObject(this.level.bubbleBottles);
@@ -23,8 +23,11 @@ class GameWorld {
          this.drawText(this.level.statusBarValue);
          keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
          this.ctx.restore();
+         keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
+
          this.drawMovableObject(this.level.enemies);
 
+         //Rectangle DRAW!!
          this.drawRectangle(ctx, this.sharkie[0].x + 60, this.sharkie[0].y + 120, this.sharkie[0].width - 120, this.sharkie[0].height - 180);
          for (let pufferFish = 0; pufferFish < 10; pufferFish++) {
             const pufferFi = this.level.enemies[pufferFish];
@@ -38,6 +41,8 @@ class GameWorld {
             const coin = this.level.coins[i];
             this.drawRectangle(ctx, coin.x + 5, coin.y + 5, coin.width - 10, coin.height - 10);
          }
+
+         //END RECTANGLE DRAW!
       }
 
       this.requestAnimation();
@@ -60,9 +65,44 @@ class GameWorld {
       });
    }
 
-   checkPositionMovableobjectIsInTheCorrectRange(movableObjectsInArray: any[]) {
-      movableObjectsInArray.forEach((currentMovableObject: { setLimitPositionXandY: (arg0: any) => void }) => {
-         currentMovableObject.setLimitPositionXandY(currentMovableObject);
+   moveBackgroundToLeft() {
+      if (this.level.backgrounds[0].x < 0) {
+         this.level.backgrounds.forEach((background: { x: number }) => {
+            background.x += 10;
+         });
+
+         this.level.enemies.forEach((enemy: { x: number }) => {
+            enemy.x += 10;
+         });
+         this.level.coins.forEach((coin: { x: number }) => {
+            coin.x += 10;
+         });
+      HIER!   this.level.bubbleBottles.forEach((bottle: { y: number }) => {
+            bottle.y + -40;
+         });
+      }
+   }
+
+   moveBackgroundToRight() {
+      if (this.level.backgrounds[this.level.backgrounds.length - 1].x > 250) {
+         this.level.backgrounds.forEach((background: { x: number }) => {
+            background.x -= 10;
+         });
+         this.level.enemies.forEach((enemy: { x: number }) => {
+            enemy.x -= 10;
+         });
+         this.level.coins.forEach((coin: { x: number }) => {
+            coin.x -= 10;
+         });
+         this.level.bubbleBottles.forEach((bottle: { y: number }) => {
+            bottle.y -= -40;
+         });
+      }
+   }
+
+   checkPositionMovableobjectIsInTheCorrectRange(movableObjectsInArray: any[], maxTopY: number, maxBottemY: number) {
+      movableObjectsInArray.forEach((currentMovableObject) => {
+         currentMovableObject.checkLimitPositionXandY(currentMovableObject, maxTopY, maxBottemY);
       });
    }
 

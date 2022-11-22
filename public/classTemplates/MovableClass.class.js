@@ -24,12 +24,12 @@ class MovableClass extends BaseClass {
     moveUp(speedObject) {
         this.y -= speedObject;
     }
-    setLimitPositionXandY(movableObject) {
-        if (movableObject.y < 10) {
-            movableObject.y = 0;
+    checkLimitPositionXandY(movableObject, maxTopY, maxBottemY) {
+        if (movableObject.y < maxTopY) {
+            movableObject.y = maxTopY;
         }
-        else if (movableObject.y > 200) {
-            movableObject.y = 200;
+        else if (movableObject.y > maxBottemY) {
+            movableObject.y = maxBottemY;
         }
         else {
             false;

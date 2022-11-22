@@ -21,8 +21,8 @@ class Sharkie extends MovableClass {
 
    checkDirectionOfMovement() {
       setInterval(() => {
-         keyboard.LEFT ? this.moveLeft(10) : false;
-         keyboard.RIGHT ? this.moveRight(10) : false;
+         //keyboard.LEFT ? this.moveLeft(10) : false;
+         //keyboard.RIGHT ? this.moveRight(10) : false;
          keyboard.DOWN ? this.moveDown(10) : false;
          keyboard.UP ? this.moveUp(10) : false;
       }, 1000 / 30);
