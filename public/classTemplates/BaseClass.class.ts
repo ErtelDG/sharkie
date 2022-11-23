@@ -15,7 +15,7 @@ class BaseClass {
    collisionPointY_TOP = 0;
    collisionPointX_LEFT = 0;
    collisionPointY_BOTTOM = 0;
-   collisionPointY_RIGHT = 0;
+   collisionPointX_RIGHT = 0;
 
    async loadAllImgInCach(array: string[]) {
       this.imagesCach = [];
@@ -45,10 +45,10 @@ class BaseClass {
       }, 1000 / 30);
    }
 
-   updateColissionPointsObject(collisionPointY_TOP: number, collisionPointX_LEFT: number, collisionPointY_BOTTOM: number, collisionPointY_RIGHT: number) {
+   updateColissionPointsObject(collisionPointY_TOP: number, collisionPointX_LEFT: number, collisionPointY_BOTTOM: number, collisionPointX_RIGHT: number) {
       this.collisionPointY_TOP = this.y + collisionPointY_TOP;
       this.collisionPointX_LEFT = this.x + collisionPointX_LEFT;
       this.collisionPointY_BOTTOM = this.height - collisionPointY_BOTTOM;
-      this.collisionPointY_RIGHT = this.width - collisionPointY_RIGHT;
+      this.collisionPointX_RIGHT = this.width - collisionPointX_RIGHT;
    }
 }
