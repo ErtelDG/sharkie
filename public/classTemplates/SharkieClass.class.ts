@@ -7,9 +7,13 @@ class Sharkie extends MovableClass {
       this.checkDirectionOfMovement();
       this.loadInIntervallAllImg();
       this.loadInIntervallOneImg();
-      this.setColissionPointsObject(120, 60, -180, -120);  
-      this.objectBreakePointTop = this.collisionPointY_TOP-60;
-      this.objectBreakePointBottom = this.collisionPointY_TOP+180;   
+      this.setColissionPointsObjec(120, 60, 180, 120);
+   }
+
+   setColissionPointsObjec(TOP: number, LEFT: number, BOTTOM: number, RIGHT: number) {
+      setInterval(() => {
+         this.updateColissionPointsObject(TOP, LEFT, BOTTOM,RIGHT);
+      }, 1000 / 30);
    }
 
    loadInIntervallOneImg() {
@@ -20,10 +24,8 @@ class Sharkie extends MovableClass {
 
    checkDirectionOfMovement() {
       setInterval(() => {
-         if (keyboard.DOWN) this.moveDown(10)
-         if (keyboard.UP) this.moveUp(10)
-         if (keyboard.DOWN) this.updateColissionPointsObject(10, 0, 0, 0);
-         if (keyboard.UP) this.updateColissionPointsObject(-10, 0, 0, 0);
+         if (keyboard.DOWN) this.moveDown(10);
+         if (keyboard.UP) this.moveUp(10);
       }, 1000 / 30);
    }
 

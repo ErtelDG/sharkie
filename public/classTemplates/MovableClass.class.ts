@@ -9,9 +9,7 @@ class MovableClass extends BaseClass {
    }
 
    speedStandard = 10;
-   objectBreakePointTop = 0;
-   objectBreakePointBottom = 0;
-
+  
    autoMoveLeft(speedObject: number) {
       this.x -= speedObject;
    }
@@ -33,11 +31,9 @@ class MovableClass extends BaseClass {
 
    checkLimitPositionXandY(movableObject: any, maxTopY: number, maxBottemY: number) {
       if (movableObject.y < maxTopY) {
-         movableObject.y = maxTopY;
-         movableObject.collisionPointY_TOP = movableObject.objectBreakePointTop;
+         movableObject.y = maxTopY;     
       } else if (movableObject.y > maxBottemY) {
-         movableObject.y = maxBottemY;
-         movableObject.collisionPointY_TOP = movableObject.objectBreakePointBottom;
+         movableObject.y = maxBottemY;        
       } else {
          false;
       }
