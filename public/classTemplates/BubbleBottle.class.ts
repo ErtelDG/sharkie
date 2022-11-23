@@ -12,7 +12,7 @@ class BubbleBottle extends BaseClass {
          "img/4.Marcadores/PosionedBubble/Animada/8.png",
       ];
       this.randomTranslate = this.randomTranslate;
-   
+
       this.width = 80;
       this.height = 100;
       this.x = 0;
@@ -22,8 +22,8 @@ class BubbleBottle extends BaseClass {
       setInterval(() => {
          this.loadOneImgFromCach();
       }, 100);
+      this.setColissionPointsObject(0, 0, 10, 10);
    }
 
-   randomTranslate = Math.random() * (6000-500)+500;
-   
+   randomTranslate = Math.random() * (6000 - 500) + 500;
 }

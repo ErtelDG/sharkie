@@ -23,14 +23,8 @@ class GameWorld {
             keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
             this.drawMovableObject(this.level.enemies);
             this.drawRotateStaticObject(this.level.bubbleBottles);
-            this.level.coins.forEach((coin) => {
-                if (this.sharkie[0].collisionPointX_LEFT < coin.collisionPointX_LEFT + coin.collisionPointX_RIGHT &&
-                    this.sharkie[0].collisionPointX_LEFT + this.sharkie[0].collisionPointX_RIGHT > coin.collisionPointX_LEFT &&
-                    this.sharkie[0].collisionPointY_TOP + this.sharkie[0].collisionPointY_BOTTOM > coin.collisionPointY_TOP &&
-                    this.sharkie[0].collisionPointY_TOP < coin.collisionPointY_TOP + coin.collisionPointY_BOTTOM) {
-                    console.log("COIN");
-                }
-            });
+            this.checkCollisionPickObjects(this.sharkie, this.level.coins);
+            this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
             //Rectangle DRAW!!
             this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointX_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
             this.level.enemies.forEach((enemie) => {
@@ -118,6 +112,31 @@ class GameWorld {
     drawMovableObject(movableObjectArray) {
         movableObjectArray.forEach((movableObject) => {
             this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+        });
+    }
+    checkCollisionPickObjects(sharkieArray, objectArray) {
+        sharkieArray.forEach((sharkie) => {
+            objectArray.forEach((object) => {
+                if (sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
+                    sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
+                    sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
+                    sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM) {
+                    console.log("COIN");
+                }
+            });
+        });
+    }
+    checkCollisionPickTransformObjects(sharkieArray, objectArray) {
+        sharkieArray.forEach((sharkie) => {
+            objectArray.forEach((object) => {
+                if (sharkie.collisionPointX_LEFT < object.randomTranslate + 70 &&
+                    sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.randomTranslate - 20 &&
+                    sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.height + 205 //&&
+                //     sharkie.collisionPointY_TOP < object.randomTranslate + object.randomTranslate
+                ) {
+                    console.log("BOTTTLE");
+                }
+            });
         });
     }
 }

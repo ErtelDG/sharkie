@@ -21,6 +21,7 @@ class BubbleBottle extends BaseClass {
         setInterval(() => {
             this.loadOneImgFromCach();
         }, 100);
+        this.setColissionPointsObject(0, 0, 10, 10);
     }
     randomTranslate = Math.random() * (6000 - 500) + 500;
 }
