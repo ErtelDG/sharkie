@@ -26,5 +26,6 @@ class EnemyFinalFish extends EnemyClass {
         this.height = 400;
         this.x = 7200;
         this.y = 0;
+        this.setColissionPointsObject(140, 30, 210, 80);
     }
 }

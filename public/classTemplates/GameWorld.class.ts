@@ -59,6 +59,11 @@ class GameWorld {
             );
          }
 
+         for (let finalFish = 20; finalFish == 20; finalFish++) {
+            const finalFi = this.level.enemies[finalFish];
+            this.drawRectangle(ctx, finalFi.collisionPointX_LEFT, finalFi.collisionPointY_TOP, finalFi.collisionPointY_RIGHT, finalFi.collisionPointY_BOTTOM);
+         }
+
          for (let i = 0; i < this.level.coins.length; i++) {
             const coin = this.level.coins[i];
             this.drawRectangle(ctx, coin.collisionPointX_LEFT, coin.collisionPointY_TOP, coin.collisionPointY_RIGHT, coin.collisionPointY_BOTTOM);

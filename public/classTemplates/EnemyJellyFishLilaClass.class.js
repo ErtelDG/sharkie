@@ -20,7 +20,7 @@ class EnemyJellyFishLila extends EnemyClass {
         setInterval(() => {
             this.lightUpAndDownAnimation();
         }, 80);
-        this.setColissionPointsObject(15, 10, 25, 10);
+        this.setColissionPointsObject(15, 10, 25, 35);
     }
     timer = 0;
     stopUp = false;
