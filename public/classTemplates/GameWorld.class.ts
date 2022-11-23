@@ -67,43 +67,24 @@ class GameWorld {
 
    moveBackgroundToLeft() {
       if (this.level.backgrounds[0].x < 0) {
-         this.level.backgrounds.forEach((background: { x: number }) => {
-            background.x += 10;
-         });
-
-         this.level.enemies.forEach((enemy: { x: number }) => {
-            enemy.x += 10;
-         });
-         this.level.coins.forEach((coin: { x: number }) => {
-            coin.x += 10;
-         });
-         this.level.bubbleBottles.forEach((bottle: { randomTranslate: number }) => {
-            bottle.randomTranslate += 10;
-         });
+         this.level.backgrounds.forEach((background: { x: number }) => (background.x += 10));
+         this.level.enemies.forEach((enemy: { x: number }) => (enemy.x += 10));
+         this.level.coins.forEach((coin: { x: number }) => (coin.x += 10));
+         this.level.bubbleBottles.forEach((bottle: { randomTranslate: number }) => (bottle.randomTranslate += 10));
       }
    }
 
    moveBackgroundToRight() {
       if (this.level.backgrounds[this.level.backgrounds.length - 1].x > 250) {
-         this.level.backgrounds.forEach((background: { x: number }) => {
-            background.x -= 10;
-         });
-         this.level.enemies.forEach((enemy: { x: number }) => {
-            enemy.x -= 10;
-         });
-         this.level.coins.forEach((coin: { x: number }) => {
-            coin.x -= 10;
-         });
-         this.level.bubbleBottles.forEach((bottle: { randomTranslate: number }) => {
-            bottle.randomTranslate -= 10;
-         });
+         this.level.backgrounds.forEach((background: { x: number }) => (background.x -= 10));
+         this.level.enemies.forEach((enemy: { x: number }) => (enemy.x -= 10));
+         this.level.coins.forEach((coin: { x: number }) => (coin.x -= 10));
+         this.level.bubbleBottles.forEach((bottle: { randomTranslate: number }) => (bottle.randomTranslate -= 10));
       }
    }
 
    checkPositionMovableobjectIsInTheCorrectRange(movableObjectsInArray: any[], maxTopY: number, maxBottemY: number) {
-      movableObjectsInArray.forEach((currentMovableObject) => {
-         currentMovableObject.checkLimitPositionXandY(currentMovableObject, maxTopY, maxBottemY);
-      });
+      movableObjectsInArray.forEach((currentMovableObject) => currentMovableObject.checkLimitPositionXandY(currentMovableObject, maxTopY, maxBottemY));
    }
 
    drawMirrowObjectToCanvas(objectsToDraw: any[]) {
@@ -120,11 +101,11 @@ class GameWorld {
    }
 
    drawStaticObject(objectToDraw: any) {
-      objectToDraw.forEach((objectElement: { imgPath: any; x: any; y: any; width: any; height: any }) => {
-         this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
-      });
+      objectToDraw.forEach((objectElement: { imgPath: any; x: any; y: any; width: any; height: any }) =>
+         this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height)
+      );
    }
-
+   
    drawRotateStaticObject(objectToDraw: any) {
       let counterForSetImgToLeftRight = 0;
       objectToDraw.forEach((objectElement: { randomTranslate: any; imgPath: any; x: any; y: any; width: any; height: any }) => {

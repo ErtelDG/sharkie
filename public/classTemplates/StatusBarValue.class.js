@@ -9,9 +9,9 @@ class StatusBarValue extends BaseClass {
         this.setCorrectValueForStatusBarInAllArray(this.name);
     }
     currentCounterForThisObject = 0;
-    counterLife = 1;
-    counterCoin = 2;
-    counterBubble = 3;
+    counterLife = 5;
+    counterCoin = 0;
+    counterBubble = 0;
     setCorrectValueForStatusBarInAllArray(whichStatusBar) {
         if (whichStatusBar == "life") {
             this.currentCounterForThisObject = this.counterLife;
