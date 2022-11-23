@@ -18,7 +18,7 @@ class GameWorld {
          this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
          this.drawStaticObject(this.level.backgrounds);
          this.drawStaticObject(this.level.coins);
-         this.drawRotateStaticObject(this.level.bubbleBottles);
+
          this.drawStaticObject(this.level.statusBar);
          this.drawText(this.level.statusBarValue);
          keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
@@ -26,7 +26,7 @@ class GameWorld {
          keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
 
          this.drawMovableObject(this.level.enemies);
-
+         this.drawRotateStaticObject(this.level.bubbleBottles);
          //Rectangle DRAW!!
          this.drawRectangle(ctx, this.sharkie[0].x + 60, this.sharkie[0].y + 120, this.sharkie[0].width - 120, this.sharkie[0].height - 180);
          for (let pufferFish = 0; pufferFish < 10; pufferFish++) {
@@ -77,8 +77,8 @@ class GameWorld {
          this.level.coins.forEach((coin: { x: number }) => {
             coin.x += 10;
          });
-      HIER!   this.level.bubbleBottles.forEach((bottle: { y: number }) => {
-            bottle.y + -40;
+         this.level.bubbleBottles.forEach((bottle: { randomTranslate: number }) => {
+            bottle.randomTranslate += 10;
          });
       }
    }
@@ -94,8 +94,8 @@ class GameWorld {
          this.level.coins.forEach((coin: { x: number }) => {
             coin.x -= 10;
          });
-         this.level.bubbleBottles.forEach((bottle: { y: number }) => {
-            bottle.y -= -40;
+         this.level.bubbleBottles.forEach((bottle: { randomTranslate: number }) => {
+            bottle.randomTranslate -= 10;
          });
       }
    }
@@ -129,6 +129,7 @@ class GameWorld {
       let counterForSetImgToLeftRight = 0;
       objectToDraw.forEach((objectElement: { randomTranslate: any; imgPath: any; x: any; y: any; width: any; height: any }) => {
          let value = counterForSetImgToLeftRight % 2 ? true : false;
+         objectElement.y = value ? (objectElement.y = -45) : false;
          objectElement.x = value ? objectElement.x : (objectElement.x = -45);
          let rotate = value ? 45 : 315;
          counterForSetImgToLeftRight++;
