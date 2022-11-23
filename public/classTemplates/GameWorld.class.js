@@ -30,17 +30,17 @@ class GameWorld {
             });
             //Rectangle DRAW!!
             this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointY_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
-            for (let pufferFish = 0; pufferFish < 10; pufferFish++) {
-                const pufferFi = this.level.enemies[pufferFish];
-                this.drawRectangle(ctx, pufferFi.x, pufferFi.y, pufferFi.width - 10, pufferFi.height - 20);
-            }
             for (let jellyFish = 11; jellyFish < 20; jellyFish++) {
                 const jellyFi = this.level.enemies[jellyFish];
                 this.drawRectangle(ctx, jellyFi.collisionPointX_LEFT, jellyFi.collisionPointY_TOP, jellyFi.collisionPointY_RIGHT, jellyFi.collisionPointY_BOTTOM);
             }
+            for (let pufferFish = 0; pufferFish < 10; pufferFish++) {
+                const pufferFi = this.level.enemies[pufferFish];
+                this.drawRectangle(ctx, pufferFi.collisionPointX_LEFT, pufferFi.collisionPointY_TOP, pufferFi.collisionPointY_RIGHT, pufferFi.collisionPointY_BOTTOM);
+            }
             for (let i = 0; i < this.level.coins.length; i++) {
                 const coin = this.level.coins[i];
-                this.drawRectangle(ctx, coin.x + 5, coin.y + 5, coin.width - 10, coin.height - 10);
+                this.drawRectangle(ctx, coin.collisionPointX_LEFT, coin.collisionPointY_TOP, coin.collisionPointY_RIGHT, coin.collisionPointY_BOTTOM);
             }
             //END RECTANGLE DRAW!
         }

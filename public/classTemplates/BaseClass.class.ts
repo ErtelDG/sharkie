@@ -39,10 +39,16 @@ class BaseClass {
       }, time);
    }
 
+   setColissionPointsObject(TOP: number, LEFT: number, BOTTOM: number, RIGHT: number) {
+      setInterval(() => {
+         this.updateColissionPointsObject(TOP, LEFT, BOTTOM, RIGHT);
+      }, 1000 / 30);
+   }
+
    updateColissionPointsObject(collisionPointY_TOP: number, collisionPointX_LEFT: number, collisionPointY_BOTTOM: number, collisionPointY_RIGHT: number) {
       this.collisionPointY_TOP = this.y + collisionPointY_TOP;
       this.collisionPointX_LEFT = this.x + collisionPointX_LEFT;
-      this.collisionPointY_BOTTOM = this.height  - collisionPointY_BOTTOM;
+      this.collisionPointY_BOTTOM = this.height - collisionPointY_BOTTOM;
       this.collisionPointY_RIGHT = this.width - collisionPointY_RIGHT;
    }
 }

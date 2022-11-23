@@ -17,6 +17,7 @@ class Coin extends BaseClass {
         setInterval(() => {
             this.lightUpAndDownAnimation();
         }, 100);
+        this.setColissionPointsObject(5, 5, 10, 10);
     }
     timer = 0;
     stopUp = false;

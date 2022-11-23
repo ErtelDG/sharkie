@@ -33,6 +33,11 @@ class BaseClass {
             this.loadOneImgFromCach();
         }, time);
     }
+    setColissionPointsObject(TOP, LEFT, BOTTOM, RIGHT) {
+        setInterval(() => {
+            this.updateColissionPointsObject(TOP, LEFT, BOTTOM, RIGHT);
+        }, 1000 / 30);
+    }
     updateColissionPointsObject(collisionPointY_TOP, collisionPointX_LEFT, collisionPointY_BOTTOM, collisionPointY_RIGHT) {
         this.collisionPointY_TOP = this.y + collisionPointY_TOP;
         this.collisionPointX_LEFT = this.x + collisionPointX_LEFT;

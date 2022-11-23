@@ -18,6 +18,6 @@ class EnemyPufferFish extends EnemyClass {
         this.height = 80;
         this.x = Math.random() * (6000 - 500) + 500;
         this.y = Math.random() * (300 - 50) + 50;
-        this.updateColissionPointsObject(15, 10, -25, -10);
+        this.setColissionPointsObject(0, 0, 25, 10);
     }
 }
