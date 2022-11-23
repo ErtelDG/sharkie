@@ -27,15 +27,22 @@ class GameWorld {
 
          this.drawMovableObject(this.level.enemies);
          this.drawRotateStaticObject(this.level.bubbleBottles);
+
+         this.level.coins.forEach((coin: { x: number; width: any }) => {
+            if (this.sharkie[0].x + 60 + this.sharkie[0].width - 120 > coin.x + 5 && this.sharkie[0].x + 60 < coin.x + 5 + coin.width - 10) {
+               console.log("COIN");
+            }
+         });
+
          //Rectangle DRAW!!
-         this.drawRectangle(ctx, this.sharkie[0].x + 60, this.sharkie[0].y + 120, this.sharkie[0].width - 120, this.sharkie[0].height - 180);
+         this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointY_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
          for (let pufferFish = 0; pufferFish < 10; pufferFish++) {
             const pufferFi = this.level.enemies[pufferFish];
             this.drawRectangle(ctx, pufferFi.x, pufferFi.y, pufferFi.width - 10, pufferFi.height - 20);
          }
          for (let jellyFish = 11; jellyFish < 20; jellyFish++) {
             const jellyFi = this.level.enemies[jellyFish];
-            this.drawRectangle(ctx, jellyFi.x + 10, jellyFi.y + 15, jellyFi.width - 15, jellyFi.height - 25);
+            this.drawRectangle(ctx, jellyFi.collisionPointX_LEFT, jellyFi.collisionPointY_TOP, jellyFi.collisionPointY_RIGHT, jellyFi.collisionPointY_BOTTOM);
          }
          for (let i = 0; i < this.level.coins.length; i++) {
             const coin = this.level.coins[i];
@@ -105,7 +112,7 @@ class GameWorld {
          this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height)
       );
    }
-   
+
    drawRotateStaticObject(objectToDraw: any) {
       let counterForSetImgToLeftRight = 0;
       objectToDraw.forEach((objectElement: { randomTranslate: any; imgPath: any; x: any; y: any; width: any; height: any }) => {

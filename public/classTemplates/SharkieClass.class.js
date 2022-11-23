@@ -2,12 +2,15 @@
 class Sharkie extends MovableClass {
     constructor() {
         super("Sharkie");
+        this.width = 300;
+        this.height = 250;
         this.setAllImagesInArray();
         this.checkDirectionOfMovement();
         this.loadInIntervallAllImg();
         this.loadInIntervallOneImg();
-        this.width = 300;
-        this.height = 250;
+        this.setColissionPointsObject(120, 60, -180, -120);
+        this.objectBreakePointTop = this.collisionPointY_TOP - 60;
+        this.objectBreakePointBottom = this.collisionPointY_TOP + 180;
     }
     loadInIntervallOneImg() {
         setInterval(() => {
@@ -16,10 +19,14 @@ class Sharkie extends MovableClass {
     }
     checkDirectionOfMovement() {
         setInterval(() => {
-            //keyboard.LEFT ? this.moveLeft(10) : false;
-            //keyboard.RIGHT ? this.moveRight(10) : false;
-            keyboard.DOWN ? this.moveDown(10) : false;
-            keyboard.UP ? this.moveUp(10) : false;
+            if (keyboard.DOWN)
+                this.moveDown(10);
+            if (keyboard.UP)
+                this.moveUp(10);
+            if (keyboard.DOWN)
+                this.updateColissionPointsObject(10, 0, 0, 0);
+            if (keyboard.UP)
+                this.updateColissionPointsObject(-10, 0, 0, 0);
         }, 1000 / 30);
     }
     loadInIntervallAllImg() {

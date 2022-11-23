@@ -23,15 +23,20 @@ class GameWorld {
             keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
             this.drawMovableObject(this.level.enemies);
             this.drawRotateStaticObject(this.level.bubbleBottles);
+            this.level.coins.forEach((coin) => {
+                if (this.sharkie[0].x + 60 + this.sharkie[0].width - 120 > coin.x + 5 && this.sharkie[0].x + 60 < coin.x + 5 + coin.width - 10) {
+                    console.log("COIN");
+                }
+            });
             //Rectangle DRAW!!
-            this.drawRectangle(ctx, this.sharkie[0].x + 60, this.sharkie[0].y + 120, this.sharkie[0].width - 120, this.sharkie[0].height - 180);
+            this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointY_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
             for (let pufferFish = 0; pufferFish < 10; pufferFish++) {
                 const pufferFi = this.level.enemies[pufferFish];
                 this.drawRectangle(ctx, pufferFi.x, pufferFi.y, pufferFi.width - 10, pufferFi.height - 20);
             }
             for (let jellyFish = 11; jellyFish < 20; jellyFish++) {
                 const jellyFi = this.level.enemies[jellyFish];
-                this.drawRectangle(ctx, jellyFi.x + 10, jellyFi.y + 15, jellyFi.width - 15, jellyFi.height - 25);
+                this.drawRectangle(ctx, jellyFi.collisionPointX_LEFT, jellyFi.collisionPointY_TOP, jellyFi.collisionPointY_RIGHT, jellyFi.collisionPointY_BOTTOM);
             }
             for (let i = 0; i < this.level.coins.length; i++) {
                 const coin = this.level.coins[i];
@@ -58,40 +63,22 @@ class GameWorld {
     }
     moveBackgroundToLeft() {
         if (this.level.backgrounds[0].x < 0) {
-            this.level.backgrounds.forEach((background) => {
-                background.x += 10;
-            });
-            this.level.enemies.forEach((enemy) => {
-                enemy.x += 10;
-            });
-            this.level.coins.forEach((coin) => {
-                coin.x += 10;
-            });
-            this.level.bubbleBottles.forEach((bottle) => {
-                bottle.randomTranslate += 10;
-            });
+            this.level.backgrounds.forEach((background) => (background.x += 10));
+            this.level.enemies.forEach((enemy) => (enemy.x += 10));
+            this.level.coins.forEach((coin) => (coin.x += 10));
+            this.level.bubbleBottles.forEach((bottle) => (bottle.randomTranslate += 10));
         }
     }
     moveBackgroundToRight() {
         if (this.level.backgrounds[this.level.backgrounds.length - 1].x > 250) {
-            this.level.backgrounds.forEach((background) => {
-                background.x -= 10;
-            });
-            this.level.enemies.forEach((enemy) => {
-                enemy.x -= 10;
-            });
-            this.level.coins.forEach((coin) => {
-                coin.x -= 10;
-            });
-            this.level.bubbleBottles.forEach((bottle) => {
-                bottle.randomTranslate -= 10;
-            });
+            this.level.backgrounds.forEach((background) => (background.x -= 10));
+            this.level.enemies.forEach((enemy) => (enemy.x -= 10));
+            this.level.coins.forEach((coin) => (coin.x -= 10));
+            this.level.bubbleBottles.forEach((bottle) => (bottle.randomTranslate -= 10));
         }
     }
     checkPositionMovableobjectIsInTheCorrectRange(movableObjectsInArray, maxTopY, maxBottemY) {
-        movableObjectsInArray.forEach((currentMovableObject) => {
-            currentMovableObject.checkLimitPositionXandY(currentMovableObject, maxTopY, maxBottemY);
-        });
+        movableObjectsInArray.forEach((currentMovableObject) => currentMovableObject.checkLimitPositionXandY(currentMovableObject, maxTopY, maxBottemY));
     }
     drawMirrowObjectToCanvas(objectsToDraw) {
         objectsToDraw.forEach((objectX) => {
@@ -105,9 +92,7 @@ class GameWorld {
         this.level.background[0].loadOneImgFromCach(this.level.background[0].imageCach);
     }
     drawStaticObject(objectToDraw) {
-        objectToDraw.forEach((objectElement) => {
-            this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
-        });
+        objectToDraw.forEach((objectElement) => this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height));
     }
     drawRotateStaticObject(objectToDraw) {
         let counterForSetImgToLeftRight = 0;
