@@ -121,7 +121,12 @@ class GameWorld {
                     sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
                     sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
                     sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM) {
-                    console.log("COIN");
+                    objectArray.splice(objectArray.indexOf(object), 1);
+                    this.level.statusBar.forEach((checkStatusBar) => {
+                        if (checkStatusBar.name == "coin") {
+                            this.level.statusBarValue[1].counterCoin++;
+                        }
+                    });
                 }
             });
         });
@@ -132,7 +137,12 @@ class GameWorld {
                 if (sharkie.collisionPointX_LEFT < object.randomTranslate + 70 &&
                     sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.randomTranslate - 20 &&
                     sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.height + 205) {
-                    console.log("BOTTTLE");
+                    object.randomTranslate = -1000;
+                    this.level.statusBar.forEach((checkStatusBar) => {
+                        if (checkStatusBar.name == "bubble") {
+                            this.level.statusBarValue[2].counterBubble++;
+                        }
+                    });
                 }
             });
         });

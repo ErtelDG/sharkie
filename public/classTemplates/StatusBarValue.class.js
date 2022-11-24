@@ -13,20 +13,22 @@ class StatusBarValue extends BaseClass {
     counterCoin = 0;
     counterBubble = 0;
     setCorrectValueForStatusBarInAllArray(whichStatusBar) {
-        if (whichStatusBar == "life") {
-            this.currentCounterForThisObject = this.counterLife;
-            this.x = 90;
-        }
-        else if (whichStatusBar == "coin") {
-            this.currentCounterForThisObject = this.counterCoin;
-            this.x = 260;
-        }
-        else if (whichStatusBar == "bubble") {
-            this.currentCounterForThisObject = this.counterBubble;
-            this.x = 420;
-        }
-        else {
-            alert("Set for statusbar one the following parameters: life || coin || bubble!");
-        }
+        setInterval(() => {
+            if (whichStatusBar == "life") {
+                this.currentCounterForThisObject = this.counterLife;
+                this.x = 90;
+            }
+            else if (whichStatusBar == "coin") {
+                this.currentCounterForThisObject = this.counterCoin;
+                this.x = 260;
+            }
+            else if (whichStatusBar == "bubble") {
+                this.currentCounterForThisObject = this.counterBubble;
+                this.x = 420;
+            }
+            else {
+                alert("Set for statusbar one the following parameters: life || coin || bubble!");
+            }
+        }, 500);
     }
 }
