@@ -131,9 +131,7 @@ class GameWorld {
             objectArray.forEach((object) => {
                 if (sharkie.collisionPointX_LEFT < object.randomTranslate + 70 &&
                     sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.randomTranslate - 20 &&
-                    sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.height + 205 //&&
-                //     sharkie.collisionPointY_TOP < object.randomTranslate + object.randomTranslate
-                ) {
+                    sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.height + 205) {
                     console.log("BOTTTLE");
                 }
             });

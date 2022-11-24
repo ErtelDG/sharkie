@@ -28,7 +28,7 @@ class GameWorld {
          this.drawMovableObject(this.level.enemies);
          this.drawRotateStaticObject(this.level.bubbleBottles);
          this.checkCollisionPickObjects(this.sharkie, this.level.coins);
-          this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
+         this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
 
          //Rectangle DRAW!!
          this.drawRectangle(
@@ -145,32 +145,38 @@ class GameWorld {
    }
 
    checkCollisionPickObjects(sharkieArray: any[], objectArray: any[]) {
-      sharkieArray.forEach((sharkie: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any; }) => {
-         objectArray.forEach((object: any) => {
-            if (
-               sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
-               sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
-               sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
-               sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM
-            ) {
-               console.log("COIN");
-            }
-         });
-      });
+      sharkieArray.forEach(
+         (sharkie: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }) => {
+            objectArray.forEach((object: any) => {
+               if (
+                  sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
+                  sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
+                  sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
+                  sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM
+               ) {
+                  console.log("COIN");
+               }
+            });
+         }
+      );
    }
 
-   checkCollisionPickTransformObjects(sharkieArray: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any; }[], objectArray: any[]){
-sharkieArray.forEach((sharkie: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }) => {
-   objectArray.forEach((object: any) => {
-      if (
- sharkie.collisionPointX_LEFT < object.randomTranslate + 70 &&
-     sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.randomTranslate -20&&
-        sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.height + 205
-
-      ) {
-         console.log("BOTTTLE");
-      }
-   });
-});
+   checkCollisionPickTransformObjects(
+      sharkieArray: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }[],
+      objectArray: any[]
+   ) {
+      sharkieArray.forEach(
+         (sharkie: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }) => {
+            objectArray.forEach((object: any) => {
+               if (
+                  sharkie.collisionPointX_LEFT < object.randomTranslate + 70 &&
+                  sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.randomTranslate - 20 &&
+                  sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.height + 205
+               ) {
+                  console.log("BOTTTLE");
+               }
+            });
+         }
+      );
    }
 }
