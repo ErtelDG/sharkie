@@ -24,6 +24,7 @@ class GameWorld {
             this.drawMovableObject(this.level.enemies);
             this.drawRotateStaticObject(this.level.bubbleBottles);
             this.checkCollisionPickObjects(this.sharkie, this.level.coins);
+            this.checkCollisionPickObjects(this.sharkie, this.level.enemies);
             this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
             //Rectangle DRAW!!
             this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointX_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
@@ -117,15 +118,11 @@ class GameWorld {
     checkCollisionPickObjects(sharkieArray, objectArray) {
         sharkieArray.forEach((sharkie) => {
             objectArray.forEach((object) => {
-                if (sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
-                    sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
-                    sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
-                    sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM) {
+                if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
                     objectArray.splice(objectArray.indexOf(object), 1);
                     this.level.statusBar.forEach((checkStatusBar) => {
-                        if (checkStatusBar.name == "coin") {
-                            this.level.statusBarValue[1].counterCoin++;
-                        }
+                        if (checkStatusBar.name == "coin")
+                            () => this.level.statusBarValue[1].counterCoin++;
                     });
                 }
             });
@@ -146,5 +143,11 @@ class GameWorld {
                 }
             });
         });
+    }
+    collisionBreakepointsSharkieObjects(sharkie, object) {
+        return (sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
+            sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
+            sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
+            sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM);
     }
 }

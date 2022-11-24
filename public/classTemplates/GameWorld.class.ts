@@ -28,6 +28,7 @@ class GameWorld {
          this.drawMovableObject(this.level.enemies);
          this.drawRotateStaticObject(this.level.bubbleBottles);
          this.checkCollisionPickObjects(this.sharkie, this.level.coins);
+         this.checkCollisionPickObjects(this.sharkie, this.level.enemies);
          this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
 
          //Rectangle DRAW!!
@@ -148,17 +149,10 @@ class GameWorld {
       sharkieArray.forEach(
          (sharkie: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }) => {
             objectArray.forEach((object: any) => {
-               if (
-                  sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
-                  sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
-                  sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
-                  sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM
-               ) {
+               if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
                   objectArray.splice(objectArray.indexOf(object), 1);
                   this.level.statusBar.forEach((checkStatusBar: { name: string }) => {
-                     if (checkStatusBar.name == "coin") {
-                        this.level.statusBarValue[1].counterCoin++;
-                     }
+                     if (checkStatusBar.name == "coin") () => this.level.statusBarValue[1].counterCoin++;
                   });
                }
             });
@@ -187,6 +181,18 @@ class GameWorld {
                }
             });
          }
+      );
+   }
+
+   collisionBreakepointsSharkieObjects(
+      sharkie: { collisionPointX_LEFT: any; collisionPointX_RIGHT: any; collisionPointY_TOP: any; collisionPointY_BOTTOM: any },
+      object: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }
+   ) {
+      return (
+         sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
+         sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
+         sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
+         sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM
       );
    }
 }
