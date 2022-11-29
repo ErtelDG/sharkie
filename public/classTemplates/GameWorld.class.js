@@ -146,6 +146,9 @@ class GameWorld {
                         else if (object.name == "EnemyJellyFishLila") {
                             sharkie.hasHurtElectric = true;
                         }
+                        else {
+                            sharkie.hasHurt = true;
+                        }
                         sharkie.checkHit = false;
                         console.log(object);
                         this.level.statusBar.forEach((checkStatusBar) => {
