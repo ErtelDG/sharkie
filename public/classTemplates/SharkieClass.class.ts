@@ -9,6 +9,7 @@ class Sharkie extends MovableClass {
       this.loadInIntervallOneImg();
       this.setColissionPointsObject(120, 60, 180, 120);
       this.checkIsDead();
+      this.startTimerForIdleTime();
    }
 
    loadInIntervallOneImg() {
@@ -50,9 +51,21 @@ class Sharkie extends MovableClass {
    arrayAllImages_IS_DEAD: string[] = [];
    sharkieLastImagesCounter = 0;
    sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
+   isIdle = false;
+   timerForIdleTime = 5;
+
+   startTimerForIdleTime() {
+      setInterval(() => {
+         if (this.isIdle) {
+            this.timerForIdleTime--;
+         } else {
+            this.resetTimerForIdle();
+         }
+      }, 1000);
+   }
 
    loadAllImageArrayForCurrenttAnimation() {
-      if (this.hasHurt == true) {
+      if (this.hasHurt) {
          this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
       } else if (this.isDead == true) {
          this.loadAllImgInCach(this.arrayAllImages_IS_DEAD);
@@ -60,10 +73,15 @@ class Sharkie extends MovableClass {
          this.loadAllImgInCach(this.arrayAllImages_SWIM);
       } else if (keyboard.D) {
          this.loadAllImgInCach(this.arrayAllImages_ATTACK_FIN_SLAP);
-      } else {
+      } else if (this.timerForIdleTime <= 0) {
+         this.loadAllImgInCach(this.arrayAllImages_LONG_IDLE);
+      } else if (this.isIdle == true) {
          this.loadAllImgInCach(this.arrayAllImages_IDLE);
+      } else {
+         this.isIdle = true;
       }
    }
+
    setAllImagesInArray() {
       this.arrayAllImages_IDLE = [
          "img/1.Sharkie/1.IDLE/1.png",
@@ -161,5 +179,10 @@ class Sharkie extends MovableClass {
          "img/1.Sharkie/6.dead/1.Poisoned/11.png",
          "img/1.Sharkie/6.dead/1.Poisoned/12.png",
       ];
+   }
+
+   resetTimerForIdle() {
+      this.timerForIdleTime = 5;
+      this.isIdle = true;
    }
 }
