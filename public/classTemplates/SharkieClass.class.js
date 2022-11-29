@@ -66,15 +66,19 @@ class Sharkie extends MovableClass {
     }
     loadAllImageArrayForCurrenttAnimation() {
         if (this.hasHurt) {
+            this.isIdle = false;
             this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
         }
         else if (this.isDead == true) {
+            this.isIdle = false;
             this.loadAllImgInCach(this.arrayAllImages_IS_DEAD);
         }
         else if (keyboard.LEFT || keyboard.RIGHT || keyboard.DOWN || keyboard.UP) {
+            this.isIdle = false;
             this.loadAllImgInCach(this.arrayAllImages_SWIM);
         }
         else if (keyboard.D) {
+            this.isIdle = false;
             this.loadAllImgInCach(this.arrayAllImages_ATTACK_FIN_SLAP);
         }
         else if (this.timerForIdleTime <= 0) {

@@ -21,6 +21,7 @@ class EnemyJellyFishLila extends EnemyClass {
             this.lightUpAndDownAnimation();
         }, 80);
         this.setColissionPointsObject(15, 10, 25, 35);
+        this.name = "EnemyJellyFishLila";
     }
     timer = 0;
     stopUp = false;
