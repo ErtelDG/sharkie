@@ -172,7 +172,11 @@ class GameWorld {
          objectArray.forEach((object: any) => {
             if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
                if (sharkie.checkHit == true) {
-                  sharkie.hasHurt = true;
+                  if (object.name == "EnemyPufferFish") {
+                     sharkie.hasHurt = true;
+                  } else if (object.name == "EnemyJellyFishLila") {
+                     sharkie.hasHurtElectric = true;
+                  }
                   sharkie.checkHit = false;
                   console.log(object);
                   this.level.statusBar.forEach((checkStatusBar: { name: string }) => {
@@ -187,6 +191,7 @@ class GameWorld {
                         sharkie.checkHit = true;
                      }
                      sharkie.hasHurt = false;
+                     sharkie.hasHurtElectric = false;
                   }, 2000);
                }
                if (sharkie.isDead == true) {

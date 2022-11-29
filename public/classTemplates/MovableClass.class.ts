@@ -13,6 +13,7 @@ class MovableClass extends BaseClass {
    lastHit = 0;
    checkHit = true;
    hasHurt = false;
+   hasHurtElectric = false;
    isDead = false;
 
    autoMoveLeft(speedObject: number) {

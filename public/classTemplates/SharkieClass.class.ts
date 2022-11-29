@@ -49,6 +49,7 @@ class Sharkie extends MovableClass {
    arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY: string[] = [];
    arrayAllImages_HAS_HURT: string[] = [];
    arrayAllImages_IS_DEAD: string[] = [];
+   arrayAllImages_HAS_HURT_ELECTRIC: string[] = [];
    sharkieLastImagesCounter = 0;
    sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
    isIdle = false;
@@ -68,6 +69,9 @@ class Sharkie extends MovableClass {
       if (this.hasHurt) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
+      } else if (this.hasHurtElectric == true) {
+         this.isIdle = false;
+         this.loadAllImgInCach(this.arrayAllImages_HAS_HURT_ELECTRIC);
       } else if (this.isDead == true) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_IS_DEAD);
@@ -167,6 +171,12 @@ class Sharkie extends MovableClass {
          "img/1.Sharkie/5.Hurt/1.Poisoned/3.png",
          "img/1.Sharkie/5.Hurt/1.Poisoned/4.png",
          "img/1.Sharkie/5.Hurt/1.Poisoned/5.png",
+      ];
+
+      this.arrayAllImages_HAS_HURT_ELECTRIC = [
+         "img/1.Sharkie/5.Hurt/2.ElectricShock/1.png",
+         "img/1.Sharkie/5.Hurt/2.ElectricShock/2.png",
+         "img/1.Sharkie/5.Hurt/2.ElectricShock/3.png",
       ];
 
       this.arrayAllImages_IS_DEAD = [
