@@ -138,7 +138,13 @@ class GameWorld {
     checkCollisionEnemies(sharkieArray, objectArray) {
         sharkieArray.forEach((sharkie) => {
             objectArray.forEach((object) => {
-                if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
+                if (keyboard.D) {
+                    if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
+                        objectArray.splice(objectArray.indexOf(object), 1);
+                        console.log("true");
+                    }
+                }
+                else if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
                     if (sharkie.checkHit == true) {
                         if (object.name == "EnemyPufferFish") {
                             sharkie.hasHurt = true;
@@ -192,6 +198,12 @@ class GameWorld {
     collisionBreakepointsSharkieObjects(sharkie, object) {
         return (sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
             sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
+            sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
+            sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM);
+    }
+    collisionBreakepointsSharkieObjectsFinSlap(sharkie, object) {
+        return (sharkie.collisionPointX_LEFT + 140 < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
+            sharkie.collisionPointX_LEFT + 140 + sharkie.collisionPointX_RIGHT - 130 > object.collisionPointX_LEFT &&
             sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
             sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM);
     }

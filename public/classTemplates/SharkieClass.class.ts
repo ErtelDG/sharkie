@@ -4,28 +4,29 @@ class Sharkie extends MovableClass {
       this.width = 300;
       this.height = 250;
       this.setAllImagesInArray();
-      this.checkDirectionOfMovement();
       this.loadInIntervallAllImg();
-      this.loadInIntervallOneImg();
+      this.checkDirectionOfMovement();
       this.setColissionPointsObject(120, 60, 180, 120);
       this.checkIsDead();
       this.startTimerForIdleTime();
+      this.imagesCach.push(this.arrayAllImages_IDLE[0]);
+      this.loadInIntervallOneImg();
    }
 
    loadInIntervallOneImg() {
       setInterval(async () => {
          if (!this.isDead) {
-            this.loadOneImgFromCach();
+            await this.loadOneImgFromCach();
          } else {
             this.sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
             if (this.sharkieLastImagesCounter < this.sharkieLastImages) {
                this.sharkieLastImagesCounter++;
-               this.loadOneImgFromCach();
+               await this.loadOneImgFromCach();
             } else {
                this.stopAllIntervals();
             }
          }
-      }, 200);
+      }, 1000 / 15);
    }
 
    checkDirectionOfMovement() {
@@ -136,10 +137,10 @@ class Sharkie extends MovableClass {
          "img/1.Sharkie/3.Swim/6.png",
       ];
       this.arrayAllImages_ATTACK_FIN_SLAP = [
-         "img/1.Sharkie/4.Attack/Fin_Slap/1.png",
-         "img/1.Sharkie/4.Attack/Fin_Slap/2.png",
-         "img/1.Sharkie/4.Attack/Fin_Slap/3.png",
-         "img/1.Sharkie/4.Attack/Fin_Slap/4.png",
+         //"img/1.Sharkie/4.Attack/Fin_Slap/1.png",
+         //  "img/1.Sharkie/4.Attack/Fin_Slap/2.png",
+         //  "img/1.Sharkie/4.Attack/Fin_Slap/3.png",
+         //  "img/1.Sharkie/4.Attack/Fin_Slap/4.png",
          "img/1.Sharkie/4.Attack/Fin_Slap/5.png",
          "img/1.Sharkie/4.Attack/Fin_Slap/6.png",
          "img/1.Sharkie/4.Attack/Fin_Slap/7.png",

@@ -11,7 +11,7 @@ class EnemyJellyFishLila extends EnemyClass {
       this.loadAllImgInCach(this.arrayAllImages);
       setInterval(() => {
          this.loadOneImgFromCach();
-         this.autoMoveLeft(Math.random() * 12);
+         this.autoMoveLeft(Math.random() * 6);
       }, 120);
       this.width = 80;
       this.height = 150;
