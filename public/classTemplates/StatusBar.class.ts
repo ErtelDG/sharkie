@@ -6,7 +6,13 @@ class StatusBar extends BaseClass {
       this.height = 80;
       this.setCorrectImageForStatusBarInAllArray(this.name);
       this.loadAllImgInCach(this.arrayAllImages);
-      this.loadOneImgFromCach();
+      setInterval(() => {
+         if (this.name != "finalFish") {
+            this.loadOneImgFromCach();
+         } else {
+            this.imgPath.src = this.imagesCach[this.counterFinalFish];
+         }
+      }, 500);
    }
 
    counterFinalFish = 5;
@@ -25,7 +31,7 @@ class StatusBar extends BaseClass {
          this.x = 350;
       } else if (whichStatusBar == "finalFish") {
          this.arrayAllImages = [];
-         this.arrayAllImages.push(this.imgStatusFinalFish[this.counterFinalFish]);
+         this.arrayAllImages = this.imgStatusFinalFish;
          this.x = 520;
          this.width = 200;
       } else {
