@@ -24,7 +24,7 @@ class GameWorld {
             this.drawMovableObject(this.level.enemies);
             this.drawRotateStaticObject(this.level.bubbleBottles);
             this.checkCollisionPickObjects(this.sharkie, this.level.coins);
-            this.checkCollisionPickObjects(this.sharkie, this.level.enemies);
+            this.checkCollisionEnemies(this.sharkie, this.level.enemies);
             this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
             //Rectangle DRAW!!
             this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointX_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
@@ -112,7 +112,13 @@ class GameWorld {
     }
     drawMovableObject(movableObjectArray) {
         movableObjectArray.forEach((movableObject) => {
-            this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+            try {
+                this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+            }
+            catch (e) {
+                console.warn("Error loading Image", e);
+                console.warn("Could not load", movableObject.imgPath);
+            }
         });
     }
     checkCollisionPickObjects(sharkieArray, objectArray) {
@@ -121,9 +127,39 @@ class GameWorld {
                 if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
                     objectArray.splice(objectArray.indexOf(object), 1);
                     this.level.statusBar.forEach((checkStatusBar) => {
-                        if (checkStatusBar.name == "coin")
-                            () => this.level.statusBarValue[1].counterCoin++;
+                        if (checkStatusBar.name == "coin") {
+                            this.level.statusBarValue[1].counterCoin++;
+                        }
                     });
+                }
+            });
+        });
+    }
+    checkCollisionEnemies(sharkieArray, objectArray) {
+        sharkieArray.forEach((sharkie) => {
+            objectArray.forEach((object) => {
+                if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
+                    if (sharkie.checkHit == true) {
+                        sharkie.hasHurt = true;
+                        sharkie.checkHit = false;
+                        console.log(object);
+                        this.level.statusBar.forEach((checkStatusBar) => {
+                            if (checkStatusBar.name == "life") {
+                                this.level.statusBarValue[0].counterLife--;
+                            }
+                        });
+                        sharkie.hit();
+                        sharkie.isHurt();
+                        setTimeout(() => {
+                            if (sharkie.isDead != true) {
+                                sharkie.checkHit = true;
+                            }
+                            sharkie.hasHurt = false;
+                        }, 2000);
+                    }
+                    if (sharkie.isDead == true) {
+                        sharkie.checkHit = false;
+                    }
                 }
             });
         });

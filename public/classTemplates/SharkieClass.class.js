@@ -9,11 +9,24 @@ class Sharkie extends MovableClass {
         this.loadInIntervallAllImg();
         this.loadInIntervallOneImg();
         this.setColissionPointsObject(120, 60, 180, 120);
+        this.checkIsDead();
     }
     loadInIntervallOneImg() {
-        setInterval(() => {
-            this.loadOneImgFromCach();
-        }, 150);
+        setInterval(async () => {
+            if (!this.isDead) {
+                this.loadOneImgFromCach();
+            }
+            else {
+                this.sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
+                if (this.sharkieLastImagesCounter < this.sharkieLastImages) {
+                    this.sharkieLastImagesCounter++;
+                    this.loadOneImgFromCach();
+                }
+                else {
+                    this.stopAllIntervals();
+                }
+            }
+        }, 200);
     }
     checkDirectionOfMovement() {
         setInterval(() => {
@@ -34,8 +47,18 @@ class Sharkie extends MovableClass {
     arrayAllImages_ATTACK_FIN_SLAP = [];
     arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE = [];
     arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY = [];
+    arrayAllImages_HAS_HURT = [];
+    arrayAllImages_IS_DEAD = [];
+    sharkieLastImagesCounter = 0;
+    sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
     loadAllImageArrayForCurrenttAnimation() {
-        if (keyboard.LEFT || keyboard.RIGHT || keyboard.DOWN || keyboard.UP) {
+        if (this.hasHurt == true) {
+            this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
+        }
+        else if (this.isDead == true) {
+            this.loadAllImgInCach(this.arrayAllImages_IS_DEAD);
+        }
+        else if (keyboard.LEFT || keyboard.RIGHT || keyboard.DOWN || keyboard.UP) {
             this.loadAllImgInCach(this.arrayAllImages_SWIM);
         }
         else if (keyboard.D) {
@@ -119,6 +142,26 @@ class Sharkie extends MovableClass {
             "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/6.png",
             "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/7.png",
             "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/8.png",
+        ];
+        this.arrayAllImages_HAS_HURT = [
+            "img/1.Sharkie/5.Hurt/1.Poisoned/2.png",
+            "img/1.Sharkie/5.Hurt/1.Poisoned/3.png",
+            "img/1.Sharkie/5.Hurt/1.Poisoned/4.png",
+            "img/1.Sharkie/5.Hurt/1.Poisoned/5.png",
+        ];
+        this.arrayAllImages_IS_DEAD = [
+            "img/1.Sharkie/6.dead/1.Poisoned/1.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/2.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/3.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/4.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/5.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/6.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/7.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/8.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/9.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/10.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/11.png",
+            "img/1.Sharkie/6.dead/1.Poisoned/12.png",
         ];
     }
 }

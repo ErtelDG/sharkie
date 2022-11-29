@@ -51,4 +51,11 @@ class BaseClass {
       this.collisionPointY_BOTTOM = this.height - collisionPointY_BOTTOM;
       this.collisionPointX_RIGHT = this.width - collisionPointX_RIGHT;
    }
+
+   stopAllIntervals() {
+      let highestTimeoutId = setTimeout(";");
+      for (let i = 0; i < highestTimeoutId; i++) {
+         clearTimeout(i);
+      }
+   }
 }
