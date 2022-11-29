@@ -9,6 +9,7 @@ class StatusBar extends BaseClass {
         this.loadAllImgInCach(this.arrayAllImages);
         this.loadOneImgFromCach();
     }
+    counterFinalFish = 5;
     setCorrectImageForStatusBarInAllArray(whichStatusBar) {
         if (whichStatusBar == "life") {
             this.arrayAllImages = this.imgStatusBarLife;
@@ -25,7 +26,8 @@ class StatusBar extends BaseClass {
             this.x = 350;
         }
         else if (whichStatusBar == "finalFish") {
-            this.arrayAllImages = this.imgStatusFinalFish;
+            this.arrayAllImages = [];
+            this.arrayAllImages.push(this.imgStatusFinalFish[this.counterFinalFish]);
             this.x = 520;
             this.width = 200;
         }

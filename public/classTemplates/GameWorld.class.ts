@@ -41,7 +41,7 @@ class GameWorld {
          );
          this.level.enemies.forEach(
             (enemie: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
-               this.drawRectangle(ctx, enemie.collisionPointX_LEFT, enemie.collisionPointY_TOP, enemie.collisionPointX_RIGHT, enemie.collisionPointY_BOTTOM);
+               this.drawRectangle(ctx, enemie.collisionPointX_LEFT+10, enemie.collisionPointY_TOP, enemie.collisionPointX_RIGHT, enemie.collisionPointY_BOTTOM);
             }
          );
          this.level.coins.forEach((coin: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
@@ -170,9 +170,25 @@ class GameWorld {
    checkCollisionEnemies(sharkieArray: any[], objectArray: any[]) {
       sharkieArray.forEach((sharkie) => {
          objectArray.forEach((object: any) => {
-            if (keyboard.D) {
+            if (keyboard.D && sharkie.isAttack != true) {
                if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
-                  objectArray.splice(objectArray.indexOf(object), 1);
+                  sharkie.isAttack = true;
+                  if (object.name != "EnemyFinalFish") {
+                     objectArray.splice(objectArray.indexOf(object), 1);
+                  } else {
+                     object.energy--;
+                     this.level.statusBar[3].counterFinalFish--;
+                     console.log(object.energy);
+                  }
+                  sharkie.checkHit = false;
+                  setTimeout(() => {
+                     if (sharkie.isDead != true) {
+                        sharkie.checkHit = true;
+                     }
+                     sharkie.hasHurt = false;
+                     sharkie.hasHurtElectric = false;
+                     sharkie.isAttack = false;
+                  }, 750);
                }
             } else if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
                if (sharkie.checkHit == true) {
@@ -194,7 +210,6 @@ class GameWorld {
                      sharkie.hasHurt = true;
                   }
                   sharkie.checkHit = false;
-
                   sharkie.hit();
                   sharkie.isHurt();
                   setTimeout(() => {

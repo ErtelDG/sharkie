@@ -15,6 +15,7 @@ class MovableClass extends BaseClass {
    hasHurt = false;
    hasHurtElectric = false;
    isDead = false;
+   isAttack = false;
 
    autoMoveLeft(speedObject: number) {
       this.x -= speedObject;

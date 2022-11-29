@@ -29,7 +29,7 @@ class GameWorld {
             //Rectangle DRAW!!
             this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointX_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
             this.level.enemies.forEach((enemie) => {
-                this.drawRectangle(ctx, enemie.collisionPointX_LEFT, enemie.collisionPointY_TOP, enemie.collisionPointX_RIGHT, enemie.collisionPointY_BOTTOM);
+                this.drawRectangle(ctx, enemie.collisionPointX_LEFT + 10, enemie.collisionPointY_TOP, enemie.collisionPointX_RIGHT, enemie.collisionPointY_BOTTOM);
             });
             this.level.coins.forEach((coin) => {
                 this.drawRectangle(ctx, coin.collisionPointX_LEFT, coin.collisionPointY_TOP, coin.collisionPointX_RIGHT, coin.collisionPointY_BOTTOM);
@@ -138,9 +138,26 @@ class GameWorld {
     checkCollisionEnemies(sharkieArray, objectArray) {
         sharkieArray.forEach((sharkie) => {
             objectArray.forEach((object) => {
-                if (keyboard.D) {
+                if (keyboard.D && sharkie.isAttack != true) {
                     if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
-                        objectArray.splice(objectArray.indexOf(object), 1);
+                        sharkie.isAttack = true;
+                        if (object.name != "EnemyFinalFish") {
+                            objectArray.splice(objectArray.indexOf(object), 1);
+                        }
+                        else {
+                            object.energy--;
+                            this.level.statusBar[3].counterFinalFish--;
+                            console.log(object.energy);
+                        }
+                        sharkie.checkHit = false;
+                        setTimeout(() => {
+                            if (sharkie.isDead != true) {
+                                sharkie.checkHit = true;
+                            }
+                            sharkie.hasHurt = false;
+                            sharkie.hasHurtElectric = false;
+                            sharkie.isAttack = false;
+                        }, 750);
                     }
                 }
                 else if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {

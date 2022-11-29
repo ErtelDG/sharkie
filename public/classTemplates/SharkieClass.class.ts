@@ -79,7 +79,7 @@ class Sharkie extends MovableClass {
       } else if (keyboard.LEFT || keyboard.RIGHT || keyboard.DOWN || keyboard.UP) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_SWIM);
-      } else if (keyboard.D) {
+      } else if (keyboard.D && this.isAttack != true) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_ATTACK_FIN_SLAP);
       } else if (this.timerForIdleTime <= 0) {
