@@ -50,7 +50,7 @@ class MovableClass extends BaseClass {
     */
    hit() {
       this.energy -= 1;
-      if (this.energy < 0) {
+      if (this.energy <= 0) {
          console.log("gameover");
          //   HIER GAME OVER ANIMATION
       } else {

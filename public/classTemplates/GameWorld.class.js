@@ -141,11 +141,19 @@ class GameWorld {
                 if (keyboard.D) {
                     if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                         objectArray.splice(objectArray.indexOf(object), 1);
-                        console.log("true");
                     }
                 }
                 else if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
                     if (sharkie.checkHit == true) {
+                        console.log(object);
+                        this.level.statusBar.forEach((checkStatusBar) => {
+                            if (checkStatusBar.name == "life") {
+                                this.level.statusBarValue[0].counterLife--;
+                            }
+                            if (checkStatusBar.name == "life" && this.level.statusBarValue[0].counterLife == 0) {
+                                sharkie.isDead = true;
+                            }
+                        });
                         if (object.name == "EnemyPufferFish") {
                             sharkie.hasHurt = true;
                         }
@@ -156,12 +164,6 @@ class GameWorld {
                             sharkie.hasHurt = true;
                         }
                         sharkie.checkHit = false;
-                        console.log(object);
-                        this.level.statusBar.forEach((checkStatusBar) => {
-                            if (checkStatusBar.name == "life") {
-                                this.level.statusBarValue[0].counterLife--;
-                            }
-                        });
                         sharkie.hit();
                         sharkie.isHurt();
                         setTimeout(() => {

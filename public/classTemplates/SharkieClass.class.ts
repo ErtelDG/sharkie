@@ -67,7 +67,7 @@ class Sharkie extends MovableClass {
    }
 
    loadAllImageArrayForCurrenttAnimation() {
-      if (this.hasHurt) {
+      if (this.hasHurt && !this.isDead) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
       } else if (this.hasHurtElectric == true) {
