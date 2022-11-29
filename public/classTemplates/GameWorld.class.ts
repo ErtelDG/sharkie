@@ -24,12 +24,12 @@ class GameWorld {
          keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
          this.ctx.restore();
          keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
-
          this.drawMovableObject(this.level.enemies);
          this.drawRotateStaticObject(this.level.bubbleBottles);
          this.checkCollisionPickObjects(this.sharkie, this.level.coins);
          this.checkCollisionEnemies(this.sharkie, this.level.enemies);
          this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
+         this.fireBubble(this.sharkie, this.level.enemies);
 
          //Rectangle DRAW!!
          this.drawRectangle(
@@ -41,7 +41,13 @@ class GameWorld {
          );
          this.level.enemies.forEach(
             (enemie: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
-               this.drawRectangle(ctx, enemie.collisionPointX_LEFT+10, enemie.collisionPointY_TOP, enemie.collisionPointX_RIGHT, enemie.collisionPointY_BOTTOM);
+               this.drawRectangle(
+                  ctx,
+                  enemie.collisionPointX_LEFT + 10,
+                  enemie.collisionPointY_TOP,
+                  enemie.collisionPointX_RIGHT,
+                  enemie.collisionPointY_BOTTOM
+               );
             }
          );
          this.level.coins.forEach((coin: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
@@ -250,6 +256,18 @@ class GameWorld {
             });
          }
       );
+   }
+
+   fireBubble(sharkieArray: any[], objectArray: any[]) {
+      if (keyboard.SPACE == true) {
+         sharkieArray.forEach((sharkie) => {
+            sharkie.fireBubble = true;
+            console.log("SPACE");
+            setTimeout(() => {
+               sharkie.fireBubble = false;
+            }, 450);
+         });
+      }
    }
 
    collisionBreakepointsSharkieObjects(

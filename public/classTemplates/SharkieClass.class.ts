@@ -70,6 +70,9 @@ class Sharkie extends MovableClass {
       if (this.hasHurt && !this.isDead) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
+      } else if (this.fireBubble) {
+         this.isIdle = false;
+         this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE);
       } else if (this.hasHurtElectric == true) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_HAS_HURT_ELECTRIC);

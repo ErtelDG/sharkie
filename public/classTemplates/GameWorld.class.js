@@ -26,6 +26,7 @@ class GameWorld {
             this.checkCollisionPickObjects(this.sharkie, this.level.coins);
             this.checkCollisionEnemies(this.sharkie, this.level.enemies);
             this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
+            this.fireBubble(this.sharkie, this.level.enemies);
             //Rectangle DRAW!!
             this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointX_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
             this.level.enemies.forEach((enemie) => {
@@ -213,6 +214,17 @@ class GameWorld {
                 }
             });
         });
+    }
+    fireBubble(sharkieArray, objectArray) {
+        if (keyboard.SPACE == true) {
+            sharkieArray.forEach((sharkie) => {
+                sharkie.fireBubble = true;
+                console.log("SPACE");
+                setTimeout(() => {
+                    sharkie.fireBubble = false;
+                }, 450);
+            });
+        }
     }
     collisionBreakepointsSharkieObjects(sharkie, object) {
         return (sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
