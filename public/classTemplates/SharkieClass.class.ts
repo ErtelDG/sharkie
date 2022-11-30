@@ -15,26 +15,28 @@ class Sharkie extends MovableClass {
       this.pressSpace();
    }
 
+   timeOver = true;
+   fireBubble = false;
    pressSpace() {
       setInterval(() => {
          if (keyboard.SPACE == true) {
-            console.log("SPACERER");
-            this.fireBubble = true;
+            console.log("timeOver", this.timeOver);
+            this.timeOver = false;
          } else {
-            this.fireBubble = false;
+            this.timeOver = true;
          }
       }, 5);
    }
 
    loadInIntervallOneImg() {
-      setInterval(async () => {
+      setInterval(() => {
          if (!this.isDead) {
-            await this.loadOneImgFromCach();
+            this.loadOneImgFromCach();
          } else {
             this.sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
             if (this.sharkieLastImagesCounter < this.sharkieLastImages) {
                this.sharkieLastImagesCounter++;
-               await this.loadOneImgFromCach();
+               this.loadOneImgFromCach();
             } else {
                this.stopAllIntervals();
             }
@@ -51,7 +53,7 @@ class Sharkie extends MovableClass {
 
    loadInIntervallAllImg() {
       setInterval(() => {
-         if (!this.fireBubble) {
+         if (keyboard.SPACE == false) {
             this.loadAllImageArrayForCurrenttAnimation();
          }
       }, 50);
@@ -84,7 +86,7 @@ class Sharkie extends MovableClass {
    }
    breatheAnimation() {
       setInterval(() => {
-         if (this.fireBubble == true && keyboard.SPACE) {
+         if (keyboard.SPACE) {
             this.endFirCounter = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY.length;
             this.isIdle = false;
 
@@ -100,7 +102,7 @@ class Sharkie extends MovableClass {
 
             //this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY);
          }
-      }, 50);
+      }, 75);
    }
 
    loadAllImageArrayForCurrenttAnimation() {

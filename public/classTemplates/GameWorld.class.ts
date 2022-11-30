@@ -274,13 +274,16 @@ class GameWorld {
 
    createFireBubble(sharkie: { x: number; width: number; y: number; fireBubble: boolean }) {
       setTimeout(() => {
-         if (keyboard.SPACE && !sharkie.fireBubble) {
+         if (keyboard.SPACE && sharkie.fireBubble == true) {
             this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
             sharkie.fireBubble = false;
+            setTimeout(() => {
+               sharkie.fireBubble = true;
+            }, 500);
          } else {
             sharkie.fireBubble = false;
          }
-      }, 500);
+      }, 100);
    }
 
    collisionBreakepointsSharkieObjects(

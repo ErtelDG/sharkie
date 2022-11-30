@@ -232,14 +232,17 @@ class GameWorld {
     }
     createFireBubble(sharkie) {
         setTimeout(() => {
-            if (keyboard.SPACE && !sharkie.fireBubble) {
+            if (keyboard.SPACE && sharkie.fireBubble == true) {
                 this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
                 sharkie.fireBubble = false;
+                setTimeout(() => {
+                    sharkie.fireBubble = true;
+                }, 500);
             }
             else {
                 sharkie.fireBubble = false;
             }
-        }, 500);
+        }, 100);
     }
     collisionBreakepointsSharkieObjects(sharkie, object) {
         return (sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
