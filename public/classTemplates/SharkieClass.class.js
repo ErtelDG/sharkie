@@ -12,6 +12,19 @@ class Sharkie extends MovableClass {
         this.startTimerForIdleTime();
         this.imagesCach.push(this.arrayAllImages_IDLE[0]);
         this.loadInIntervallOneImg();
+        this.breatheAnimation();
+        this.pressSpace();
+    }
+    pressSpace() {
+        setInterval(() => {
+            if (keyboard.SPACE == true) {
+                console.log("SPACERER");
+                this.fireBubble = true;
+            }
+            else {
+                this.fireBubble = false;
+            }
+        }, 5);
     }
     loadInIntervallOneImg() {
         setInterval(async () => {
@@ -40,7 +53,9 @@ class Sharkie extends MovableClass {
     }
     loadInIntervallAllImg() {
         setInterval(() => {
-            this.loadAllImageArrayForCurrenttAnimation();
+            if (!this.fireBubble) {
+                this.loadAllImageArrayForCurrenttAnimation();
+            }
         }, 50);
     }
     arrayAllImages_IDLE = [];
@@ -68,25 +83,29 @@ class Sharkie extends MovableClass {
             }
         }, 1000);
     }
+    breatheAnimation() {
+        setInterval(() => {
+            if (this.fireBubble == true && keyboard.SPACE) {
+                this.endFirCounter = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY.length;
+                this.isIdle = false;
+                if (this.endFirCounter > this.fireCounter) {
+                    this.imagesCach = [];
+                    let pathURL = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY[this.fireCounter];
+                    this.imagesCach.push(pathURL);
+                    this.fireCounter++;
+                }
+                else {
+                    this.fireCounter = 0;
+                    this.fireBubble = false;
+                }
+                //this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY);
+            }
+        }, 50);
+    }
     loadAllImageArrayForCurrenttAnimation() {
         if (this.hasHurt && !this.isDead) {
             this.isIdle = false;
             this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
-        }
-        else if (this.fireBubble == true) {
-            this.endFirCounter = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY.length;
-            this.isIdle = false;
-            if (this.endFirCounter > this.fireCounter) {
-                this.imagesCach = [];
-                let pathURL = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY[this.fireCounter];
-                this.imagesCach.push(pathURL);
-                this.fireCounter++;
-            }
-            else {
-                this.fireCounter = 0;
-                this.fireBubble = false;
-            }
-            //this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY);
         }
         else if (this.hasHurtElectric == true) {
             this.isIdle = false;

@@ -10,7 +10,7 @@ class GameWorld {
         this.level = level1;
         this.sharkie = [new Sharkie()];
         this.draw();
-        this.fireBubble(this.sharkie, this.bubble);
+        this.fireBubble(this.sharkie);
     }
     async draw() {
         if (this.ctx != null) {
@@ -217,20 +217,28 @@ class GameWorld {
             });
         });
     }
-    fireBubble(sharkieArray, objectArray) {
+    fireBubble(sharkieArray) {
         sharkieArray.forEach((sharkie) => {
             setInterval(() => {
-                if (keyboard.SPACE && !sharkie.fireBubble) {
-                    sharkie.fireBubble = true;
+                sharkie.fireBubble = true;
+                if (keyboard.SPACE && sharkie.fireBubble) {
                     this.createFireBubble(sharkie);
                 }
-            }, 1000);
+                else {
+                    sharkie.fireBubble = false;
+                }
+            }, 500);
         });
     }
     createFireBubble(sharkie) {
         setTimeout(() => {
-            this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
-            sharkie.fireBubble = false;
+            if (keyboard.SPACE && !sharkie.fireBubble) {
+                this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
+                sharkie.fireBubble = false;
+            }
+            else {
+                sharkie.fireBubble = false;
+            }
         }, 500);
     }
     collisionBreakepointsSharkieObjects(sharkie, object) {

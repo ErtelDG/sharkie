@@ -11,7 +11,7 @@ class GameWorld {
 
       this.sharkie = [new Sharkie()];
       this.draw();
-      this.fireBubble(this.sharkie, this.bubble);
+      this.fireBubble(this.sharkie);
    }
 
    async draw() {
@@ -259,21 +259,27 @@ class GameWorld {
       );
    }
 
-   fireBubble(sharkieArray: any[], objectArray: any[]) {
+   fireBubble(sharkieArray: any[]) {
       sharkieArray.forEach((sharkie) => {
          setInterval(() => {
-            if (keyboard.SPACE && !sharkie.fireBubble) {
-               sharkie.fireBubble = true;
+            sharkie.fireBubble = true;
+            if (keyboard.SPACE && sharkie.fireBubble) {
                this.createFireBubble(sharkie);
+            } else {
+               sharkie.fireBubble = false;
             }
-         }, 1000);
+         }, 500);
       });
    }
 
    createFireBubble(sharkie: { x: number; width: number; y: number; fireBubble: boolean }) {
       setTimeout(() => {
-         this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
-         sharkie.fireBubble = false;
+         if (keyboard.SPACE && !sharkie.fireBubble) {
+            this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
+            sharkie.fireBubble = false;
+         } else {
+            sharkie.fireBubble = false;
+         }
       }, 500);
    }
 
