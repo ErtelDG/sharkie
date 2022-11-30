@@ -20,7 +20,7 @@ class GameWorld {
          this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
          this.drawStaticObject(this.level.backgrounds);
          this.drawStaticObject(this.level.coins);
-
+         this.drawStaticObject(this.bubble);
          this.drawStaticObject(this.level.statusBar);
          this.drawText(this.level.statusBarValue);
          keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
@@ -177,7 +177,7 @@ class GameWorld {
    checkCollisionEnemies(sharkieArray: any[], objectArray: any[]) {
       sharkieArray.forEach((sharkie) => {
          objectArray.forEach((object: any) => {
-            if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt ) {
+            if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt) {
                if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                   sharkie.isAttack = true;
                   if (object.name != "EnemyFinalFish") {
@@ -262,16 +262,19 @@ class GameWorld {
    fireBubble(sharkieArray: any[], objectArray: any[]) {
       sharkieArray.forEach((sharkie) => {
          setInterval(() => {
-            if (keyboard.SPACE && !sharkie.hasABubble) {
-               this.bubble.push(new Bubble("Bubble"));
-               sharkie.hasABubble = true;
-               console.log("SPACE");
-               setTimeout(() => {
-                  sharkie.fireBubble = false;
-               }, 1000);
+            if (keyboard.SPACE && !sharkie.fireBubble) {
+               sharkie.fireBubble = true;
+               this.createFireBubble(sharkie);
             }
-         }, 100);
+         }, 1000);
       });
+   }
+
+   createFireBubble(sharkie: { x: number; width: number; y: number; fireBubble: boolean }) {
+      setTimeout(() => {
+         this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
+         sharkie.fireBubble = false;
+      }, 500);
    }
 
    collisionBreakepointsSharkieObjects(

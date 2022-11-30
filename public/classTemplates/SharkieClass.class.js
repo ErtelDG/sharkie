@@ -56,6 +56,8 @@ class Sharkie extends MovableClass {
     sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
     isIdle = false;
     timerForIdleTime = 15;
+    endFirCounter = 0;
+    fireCounter = 0;
     startTimerForIdleTime() {
         setInterval(() => {
             if (this.isIdle) {
@@ -71,9 +73,20 @@ class Sharkie extends MovableClass {
             this.isIdle = false;
             this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
         }
-        else if (this.fireBubble) {
+        else if (this.fireBubble == true) {
+            this.endFirCounter = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY.length;
             this.isIdle = false;
-            this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE);
+            if (this.endFirCounter > this.fireCounter) {
+                this.imagesCach = [];
+                let pathURL = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY[this.fireCounter];
+                this.imagesCach.push(pathURL);
+                this.fireCounter++;
+            }
+            else {
+                this.fireCounter = 0;
+                this.fireBubble = false;
+            }
+            //this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY);
         }
         else if (this.hasHurtElectric == true) {
             this.isIdle = false;
@@ -98,7 +111,7 @@ class Sharkie extends MovableClass {
             this.loadAllImgInCach(this.arrayAllImages_IDLE);
         }
         else {
-            this.isIdle = true;
+            //this.isIdle = true;
         }
     }
     setAllImagesInArray() {
@@ -147,10 +160,10 @@ class Sharkie extends MovableClass {
             "img/1.Sharkie/3.Swim/6.png",
         ];
         this.arrayAllImages_ATTACK_FIN_SLAP = [
-            //"img/1.Sharkie/4.Attack/Fin_Slap/1.png",
-            //  "img/1.Sharkie/4.Attack/Fin_Slap/2.png",
-            //  "img/1.Sharkie/4.Attack/Fin_Slap/3.png",
-            //  "img/1.Sharkie/4.Attack/Fin_Slap/4.png",
+            "img/1.Sharkie/4.Attack/Fin_Slap/1.png",
+            "img/1.Sharkie/4.Attack/Fin_Slap/2.png",
+            "img/1.Sharkie/4.Attack/Fin_Slap/3.png",
+            "img/1.Sharkie/4.Attack/Fin_Slap/4.png",
             "img/1.Sharkie/4.Attack/Fin_Slap/5.png",
             "img/1.Sharkie/4.Attack/Fin_Slap/6.png",
             "img/1.Sharkie/4.Attack/Fin_Slap/7.png",

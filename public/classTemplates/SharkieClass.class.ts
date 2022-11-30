@@ -55,6 +55,8 @@ class Sharkie extends MovableClass {
    sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
    isIdle = false;
    timerForIdleTime = 15;
+   endFirCounter = 0;
+   fireCounter = 0;
 
    startTimerForIdleTime() {
       setInterval(() => {
@@ -70,9 +72,21 @@ class Sharkie extends MovableClass {
       if (this.hasHurt && !this.isDead) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_HAS_HURT);
-      } else if (this.fireBubble) {
+      } else if (this.fireBubble == true) {
+         this.endFirCounter = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY.length;
          this.isIdle = false;
-         this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE);
+
+         if (this.endFirCounter > this.fireCounter) {
+            this.imagesCach = [];
+            let pathURL = this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY[this.fireCounter];
+            this.imagesCach.push(pathURL);
+            this.fireCounter++;
+         } else {
+            this.fireCounter = 0;
+            this.fireBubble = false;
+         }
+
+         //this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY);
       } else if (this.hasHurtElectric == true) {
          this.isIdle = false;
          this.loadAllImgInCach(this.arrayAllImages_HAS_HURT_ELECTRIC);
@@ -90,7 +104,7 @@ class Sharkie extends MovableClass {
       } else if (this.isIdle == true) {
          this.loadAllImgInCach(this.arrayAllImages_IDLE);
       } else {
-         this.isIdle = true;
+         //this.isIdle = true;
       }
    }
 
@@ -140,10 +154,10 @@ class Sharkie extends MovableClass {
          "img/1.Sharkie/3.Swim/6.png",
       ];
       this.arrayAllImages_ATTACK_FIN_SLAP = [
-         //"img/1.Sharkie/4.Attack/Fin_Slap/1.png",
-         //  "img/1.Sharkie/4.Attack/Fin_Slap/2.png",
-         //  "img/1.Sharkie/4.Attack/Fin_Slap/3.png",
-         //  "img/1.Sharkie/4.Attack/Fin_Slap/4.png",
+         "img/1.Sharkie/4.Attack/Fin_Slap/1.png",
+         "img/1.Sharkie/4.Attack/Fin_Slap/2.png",
+         "img/1.Sharkie/4.Attack/Fin_Slap/3.png",
+         "img/1.Sharkie/4.Attack/Fin_Slap/4.png",
          "img/1.Sharkie/4.Attack/Fin_Slap/5.png",
          "img/1.Sharkie/4.Attack/Fin_Slap/6.png",
          "img/1.Sharkie/4.Attack/Fin_Slap/7.png",
@@ -161,12 +175,19 @@ class Sharkie extends MovableClass {
       ];
       this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY = [
          "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/1.png",
+
          "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/2.png",
+
          "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/3.png",
+
          "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/4.png",
+
          "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/5.png",
+
          "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/6.png",
+
          "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/7.png",
+
          "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/8.png",
       ];
 
