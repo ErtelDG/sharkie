@@ -22,11 +22,13 @@ class EnemyJellyFishLila extends EnemyClass {
         }, 80);
         this.setColissionPointsObject(15, 10, 25, 35);
         this.name = "EnemyJellyFishLila";
+        this.loadImageIsDeadOrNot(this.loadDeadImages);
     }
     timer = 0;
     stopUp = false;
     stopDown = false;
     speedUpAndDown = 8;
+    loadDeadImages = ["img/2.Enemy/1PufferFish/4.DIE/2.png"];
     lightUpAndDownAnimation() {
         if (this.stopUp == false) {
             this.y += this.speedUpAndDown;

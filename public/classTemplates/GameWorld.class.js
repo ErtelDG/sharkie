@@ -29,8 +29,12 @@ class GameWorld {
             this.checkCollisionPickObjects(this.sharkie, this.level.coins);
             this.checkCollisionEnemies(this.sharkie, this.level.enemies);
             this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
+            this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
             //Rectangle DRAW!!
             this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointX_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
+            this.bubble.forEach((drawBubble) => {
+                this.drawRectangle(ctx, drawBubble.collisionPointX_LEFT, drawBubble.collisionPointY_TOP, drawBubble.collisionPointX_RIGHT, drawBubble.collisionPointY_BOTTOM);
+            });
             this.level.enemies.forEach((enemie) => {
                 this.drawRectangle(ctx, enemie.collisionPointX_LEFT + 10, enemie.collisionPointY_TOP, enemie.collisionPointX_RIGHT, enemie.collisionPointY_BOTTOM);
             });
@@ -129,7 +133,7 @@ class GameWorld {
     checkCollisionPickObjects(sharkieArray, objectArray) {
         sharkieArray.forEach((sharkie) => {
             objectArray.forEach((object) => {
-                if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
+                if (this.collisionBreakepointsObjectWithEnemy(sharkie, object)) {
                     objectArray.splice(objectArray.indexOf(object), 1);
                     this.level.statusBar.forEach((checkStatusBar) => {
                         if (checkStatusBar.name == "coin") {
@@ -168,7 +172,7 @@ class GameWorld {
                         }, 250);
                     }
                 }
-                else if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
+                else if (this.collisionBreakepointsObjectWithEnemy(sharkie, object)) {
                     if (sharkie.checkHit == true) {
                         console.log(object);
                         this.level.statusBar.forEach((checkStatusBar) => {
@@ -249,11 +253,31 @@ class GameWorld {
             }
         }, 100);
     }
-    collisionBreakepointsSharkieObjects(sharkie, object) {
-        return (sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
-            sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
-            sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
-            sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM);
+    bubbleCollisionWithEnemies(bubbles, enemies) {
+        setInterval(() => {
+            bubbles.forEach((bubble) => enemies.forEach((enemy) => {
+                if (this.collisionBreakepointsObjectWithEnemy(bubble, enemy) == true) {
+                    if (enemy.name == "EnemyJellyFishLila") {
+                        console.log("JELLYFISH");
+                        enemies.splice(enemies.indexOf(enemy), 1);
+                    }
+                    else if (enemy.name == "EnemyPufferFish") {
+                        console.log("PUFFERFISH");
+                        enemies.splice(enemies.indexOf(enemy), 1);
+                    }
+                    else {
+                        console.log("FINALFISH");
+                        enemies.splice(enemies.indexOf(enemy), 1);
+                    }
+                }
+            }));
+        }, 200);
+    }
+    collisionBreakepointsObjectWithEnemy(object, enemy) {
+        return (object.collisionPointX_LEFT < enemy.collisionPointX_LEFT + enemy.collisionPointX_RIGHT &&
+            object.collisionPointX_LEFT + object.collisionPointX_RIGHT > enemy.collisionPointX_LEFT &&
+            object.collisionPointY_TOP + object.collisionPointY_BOTTOM > enemy.collisionPointY_TOP &&
+            object.collisionPointY_TOP < enemy.collisionPointY_TOP + enemy.collisionPointY_BOTTOM);
     }
     collisionBreakepointsSharkieObjectsFinSlap(sharkie, object) {
         return (sharkie.collisionPointX_LEFT + 150 < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&

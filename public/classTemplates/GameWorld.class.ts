@@ -31,6 +31,7 @@ class GameWorld {
          this.checkCollisionPickObjects(this.sharkie, this.level.coins);
          this.checkCollisionEnemies(this.sharkie, this.level.enemies);
          this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
+         this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
 
          //Rectangle DRAW!!
          this.drawRectangle(
@@ -40,6 +41,17 @@ class GameWorld {
             this.sharkie[0].collisionPointX_RIGHT,
             this.sharkie[0].collisionPointY_BOTTOM
          );
+
+         this.bubble.forEach((drawBubble) => {
+            this.drawRectangle(
+               ctx,
+               drawBubble.collisionPointX_LEFT,
+               drawBubble.collisionPointY_TOP,
+               drawBubble.collisionPointX_RIGHT,
+               drawBubble.collisionPointY_BOTTOM
+            );
+         });
+
          this.level.enemies.forEach(
             (enemie: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
                this.drawRectangle(
@@ -163,7 +175,7 @@ class GameWorld {
       sharkieArray.forEach(
          (sharkie: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }) => {
             objectArray.forEach((object: any) => {
-               if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
+               if (this.collisionBreakepointsObjectWithEnemy(sharkie, object)) {
                   objectArray.splice(objectArray.indexOf(object), 1);
                   this.level.statusBar.forEach((checkStatusBar: { name: string }) => {
                      if (checkStatusBar.name == "coin") {
@@ -186,7 +198,7 @@ class GameWorld {
                      object.isDead = true;
                      setTimeout(() => {
                         objectArray.splice(objectArray.indexOf(object), 1);
-                     },2500);
+                     }, 2500);
                   } else {
                      object.energy--;
                      this.level.statusBar[3].counterFinalFish--;
@@ -202,7 +214,7 @@ class GameWorld {
                      sharkie.isAttack = false;
                   }, 250);
                }
-            } else if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
+            } else if (this.collisionBreakepointsObjectWithEnemy(sharkie, object)) {
                if (sharkie.checkHit == true) {
                   console.log(object);
                   this.level.statusBar.forEach((checkStatusBar: { name: string }) => {
@@ -291,15 +303,36 @@ class GameWorld {
       }, 100);
    }
 
-   collisionBreakepointsSharkieObjects(
-      sharkie: { collisionPointX_LEFT: any; collisionPointX_RIGHT: any; collisionPointY_TOP: any; collisionPointY_BOTTOM: any },
-      object: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }
+   bubbleCollisionWithEnemies(bubbles: any[], enemies: any[]) {
+      setInterval(() => {
+         bubbles.forEach((bubble) =>
+            enemies.forEach((enemy) => {
+               if (this.collisionBreakepointsObjectWithEnemy(bubble, enemy) == true) {
+                  if (enemy.name == "EnemyJellyFishLila") {
+                     console.log("JELLYFISH");
+                     enemies.splice(enemies.indexOf(enemy), 1);
+                  } else if (enemy.name == "EnemyPufferFish") {
+                     console.log("PUFFERFISH");
+                     enemies.splice(enemies.indexOf(enemy), 1);
+                  } else {
+                     console.log("FINALFISH");
+                     enemies.splice(enemies.indexOf(enemy), 1);
+                  }
+               }
+            })
+         );
+      }, 200);
+   }
+
+   collisionBreakepointsObjectWithEnemy(
+      object: { collisionPointX_LEFT: any; collisionPointX_RIGHT: any; collisionPointY_TOP: any; collisionPointY_BOTTOM: any },
+      enemy: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }
    ) {
       return (
-         sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
-         sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.collisionPointX_LEFT &&
-         sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
-         sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM
+         object.collisionPointX_LEFT < enemy.collisionPointX_LEFT + enemy.collisionPointX_RIGHT &&
+         object.collisionPointX_LEFT + object.collisionPointX_RIGHT > enemy.collisionPointX_LEFT &&
+         object.collisionPointY_TOP + object.collisionPointY_BOTTOM > enemy.collisionPointY_TOP &&
+         object.collisionPointY_TOP < enemy.collisionPointY_TOP + enemy.collisionPointY_BOTTOM
       );
    }
 

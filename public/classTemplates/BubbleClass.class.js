@@ -9,7 +9,7 @@ class Bubble extends BaseClass {
         this.y = y;
         this.loadAllImgInCach(this.arrayAllImages);
         this.animation(100);
-        this.setColissionPointsObject(5, 5, 10, 10);
+        this.setColissionPointsObject(0, 0, 0, 0);
         this.moveBubble();
     }
     moveBubble() {

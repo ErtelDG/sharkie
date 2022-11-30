@@ -28,5 +28,7 @@ class EnemyFinalFish extends EnemyClass {
       this.y = 0;
       this.setColissionPointsObject(140, 30, 210, 80);
       this.name = "EnemyFinalFish";
+      this.loadImageIsDeadOrNot(this.loadDeadImages);
    }
+   loadDeadImages = ["img/2.Enemy/1PufferFish/4.DIE/2.png"];
 }
