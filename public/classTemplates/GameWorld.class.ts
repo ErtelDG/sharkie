@@ -84,6 +84,7 @@ class GameWorld {
          this.level.enemies.forEach((enemy: { x: number }) => (enemy.x += 10));
          this.level.coins.forEach((coin: { x: number }) => (coin.x += 10));
          this.level.bubbleBottles.forEach((bottle: { randomTranslate: number }) => (bottle.randomTranslate += 10));
+         this.bubble.forEach((bubble) => (bubble.x += 10));
       }
    }
 
@@ -93,6 +94,7 @@ class GameWorld {
          this.level.enemies.forEach((enemy: { x: number }) => (enemy.x -= 10));
          this.level.coins.forEach((coin: { x: number }) => (coin.x -= 10));
          this.level.bubbleBottles.forEach((bottle: { randomTranslate: number }) => (bottle.randomTranslate -= 10));
+         this.bubble.forEach((bubble) => (bubble.x -= 10));
       }
    }
 

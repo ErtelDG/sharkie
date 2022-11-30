@@ -62,6 +62,7 @@ class GameWorld {
             this.level.enemies.forEach((enemy) => (enemy.x += 10));
             this.level.coins.forEach((coin) => (coin.x += 10));
             this.level.bubbleBottles.forEach((bottle) => (bottle.randomTranslate += 10));
+            this.bubble.forEach((bubble) => (bubble.x += 10));
         }
     }
     moveBackgroundToRight() {
@@ -70,6 +71,7 @@ class GameWorld {
             this.level.enemies.forEach((enemy) => (enemy.x -= 10));
             this.level.coins.forEach((coin) => (coin.x -= 10));
             this.level.bubbleBottles.forEach((bottle) => (bottle.randomTranslate -= 10));
+            this.bubble.forEach((bubble) => (bubble.x -= 10));
         }
     }
     checkPositionMovableobjectIsInTheCorrectRange(movableObjectsInArray, maxTopY, maxBottemY) {
