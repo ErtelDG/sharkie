@@ -6,4 +6,5 @@ class EnemyClass extends MovableClass {
    setAllImagesInArray(array: string[]) {
       return (this.arrayAllImages = array);
    }
+  
 }

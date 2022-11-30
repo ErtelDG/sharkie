@@ -183,7 +183,10 @@ class GameWorld {
                if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                   sharkie.isAttack = true;
                   if (object.name != "EnemyFinalFish" && object.name == "EnemyPufferFish") {
-                     objectArray.splice(objectArray.indexOf(object), 1);
+                     object.isDead = true;
+                     setTimeout(() => {
+                        objectArray.splice(objectArray.indexOf(object), 1);
+                     },2500);
                   } else {
                      object.energy--;
                      this.level.statusBar[3].counterFinalFish--;
