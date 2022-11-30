@@ -2,6 +2,7 @@ class GameWorld {
    ctx: any = ctx;
    level;
    sharkie;
+   bubble: any[] = [];
 
    constructor() {
       this.ctx.font = "48px MyWebFont";
@@ -10,6 +11,7 @@ class GameWorld {
 
       this.sharkie = [new Sharkie()];
       this.draw();
+      this.fireBubble(this.sharkie, this.bubble);
    }
 
    async draw() {
@@ -29,7 +31,6 @@ class GameWorld {
          this.checkCollisionPickObjects(this.sharkie, this.level.coins);
          this.checkCollisionEnemies(this.sharkie, this.level.enemies);
          this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
-         this.fireBubble(this.sharkie, this.level.enemies);
 
          //Rectangle DRAW!!
          this.drawRectangle(
@@ -176,7 +177,7 @@ class GameWorld {
    checkCollisionEnemies(sharkieArray: any[], objectArray: any[]) {
       sharkieArray.forEach((sharkie) => {
          objectArray.forEach((object: any) => {
-            if (keyboard.D && sharkie.isAttack != true) {
+            if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt ) {
                if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                   sharkie.isAttack = true;
                   if (object.name != "EnemyFinalFish") {
@@ -194,7 +195,7 @@ class GameWorld {
                      sharkie.hasHurt = false;
                      sharkie.hasHurtElectric = false;
                      sharkie.isAttack = false;
-                  }, 750);
+                  }, 250);
                }
             } else if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
                if (sharkie.checkHit == true) {
@@ -217,7 +218,7 @@ class GameWorld {
                   }
                   sharkie.checkHit = false;
                   sharkie.hit();
-                  sharkie.isHurt();
+                  // sharkie.isHurt();
                   setTimeout(() => {
                      if (sharkie.isDead != true) {
                         sharkie.checkHit = true;
@@ -259,15 +260,18 @@ class GameWorld {
    }
 
    fireBubble(sharkieArray: any[], objectArray: any[]) {
-      if (keyboard.SPACE == true) {
-         sharkieArray.forEach((sharkie) => {
-            sharkie.fireBubble = true;
-            console.log("SPACE");
-            setTimeout(() => {
-               sharkie.fireBubble = false;
-            }, 450);
-         });
-      }
+      sharkieArray.forEach((sharkie) => {
+         setInterval(() => {
+            if (keyboard.SPACE && !sharkie.hasABubble) {
+               this.bubble.push(new Bubble("Bubble"));
+               sharkie.hasABubble = true;
+               console.log("SPACE");
+               setTimeout(() => {
+                  sharkie.fireBubble = false;
+               }, 1000);
+            }
+         }, 100);
+      });
    }
 
    collisionBreakepointsSharkieObjects(
@@ -287,8 +291,8 @@ class GameWorld {
       object: { collisionPointX_LEFT: number; collisionPointX_RIGHT: any; collisionPointY_TOP: number; collisionPointY_BOTTOM: any }
    ) {
       return (
-         sharkie.collisionPointX_LEFT + 140 < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
-         sharkie.collisionPointX_LEFT + 140 + sharkie.collisionPointX_RIGHT - 130 > object.collisionPointX_LEFT &&
+         sharkie.collisionPointX_LEFT + 150 < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
+         sharkie.collisionPointX_LEFT + 150 + sharkie.collisionPointX_RIGHT - 130 > object.collisionPointX_LEFT &&
          sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
          sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM
       );

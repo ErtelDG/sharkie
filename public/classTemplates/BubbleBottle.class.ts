@@ -26,4 +26,6 @@ class BubbleBottle extends BaseClass {
    }
 
    randomTranslate = Math.random() * (9000 - 500) + 500;
+
+  
 }

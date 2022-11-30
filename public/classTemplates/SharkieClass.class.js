@@ -41,7 +41,7 @@ class Sharkie extends MovableClass {
     loadInIntervallAllImg() {
         setInterval(() => {
             this.loadAllImageArrayForCurrenttAnimation();
-        }, 100);
+        }, 50);
     }
     arrayAllImages_IDLE = [];
     arrayAllImages_LONG_IDLE = [];
@@ -55,7 +55,7 @@ class Sharkie extends MovableClass {
     sharkieLastImagesCounter = 0;
     sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
     isIdle = false;
-    timerForIdleTime = 5;
+    timerForIdleTime = 15;
     startTimerForIdleTime() {
         setInterval(() => {
             if (this.isIdle) {

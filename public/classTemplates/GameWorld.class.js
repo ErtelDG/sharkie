@@ -3,12 +3,14 @@ class GameWorld {
     ctx = ctx;
     level;
     sharkie;
+    bubble = [];
     constructor() {
         this.ctx.font = "48px MyWebFont";
         this.ctx.fillStyle = "white";
         this.level = level1;
         this.sharkie = [new Sharkie()];
         this.draw();
+        this.fireBubble(this.sharkie, this.bubble);
     }
     async draw() {
         if (this.ctx != null) {
@@ -26,7 +28,6 @@ class GameWorld {
             this.checkCollisionPickObjects(this.sharkie, this.level.coins);
             this.checkCollisionEnemies(this.sharkie, this.level.enemies);
             this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
-            this.fireBubble(this.sharkie, this.level.enemies);
             //Rectangle DRAW!!
             this.drawRectangle(ctx, this.sharkie[0].collisionPointX_LEFT, this.sharkie[0].collisionPointY_TOP, this.sharkie[0].collisionPointX_RIGHT, this.sharkie[0].collisionPointY_BOTTOM);
             this.level.enemies.forEach((enemie) => {
@@ -139,7 +140,7 @@ class GameWorld {
     checkCollisionEnemies(sharkieArray, objectArray) {
         sharkieArray.forEach((sharkie) => {
             objectArray.forEach((object) => {
-                if (keyboard.D && sharkie.isAttack != true) {
+                if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt) {
                     if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                         sharkie.isAttack = true;
                         if (object.name != "EnemyFinalFish") {
@@ -158,7 +159,7 @@ class GameWorld {
                             sharkie.hasHurt = false;
                             sharkie.hasHurtElectric = false;
                             sharkie.isAttack = false;
-                        }, 750);
+                        }, 250);
                     }
                 }
                 else if (this.collisionBreakepointsSharkieObjects(sharkie, object)) {
@@ -183,7 +184,7 @@ class GameWorld {
                         }
                         sharkie.checkHit = false;
                         sharkie.hit();
-                        sharkie.isHurt();
+                        // sharkie.isHurt();
                         setTimeout(() => {
                             if (sharkie.isDead != true) {
                                 sharkie.checkHit = true;
@@ -216,15 +217,18 @@ class GameWorld {
         });
     }
     fireBubble(sharkieArray, objectArray) {
-        if (keyboard.SPACE == true) {
-            sharkieArray.forEach((sharkie) => {
-                sharkie.fireBubble = true;
-                console.log("SPACE");
-                setTimeout(() => {
-                    sharkie.fireBubble = false;
-                }, 450);
-            });
-        }
+        sharkieArray.forEach((sharkie) => {
+            setInterval(() => {
+                if (keyboard.SPACE && !sharkie.hasABubble) {
+                    this.bubble.push(new Bubble("Bubble"));
+                    sharkie.hasABubble = true;
+                    console.log("SPACE");
+                    setTimeout(() => {
+                        sharkie.fireBubble = false;
+                    }, 1000);
+                }
+            }, 100);
+        });
     }
     collisionBreakepointsSharkieObjects(sharkie, object) {
         return (sharkie.collisionPointX_LEFT < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
@@ -233,8 +237,8 @@ class GameWorld {
             sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM);
     }
     collisionBreakepointsSharkieObjectsFinSlap(sharkie, object) {
-        return (sharkie.collisionPointX_LEFT + 140 < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
-            sharkie.collisionPointX_LEFT + 140 + sharkie.collisionPointX_RIGHT - 130 > object.collisionPointX_LEFT &&
+        return (sharkie.collisionPointX_LEFT + 150 < object.collisionPointX_LEFT + object.collisionPointX_RIGHT &&
+            sharkie.collisionPointX_LEFT + 150 + sharkie.collisionPointX_RIGHT - 130 > object.collisionPointX_LEFT &&
             sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.collisionPointY_TOP &&
             sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM);
     }
