@@ -309,8 +309,7 @@ class GameWorld {
             enemies.forEach((enemy) => {
                if (this.collisionBreakepointsObjectWithEnemy(bubble, enemy) == true) {
                   if (enemy.name == "EnemyJellyFishLila") {
-                     console.log("JELLYFISH");
-                     enemies.splice(enemies.indexOf(enemy), 1);
+                     enemy.isDead = true;
                   } else if (enemy.name == "EnemyPufferFish" || "EnemyFinalFish") {
                      console.log("PUFFERFISH" + "FINALFISH");
                      bubbles.splice(bubbles.indexOf(bubble), 1);
