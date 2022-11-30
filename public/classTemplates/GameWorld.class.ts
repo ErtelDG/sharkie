@@ -311,12 +311,9 @@ class GameWorld {
                   if (enemy.name == "EnemyJellyFishLila") {
                      console.log("JELLYFISH");
                      enemies.splice(enemies.indexOf(enemy), 1);
-                  } else if (enemy.name == "EnemyPufferFish") {
-                     console.log("PUFFERFISH");
-                     enemies.splice(enemies.indexOf(enemy), 1);
-                  } else {
-                     console.log("FINALFISH");
-                     enemies.splice(enemies.indexOf(enemy), 1);
+                  } else if (enemy.name == "EnemyPufferFish" || "EnemyFinalFish") {
+                     console.log("PUFFERFISH" + "FINALFISH");
+                     bubbles.splice(bubbles.indexOf(bubble), 1);
                   }
                }
             })
