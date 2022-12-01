@@ -6,6 +6,7 @@ class KeyboardKeys {
     DOWN = false;
     SPACE = false;
     D = false;
+    F = false;
     constructor() {
         this.keyPressEvents();
         this.btnPressEvents();
@@ -14,6 +15,16 @@ class KeyboardKeys {
      * function => interaction user when using touch screen
      */
     btnPressEvents() {
+        document.getElementById("fire-green-bubble")?.addEventListener("touchstart", (e) => {
+            if (e.cancelable)
+                e.preventDefault();
+            keyboard.F = true;
+        });
+        document.getElementById("fire-green-bubble")?.addEventListener("touchend", (e) => {
+            if (e.cancelable)
+                e.preventDefault();
+            keyboard.F = false;
+        });
         document.getElementById("arrow-left")?.addEventListener("touchstart", (e) => {
             if (e.cancelable)
                 e.preventDefault();
@@ -54,12 +65,12 @@ class KeyboardKeys {
                 e.preventDefault();
             keyboard.UP = false;
         });
-        document.getElementById("throw-bottle")?.addEventListener("touchstart", (e) => {
+        document.getElementById("fire-white-bubble")?.addEventListener("touchstart", (e) => {
             if (e.cancelable)
                 e.preventDefault();
             keyboard.D = true;
         });
-        document.getElementById("throw-bottle")?.addEventListener("touchend", (e) => {
+        document.getElementById("fire-white-bubble")?.addEventListener("touchend", (e) => {
             if (e.cancelable)
                 e.preventDefault();
             keyboard.D = false;
@@ -88,6 +99,9 @@ class KeyboardKeys {
             if (e.key == "d") {
                 keyboard.D = true;
             }
+            if (e.key == "f") {
+                keyboard.F = true;
+            }
         });
         window.addEventListener("keyup", (e) => {
             if (e.key == "ArrowRight") {
@@ -107,6 +121,9 @@ class KeyboardKeys {
             }
             if (e.key == "d") {
                 keyboard.D = false;
+            }
+            if (e.key == "f") {
+                keyboard.F = false;
             }
         });
     }

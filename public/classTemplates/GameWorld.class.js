@@ -158,7 +158,7 @@ class GameWorld {
                 if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt) {
                     if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                         sharkie.isAttack = true;
-                        if (object.name == "EnemyFinalFish" || object.name == "EnemyPufferFish") {
+                        if (object.name != "EnemyFinalFish" && object.name == "EnemyPufferFish") {
                             object.isDead = true;
                             setTimeout(() => {
                                 objectArray.splice(objectArray.indexOf(object), 1);
