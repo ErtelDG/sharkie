@@ -35,38 +35,38 @@ class GameWorld {
          this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
 
          //Rectangle DRAW!!
-         this.drawRectangle(
-            ctx,
-            this.sharkie[0].collisionPointX_LEFT,
-            this.sharkie[0].collisionPointY_TOP,
-            this.sharkie[0].collisionPointX_RIGHT,
-            this.sharkie[0].collisionPointY_BOTTOM
-         );
+         // this.drawRectangle(
+         //    ctx,
+         //    this.sharkie[0].collisionPointX_LEFT,
+         //    this.sharkie[0].collisionPointY_TOP,
+         //    this.sharkie[0].collisionPointX_RIGHT,
+         //    this.sharkie[0].collisionPointY_BOTTOM
+         // );
 
-         this.bubble.forEach((drawBubble) => {
-            this.drawRectangle(
-               ctx,
-               drawBubble.collisionPointX_LEFT,
-               drawBubble.collisionPointY_TOP,
-               drawBubble.collisionPointX_RIGHT,
-               drawBubble.collisionPointY_BOTTOM
-            );
-         });
+         // this.bubble.forEach((drawBubble) => {
+         //    this.drawRectangle(
+         //       ctx,
+         //       drawBubble.collisionPointX_LEFT,
+         //       drawBubble.collisionPointY_TOP,
+         //       drawBubble.collisionPointX_RIGHT,
+         //       drawBubble.collisionPointY_BOTTOM
+         //    );
+         // });
 
-         this.level.enemies.forEach(
-            (enemie: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
-               this.drawRectangle(
-                  ctx,
-                  enemie.collisionPointX_LEFT + 10,
-                  enemie.collisionPointY_TOP,
-                  enemie.collisionPointX_RIGHT,
-                  enemie.collisionPointY_BOTTOM
-               );
-            }
-         );
-         this.level.coins.forEach((coin: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
-            this.drawRectangle(ctx, coin.collisionPointX_LEFT, coin.collisionPointY_TOP, coin.collisionPointX_RIGHT, coin.collisionPointY_BOTTOM);
-         });
+         // this.level.enemies.forEach(
+         //    (enemie: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
+         //       this.drawRectangle(
+         //          ctx,
+         //          enemie.collisionPointX_LEFT + 10,
+         //          enemie.collisionPointY_TOP,
+         //          enemie.collisionPointX_RIGHT,
+         //          enemie.collisionPointY_BOTTOM
+         //       );
+         //    }
+         // );
+         // this.level.coins.forEach((coin: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
+         //    this.drawRectangle(ctx, coin.collisionPointX_LEFT, coin.collisionPointY_TOP, coin.collisionPointX_RIGHT, coin.collisionPointY_BOTTOM);
+         // });
 
          //END RECTANGLE DRAW!
       }
@@ -74,12 +74,12 @@ class GameWorld {
       this.requestAnimation();
    }
 
-   drawRectangle(context: any, x: any, y: any, width: any, height: any) {
-      context.strokeRect(x, y, width, height);
-      context.lineWidth = 4;
-      context.strokeStyle = "white";
-      context.stroke();
-   }
+   // drawRectangle(context: any, x: any, y: any, width: any, height: any) {
+   //    context.strokeRect(x, y, width, height);
+   //    context.lineWidth = 4;
+   //    context.strokeStyle = "white";
+   //    context.stroke();
+   // }
 
    /**
     * set the request animation
@@ -151,7 +151,7 @@ class GameWorld {
       this.ctx.translate(objectElement.randomTranslate, 300);
       this.ctx.rotate((rotate * Math.PI) / 180);
       this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
-      this.drawRectangle(ctx, objectElement.x + 10, objectElement.y + 10, objectElement.width - 20, objectElement.height - 20);
+      // this.drawRectangle(ctx, objectElement.x + 10, objectElement.y + 10, objectElement.width - 20, objectElement.height - 20);
       this.ctx.restore();
    }
 
@@ -197,7 +197,7 @@ class GameWorld {
    checkCollisionEnemies(sharkieArray: any[], objectArray: any[]) {
       sharkieArray.forEach((sharkie) => {
          objectArray.forEach((object: any) => {
-            if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt) {
+            if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt && !sharkie.hasHurtElectric) {
                if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                   sharkie.isAttack = true;
                   if (object.name != "EnemyFinalFish" && object.name == "EnemyPufferFish") {
@@ -205,6 +205,16 @@ class GameWorld {
                      setTimeout(() => {
                         objectArray.splice(objectArray.indexOf(object), 1);
                      }, 2500);
+                  } else if (object.name != "EnemyFinalFish" && object.name == "EnemyJellyFishLila") {
+                     sharkie.hasHurtElectric = true;
+                     sharkie.checkHit = false;
+                                         setTimeout(() => {
+                        if (sharkie.isDead != true) {
+                           sharkie.checkHit = true;
+                        }
+                        sharkie.hasHurt = false;
+                        sharkie.hasHurtElectric = false;
+                     }, 2000);
                   } else {
                      object.energy--;
                      this.level.statusBar[3].counterFinalFish--;
