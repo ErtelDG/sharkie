@@ -147,6 +147,9 @@ class GameWorld {
                         if (checkStatusBar.name == "coin") {
                             this.level.statusBarValue[1].counterCoin++;
                         }
+                        if (checkStatusBar.name == "bubble") {
+                            this.level.statusBarValue[2].counterCoin++;
+                        }
                     });
                 }
             });
@@ -238,7 +241,7 @@ class GameWorld {
         sharkieArray.forEach((sharkie) => {
             setInterval(() => {
                 sharkie.fireBubble = true;
-                if (keyboard.SPACE && sharkie.fireBubble) {
+                if (keyboard.SPACE || keyboard.F && sharkie.fireBubble) {
                     this.createFireBubble(sharkie);
                 }
                 else {
@@ -251,6 +254,13 @@ class GameWorld {
         setTimeout(() => {
             if (keyboard.SPACE && sharkie.fireBubble == true) {
                 this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
+                sharkie.fireBubble = false;
+                setTimeout(() => {
+                    sharkie.fireBubble = true;
+                }, 500);
+            }
+            else if (keyboard.F && sharkie.fireBubble == true) {
+                this.bubble.push(new PoisonedBubble("PoisonedBubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
                 sharkie.fireBubble = false;
                 setTimeout(() => {
                     sharkie.fireBubble = true;

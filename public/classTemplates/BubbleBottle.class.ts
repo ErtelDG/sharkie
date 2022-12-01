@@ -25,7 +25,5 @@ class BubbleBottle extends BaseClass {
       this.setColissionPointsObject(0, 0, 10, 10);
    }
 
-   randomTranslate = Math.random() * (9000 - 500) + 500;
-
-  
+   randomTranslate = 500; //Math.random() * (9000 - 500) + 500
 }
