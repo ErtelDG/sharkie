@@ -52,7 +52,7 @@ class Level extends BaseClass {
    }
 
    createStatusBar() {
-      this.statusBar.push(new StatusBar("life"), new StatusBar("coin"), new StatusBar("bubble"), new StatusBar("finalFish"));
+      this.statusBar.push(new StatusBar("life"), new StatusBar("coin"), new StatusBar("bubble"));
    }
 
    createStatusBarValue() {

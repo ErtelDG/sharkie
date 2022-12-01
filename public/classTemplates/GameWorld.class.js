@@ -17,6 +17,7 @@ class GameWorld {
                 //this.level.backgrounds[this.level.backgrounds.length * 0.8].x
                 this.enemyFinalFishExists = true;
                 this.level.pushANewEnemy(new EnemyFinalFish());
+                this.level.statusBar.push(new StatusBar("finalFish"));
             }
         }, 100);
     }
@@ -241,7 +242,7 @@ class GameWorld {
         sharkieArray.forEach((sharkie) => {
             setInterval(() => {
                 sharkie.fireBubble = true;
-                if (keyboard.SPACE || keyboard.F && sharkie.fireBubble) {
+                if ((keyboard.SPACE || (keyboard.F && this.level.statusBarValue[2].counterBubble > 0)) && sharkie.fireBubble) {
                     this.createFireBubble(sharkie);
                 }
                 else {
@@ -252,7 +253,7 @@ class GameWorld {
     }
     createFireBubble(sharkie) {
         setTimeout(() => {
-            if (keyboard.SPACE && sharkie.fireBubble == true) {
+            if (keyboard.SPACE && sharkie.fireBubble) {
                 this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
                 sharkie.fireBubble = false;
                 setTimeout(() => {
@@ -261,6 +262,7 @@ class GameWorld {
             }
             else if (keyboard.F && sharkie.fireBubble == true) {
                 this.bubble.push(new PoisonedBubble("PoisonedBubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
+                this.level.statusBarValue[2].counterBubble--;
                 sharkie.fireBubble = false;
                 setTimeout(() => {
                     sharkie.fireBubble = true;
@@ -279,9 +281,23 @@ class GameWorld {
                         enemy.isDead = true;
                         bubbles.splice(bubbles.indexOf(bubble), 1);
                     }
-                    else if (enemy.name == "EnemyPufferFish" || "EnemyFinalFish") {
-                        console.log("PUFFERFISH" + "FINALFISH");
+                    else if ((enemy.name == "EnemyPufferFish" || enemy.name == "EnemyFinalFish") && bubble.name == "BubbleClass") {
+                        console.log("PUFFERFISH" + "FINALFISH WHITE BUBBLE");
                         bubbles.splice(bubbles.indexOf(bubble), 1);
+                    }
+                    else if (bubble.name == "PoisonedBubble") {
+                        if (enemy.name == "PUFFERFISH") {
+                            console.log("PUFFERFISH");
+                            bubbles.splice(bubbles.indexOf(bubble), 1);
+                        }
+                        else if (enemy.name == "EnemyFinalFish") {
+                            console.log("hit final fish");
+                            enemy.energy -= 1;
+                            if (enemy.energy <= 0) {
+                                enemy.isDead = true;
+                            }
+                            bubbles.splice(bubbles.indexOf(bubble), 1);
+                        }
                     }
                 }
             }));
