@@ -3,15 +3,21 @@ class GameWorld {
    level;
    sharkie;
    bubble: any[] = [];
+   enemyFinalFishExists = false;
 
    constructor() {
       this.ctx.font = "48px MyWebFont";
       this.ctx.fillStyle = "white";
       this.level = level1;
-
       this.sharkie = [new Sharkie()];
       this.draw();
       this.fireBubble(this.sharkie);
+      setInterval(() => {
+         if (this.level.backgrounds[this.level.backgrounds.length * 0.8].x <= 0 && this.enemyFinalFishExists == false) {
+            this.enemyFinalFishExists = true;
+            this.level.pushANewEnemy(new EnemyFinalFish());
+         }
+      }, 100);
    }
 
    async draw() {
@@ -300,7 +306,7 @@ class GameWorld {
          } else {
             sharkie.fireBubble = false;
          }
-      }, 100);
+      }, 120);
    }
 
    bubbleCollisionWithEnemies(bubbles: any[], enemies: any[]) {
@@ -310,6 +316,7 @@ class GameWorld {
                if (this.collisionBreakepointsObjectWithEnemy(bubble, enemy) == true) {
                   if (enemy.name == "EnemyJellyFishLila") {
                      enemy.isDead = true;
+                     bubbles.splice(bubbles.indexOf(bubble), 1);
                   } else if (enemy.name == "EnemyPufferFish" || "EnemyFinalFish") {
                      console.log("PUFFERFISH" + "FINALFISH");
                      bubbles.splice(bubbles.indexOf(bubble), 1);

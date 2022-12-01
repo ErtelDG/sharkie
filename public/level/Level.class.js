@@ -6,7 +6,6 @@ class Level extends BaseClass {
         this.createStaticObject(20, this.coins, Coin);
         this.createEnemies(10, EnemyPufferFish);
         this.createEnemies(10, EnemyJellyFishLila);
-        this.createEnemies(1, EnemyFinalFish);
         this.createStaticObject(8, this.bubbleBottles, BubbleBottle);
         this.createStatusBar();
         this.createStatusBarValue();
@@ -52,5 +51,8 @@ class Level extends BaseClass {
     }
     createStatusBarValue() {
         this.statusBarValue.push(new StatusBarValue("life"), new StatusBarValue("coin"), new StatusBarValue("bubble"));
+    }
+    pushANewEnemy(newObject) {
+        this.enemies.push(newObject);
     }
 }

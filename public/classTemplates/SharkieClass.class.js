@@ -202,6 +202,7 @@ class Sharkie extends MovableClass {
         ];
         this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY = [
             "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/1.png",
+            "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/1.png",
             "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/2.png",
             "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/3.png",
             "img/1.Sharkie/4.Attack/Bubble_Trap/For_Jelly/4.png",

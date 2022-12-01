@@ -30,7 +30,12 @@ class EnemyJellyFishLila extends EnemyClass {
    stopDown = false;
    speedUpAndDown = 8;
 
-   loadDeadImages = ["img/2.Enemy/1PufferFish/4.DIE/2.png"];
+   loadDeadImages = [
+      "img/2.Enemy/2JellyFish/Dead/Lila/L1.png",
+      "img/2.Enemy/2JellyFish/Dead/Lila/L2.png",
+      "img/2.Enemy/2JellyFish/Dead/Lila/L3.png",
+      "img/2.Enemy/2JellyFish/Dead/Lila/L4.png",
+   ];
 
    lightUpAndDownAnimation() {
       if (this.stopUp == false) {
