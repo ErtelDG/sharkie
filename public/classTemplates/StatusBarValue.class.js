@@ -12,6 +12,7 @@ class StatusBarValue extends BaseClass {
     counterLife = 5;
     counterCoin = 0;
     counterBubble = 0;
+    counterFinalFish = 5;
     setCorrectValueForStatusBarInAllArray(whichStatusBar) {
         setInterval(() => {
             if (whichStatusBar == "life") {
@@ -27,7 +28,8 @@ class StatusBarValue extends BaseClass {
                 this.x = 420;
             }
             else {
-                alert("Set for statusbar one the following parameters: life || coin || bubble!");
+                this.currentCounterForThisObject = this.counterFinalFish;
+                this.x = 600;
             }
         }, 500);
     }

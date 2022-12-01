@@ -32,7 +32,7 @@ class StatusBar extends BaseClass {
       } else if (whichStatusBar == "finalFish") {
          this.arrayAllImages = [];
          this.arrayAllImages = this.imgStatusFinalFish;
-         this.y=-10
+         this.y = -10;
          this.x = 750;
          this.width = 200;
       } else {

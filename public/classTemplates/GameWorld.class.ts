@@ -10,19 +10,12 @@ class GameWorld {
       this.ctx.fillStyle = "white";
       this.level = level1;
       this.sharkie = [new Sharkie()];
-      this.draw();
+      this.gameplay();
       this.fireBubble(this.sharkie);
-      setInterval(() => {
-         if (this.level.backgrounds[1].x <= 0 && this.enemyFinalFishExists == false) {
-            //this.level.backgrounds[this.level.backgrounds.length * 0.8].x
-            this.enemyFinalFishExists = true;
-            this.level.pushANewEnemy(new EnemyFinalFish());
-            this.level.statusBar.push(new StatusBar("finalFish"));
-         }
-      }, 100);
+      this.createFinalFish();
    }
 
-   async draw() {
+   async gameplay() {
       if (this.ctx != null) {
          this.ctx.clearRect(0, 0, canvas.width, canvas.height);
          this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
@@ -94,7 +87,7 @@ class GameWorld {
    requestAnimation() {
       let self = this;
       requestAnimationFrame(function () {
-         self.draw();
+         self.gameplay();
       });
    }
 
@@ -330,17 +323,20 @@ class GameWorld {
                      enemy.isDead = true;
                      bubbles.splice(bubbles.indexOf(bubble), 1);
                   } else if ((enemy.name == "EnemyPufferFish" || enemy.name == "EnemyFinalFish") && bubble.name == "BubbleClass") {
-                     console.log("PUFFERFISH" + "FINALFISH WHITE BUBBLE");
                      bubbles.splice(bubbles.indexOf(bubble), 1);
                   } else if (bubble.name == "PoisonedBubble") {
                      if (enemy.name == "PUFFERFISH") {
-                        console.log("PUFFERFISH");
                         bubbles.splice(bubbles.indexOf(bubble), 1);
                      } else if (enemy.name == "EnemyFinalFish") {
-                        console.log("hit final fish");
                         enemy.energy -= 1;
+                        this.level.statusBar[3].counterFinalFish--;
                         if (enemy.energy <= 0) {
                            enemy.isDead = true;
+                        } else {
+                           enemy.hasHurt = true;
+                           setTimeout(() => {
+                              enemy.hasHurt = false;
+                           }, 1000);
                         }
                         bubbles.splice(bubbles.indexOf(bubble), 1);
                      }
@@ -349,6 +345,18 @@ class GameWorld {
             })
          );
       }, 200);
+   }
+
+   createFinalFish() {
+      setInterval(() => {
+         if (this.level.backgrounds[1].x <= 0 && this.enemyFinalFishExists == false) {
+            //this.level.backgrounds[this.level.backgrounds.length * 0.8].x
+            this.enemyFinalFishExists = true;
+            this.level.pushANewEnemy(new EnemyFinalFish());
+            this.level.statusBar.push(new StatusBar("finalFish"));
+             this.level.statusBarValue.push(new StatusBarValue("finalFish"));
+         }
+      }, 100);
    }
 
    collisionBreakepointsObjectWithEnemy(
