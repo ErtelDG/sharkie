@@ -19,8 +19,12 @@ class EnemyFinalFish extends EnemyClass {
       ]);
       this.loadAllImgInCach(this.arrayAllImages);
       setInterval(() => {
+         if (!this.isDead) {
+            this.autoMoveLeft(16);
+         } else {
+            this.loadAllImgInCach(this.loadDeadImages);
+         }
          this.loadOneImgFromCach();
-         this.autoMoveLeft(16);
       }, 100);
       this.width = 400;
       this.height = 400;
@@ -30,5 +34,12 @@ class EnemyFinalFish extends EnemyClass {
       this.name = "EnemyFinalFish";
       this.loadImageIsDeadOrNot(this.loadDeadImages);
    }
-   loadDeadImages = ["img/2.Enemy/1PufferFish/4.DIE/2.png"];
+   loadDeadImages = [
+      "img/2.Enemy/3FinalEnemy/Dead/dead1.png",
+      "img/2.Enemy/3FinalEnemy/Dead/dead2.png",
+      "img/2.Enemy/3FinalEnemy/Dead/dead3.png",
+      "img/2.Enemy/3FinalEnemy/Dead/dead4.png",
+      "img/2.Enemy/3FinalEnemy/Dead/dead5.png",
+      "img/2.Enemy/3FinalEnemy/Dead/dead6.png",
+   ];
 }

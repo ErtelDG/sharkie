@@ -9,7 +9,7 @@ class MovableClass extends BaseClass {
         this.y = 10;
     }
     speedStandard = 10;
-    energy = 5;
+    energy = 1; //5
     lastHit = 0;
     checkHit = true;
     hasHurt = false;

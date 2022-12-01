@@ -13,7 +13,8 @@ class GameWorld {
       this.draw();
       this.fireBubble(this.sharkie);
       setInterval(() => {
-         if (this.level.backgrounds[this.level.backgrounds.length * 0.8].x <= 0 && this.enemyFinalFishExists == false) {
+         if (this.level.backgrounds[1].x <= 0 && this.enemyFinalFishExists == false) {
+            //this.level.backgrounds[this.level.backgrounds.length * 0.8].x
             this.enemyFinalFishExists = true;
             this.level.pushANewEnemy(new EnemyFinalFish());
          }
