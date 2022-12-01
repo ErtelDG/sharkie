@@ -156,8 +156,10 @@ class GameWorld {
    }
 
    drawText(objectToDraw: any) {
-      objectToDraw.forEach((objectElement: { currentCounterForThisObject: any; x: any; y: any }) => {
-         this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
+      objectToDraw.forEach((objectElement: { name: any; currentCounterForThisObject: any; x: any; y: any }) => {
+         if (objectElement.name != "finalFish") {
+            this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
+         }
       });
    }
 
@@ -324,6 +326,8 @@ class GameWorld {
                      bubbles.splice(bubbles.indexOf(bubble), 1);
                   } else if ((enemy.name == "EnemyPufferFish" || enemy.name == "EnemyFinalFish") && bubble.name == "BubbleClass") {
                      bubbles.splice(bubbles.indexOf(bubble), 1);
+                  } else if (enemy.name == "EnemyPufferFish" && bubble.name == "PoisonedBubble") {
+                     bubbles.splice(bubbles.indexOf(bubble), 1);
                   } else if (bubble.name == "PoisonedBubble") {
                      if (enemy.name == "PUFFERFISH") {
                         bubbles.splice(bubbles.indexOf(bubble), 1);
@@ -349,12 +353,12 @@ class GameWorld {
 
    createFinalFish() {
       setInterval(() => {
-         if (this.level.backgrounds[1].x <= 0 && this.enemyFinalFishExists == false) {
+         if (this.level.backgrounds[this.level.backgrounds.length * 0.8].x <= 0 && this.enemyFinalFishExists == false) {
             //this.level.backgrounds[this.level.backgrounds.length * 0.8].x
             this.enemyFinalFishExists = true;
             this.level.pushANewEnemy(new EnemyFinalFish());
             this.level.statusBar.push(new StatusBar("finalFish"));
-             this.level.statusBarValue.push(new StatusBarValue("finalFish"));
+            this.level.statusBarValue.push(new StatusBarValue("finalFish"));
          }
       }, 100);
    }

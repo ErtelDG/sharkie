@@ -118,7 +118,9 @@ class GameWorld {
     }
     drawText(objectToDraw) {
         objectToDraw.forEach((objectElement) => {
-            this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
+            if (objectElement.name != "finalFish") {
+                this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
+            }
         });
     }
     drawMovableObject(movableObjectArray) {
@@ -277,6 +279,9 @@ class GameWorld {
                     else if ((enemy.name == "EnemyPufferFish" || enemy.name == "EnemyFinalFish") && bubble.name == "BubbleClass") {
                         bubbles.splice(bubbles.indexOf(bubble), 1);
                     }
+                    else if (enemy.name == "EnemyPufferFish" && bubble.name == "PoisonedBubble") {
+                        bubbles.splice(bubbles.indexOf(bubble), 1);
+                    }
                     else if (bubble.name == "PoisonedBubble") {
                         if (enemy.name == "PUFFERFISH") {
                             bubbles.splice(bubbles.indexOf(bubble), 1);
@@ -302,7 +307,7 @@ class GameWorld {
     }
     createFinalFish() {
         setInterval(() => {
-            if (this.level.backgrounds[1].x <= 0 && this.enemyFinalFishExists == false) {
+            if (this.level.backgrounds[this.level.backgrounds.length * 0.8].x <= 0 && this.enemyFinalFishExists == false) {
                 //this.level.backgrounds[this.level.backgrounds.length * 0.8].x
                 this.enemyFinalFishExists = true;
                 this.level.pushANewEnemy(new EnemyFinalFish());

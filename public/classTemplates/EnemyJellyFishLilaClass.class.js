@@ -15,7 +15,7 @@ class EnemyJellyFishLila extends EnemyClass {
         }, 120);
         this.width = 80;
         this.height = 150;
-        this.x = Math.random() * (6000 - 500) + 500;
+        this.x = Math.random() * (10000 - 500) + 500;
         this.y = Math.random() * 150;
         setInterval(() => {
             this.lightUpAndDownAnimation();
