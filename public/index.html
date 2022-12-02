@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sharkie</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="autoOrientation.css">
   <link rel="shortcut icon" href="#" type="image/x-icon">
 
   <script src="classTemplates/KeyboardAndTouch.class.js"></script>
@@ -55,30 +54,38 @@
       </div>
       <div class="h-full flex justify-center items-center">
         <div class="flex flex-col h-full">
-          <img class="p-2 h-3/5 object-scale-down" src="img/6.Botones/Key/keySpaceBar.png" alt="">
-          <img class="p-2 h-2/5 object-scale-down" src="img/6.Botones/Tittles/BubbleTitle.png" alt="">
-        </div>
-      </div>
-      <div class="h-full flex justify-center items-center">
-        <div class="flex flex-col h-full">
           <img class="p-2 h-3/5 object-scale-down" src="img/6.Botones/Key/keyF.gif" alt="">
           <img class="p-2 h-2/5 object-scale-down" src="img/6.Botones/Tittles/PoisonedBubbleTitle.png" alt="">
         </div>
       </div>
+      <div class="h-full flex justify-center items-center">
+        <div class="flex flex-col h-full">
+          <img class="p-2 h-3/5 object-scale-down" src="img/6.Botones/Key/keySpaceBar.png" alt="">
+          <img class="p-2 h-2/5 object-scale-down" src="img/6.Botones/Tittles/BubbleTitle.png" alt="">
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- second contain -->
   <div class="h-full w-full flex-col justify-center items-center hidden bg-sharkieBlue" id="secondContain">
-    <canvas class="w-full h-4/5" id="canvas" width="960" height="400" class="bg-black"></canvas>
-    <div class="grid grid-cols-10 gap-4 h-1/5 items-center w-full px-2">
-      <div id="arrow-left" class=""><img src="img/6.Botones/Key/arrowKeyLeft.png" alt=""></div>
-      <div id="arrow-up" class=""><img src="img/6.Botones/Key/arrowKeyUp.png" alt=""></div>
-      <div id="arrow-down" class=""><img src="img/6.Botones/Key/arrowKeyDown.png" alt=""></div>
-      <div id="arrow-right" class=""><img src="img/6.Botones/Key/arrowKeyRight.png" alt=""></div>
-      <div id="fin-slap" class=""><img src="img/6.Botones/Key/keyD.png" alt=""></div>
-      <div id="fire-green-bubble" class=""><img src="img/6.Botones/Key/keyF.gif" alt=""></div>
-      <div id="fire-white-bubble" class="col-span-4"><img src="img/6.Botones/Key/keySpaceBar.png" alt=""></div>
+    <canvas class="w-full h-4/5 lg:w-auto lg:h-auto" id="canvas" width="960" height="400" class="bg-black"></canvas>
+    <div class="grid grid-cols-12 gap-4 h-1/5 items-center w-full px-2">
+      <div id="arrow-left" class=" md:hidden"><img src="img/6.Botones/Key/arrowKeyLeft.png" alt=""></div>
+      <div id="arrow-up" class=" md:hidden"><img src="img/6.Botones/Key/arrowKeyUp.png" alt=""></div>
+      <div id="arrow-down" class=" md:hidden"><img src="img/6.Botones/Key/arrowKeyDown.png" alt=""></div>
+      <div id="arrow-right" class=" md:hidden"><img src="img/6.Botones/Key/arrowKeyRight.png" alt=""></div>
+      <div id="fin-slap" class=" md:hidden"><img src="img/6.Botones/Key/keyD.png" alt=""></div>
+      <div id="fire-green-bubble" class=" md:hidden"><img src="img/6.Botones/Key/keyF.gif" alt=""></div>
+      <div id="fire-white-bubble" class="col-span-3 md:hidden"><img src="img/6.Botones/Key/keySpaceBar.png" alt="">
+      </div>
+      <div id="soundOnOff" class="cursor-pointer hover:opacity-75 col-start-2 col-span-4 hidden md:grid"><img
+          src="img/6.Botones/Key/soundOnOff.png" alt="">
+      </div>
+      <div id="fullscreenOnOff" class="cursor-pointer hover:opacity-75 col-span-3 md:col-start-8 md:col-span-4 md:grid"
+        onclick="fullscreenOnOff()"><img src="img/6.Botones/Key/fullscreenOnOff.png" alt=""></div>
+
     </div>
   </div>
 

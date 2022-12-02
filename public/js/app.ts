@@ -10,6 +10,7 @@ let thirdContain = document.getElementById("thirdContain");
 let imageYouWin = document.getElementById("imageYouWin");
 let imageGameOver = document.getElementById("imageGameOver");
 let imageTryAgain = document.getElementById("imageTryAgain");
+let isFullscreen = false;
 
 async function init() {
    firstContain?.classList.remove("grid");
@@ -22,4 +23,16 @@ async function init() {
    imageGameOver?.classList.remove("hidden");
    level1 = new Level();
    gameworld = new GameWorld();
+}
+
+function fullscreenOnOff() {
+   if (!isFullscreen) {
+      canvas.classList.remove("lg:w-auto");
+      canvas.classList.remove("lg:h-auto");
+      isFullscreen = true;
+   } else {
+      canvas.classList.add("lg:w-auto");
+      canvas.classList.add("lg:h-auto");
+      isFullscreen = false;
+   }
 }

@@ -31468,7 +31468,7 @@ body {
   line-height: inherit;
 }
 
-@media screen and (max-width: 560px) and (orientation: portrait) {
+@media screen and (orientation: portrait) {
   html {
     transform: rotate(-90deg);
     transform-origin: left top;
