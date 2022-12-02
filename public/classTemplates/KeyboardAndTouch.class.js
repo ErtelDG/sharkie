@@ -48,7 +48,7 @@ class KeyboardKeys {
         document.getElementById("start-icon")?.addEventListener("touchstart", (e) => {
             if (e.cancelable)
                 e.preventDefault();
-            //  restart();
+            init();
         });
         document.getElementById("sound-icon")?.addEventListener("touchstart", (e) => {
             if (e.cancelable)
@@ -65,12 +65,32 @@ class KeyboardKeys {
                 e.preventDefault();
             keyboard.UP = false;
         });
+        document.getElementById("arrow-down")?.addEventListener("touchstart", (e) => {
+            if (e.cancelable)
+                e.preventDefault();
+            keyboard.DOWN = true;
+        });
+        document.getElementById("arrow-down")?.addEventListener("touchend", (e) => {
+            if (e.cancelable)
+                e.preventDefault();
+            keyboard.DOWN = false;
+        });
         document.getElementById("fire-white-bubble")?.addEventListener("touchstart", (e) => {
+            if (e.cancelable)
+                e.preventDefault();
+            keyboard.SPACE = true;
+        });
+        document.getElementById("fire-white-bubble")?.addEventListener("touchend", (e) => {
+            if (e.cancelable)
+                e.preventDefault();
+            keyboard.SPACE = false;
+        });
+        document.getElementById("fin-slap")?.addEventListener("touchstart", (e) => {
             if (e.cancelable)
                 e.preventDefault();
             keyboard.D = true;
         });
-        document.getElementById("fire-white-bubble")?.addEventListener("touchend", (e) => {
+        document.getElementById("fin-slap")?.addEventListener("touchend", (e) => {
             if (e.cancelable)
                 e.preventDefault();
             keyboard.D = false;

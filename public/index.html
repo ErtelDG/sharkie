@@ -31,10 +31,12 @@
 <body class="m-0 h-screen w-screen">
 
   <!-- first contain -->
-  <div class="grid grid-cols-6 grid-rows-5 h-full w-full bg-ima bg-sharkie bg-cover" id="firstContain">
+  <div class="grid grid-cols-6 grid-rows-5 h-full w-full bg-sharkie bg-cover hidden" id="firstContain">
     <div class="grid grid-cols-6 grid-rows-6 col-span-full row-span-4">
       <div class="col-start-3 col-end-5 row-start-3 row-end-5">
-        <div class="w-full h-full cursor-pointer" onclick="init()"><img class="object-contain h-full w-full" src="img/6.Botones/Start/2.png" alt=""></div>
+        <div class="w-full h-full cursor-pointer" id="start-icon" onclick="init()">
+          <img class="object-contain h-full w-full" src="img/6.Botones/Start/2.png" alt="">
+        </div>
       </div>
     </div>
     <div class="col-span-full row-span-1 flex justify-around">
@@ -66,20 +68,33 @@
   </div>
 
   <!-- second contain -->
-  <div class="w-screen h-screen flex-col justify-center items-center hidden" id="secondContain">
+  <div class="w-screen h-screen flex-col justify-center items-center hidden bg-sharkieBlue" id="secondContain">
     <canvas class="w-full h-4/5" id="canvas" width="960" height="400" class="bg-black"></canvas>
-    <div class="grid grid-cols-10 gap-4 h-1/5 bg-black items-center w-full">
-      <div class=" bg-green-500">01</div>
-      <div class=" bg-green-500">01</div>
-      <div class=" bg-green-500">01</div>
-      <div class=" bg-green-500">01</div>
-      <div class=" bg-green-500"><img src="img/6.Botones/Key/keyD.png" alt=""></div>
-      <div class=" bg-green-500"><img src="img/6.Botones/Key/keyF.gif" alt=""></div>
-      <div class="col-span-4 bg-green-500"><img src="img/6.Botones/Key/keySpaceBar.png" alt=""></div>
-
-
+    <div class="grid grid-cols-10 gap-4 h-1/5 items-center w-full px-2">
+      <div id="arrow-left" class=""><img src="img/6.Botones/Key/arrowKeyLeft.png" alt=""></div>
+      <div id="arrow-up" class=""><img src="img/6.Botones/Key/arrowKeyUp.png" alt=""></div>
+      <div id="arrow-down" class=""><img src="img/6.Botones/Key/arrowKeyDown.png" alt=""></div>
+      <div id="arrow-right" class=""><img src="img/6.Botones/Key/arrowKeyRight.png" alt=""></div>
+      <div id="fin-slap" class=""><img src="img/6.Botones/Key/keyD.png" alt=""></div>
+      <div id="fire-green-bubble" class=""><img src="img/6.Botones/Key/keyF.gif" alt=""></div>
+      <div id="fire-white-bubble" class="col-span-4"><img src="img/6.Botones/Key/keySpaceBar.png" alt=""></div>
     </div>
   </div>
+
+  <!-- third contain -->
+  <div class="w-screen h-screen grid grid-cols-12 grid-rows-6 bg-sharkie bg-cover" id="thirdContain">
+    <div class="w-full h-full col-start-4 col-span-6 row-start-2">
+      <img id="imageYouWin" class="object-contain h-full w-full" src="img/6.Botones/TryAgain/YouWin.png" alt="">
+      <img id="imageGameOver" class="object-contain h-full w-full hidden" src="img/6.Botones/TryAgain/GameOver.png"
+        alt="">
+    </div>
+    <div class="w-full h-full cursor-pointer col-start-4 col-span-6 row-start-4" id="start-icon" onclick="init()">
+      <img id="imageTryAgain" onclick="init() " class="object-contain h-full w-full"
+        src="img/6.Botones/TryAgain/TryAgain.png" alt="">
+    </div>
+  </div>
+
+
   <script src="js/app.js"></script>
 </body>
 
