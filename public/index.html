@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sharkie</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="autoOrientation.css">
   <link rel="shortcut icon" href="#" type="image/x-icon">
 
   <script src="classTemplates/KeyboardAndTouch.class.js"></script>
@@ -68,7 +69,7 @@
   </div>
 
   <!-- second contain -->
-  <div class="w-screen h-screen flex-col justify-center items-center hidden bg-sharkieBlue" id="secondContain">
+  <div class="h-full w-full flex-col justify-center items-center hidden bg-sharkieBlue" id="secondContain">
     <canvas class="w-full h-4/5" id="canvas" width="960" height="400" class="bg-black"></canvas>
     <div class="grid grid-cols-10 gap-4 h-1/5 items-center w-full px-2">
       <div id="arrow-left" class=""><img src="img/6.Botones/Key/arrowKeyLeft.png" alt=""></div>
@@ -82,13 +83,14 @@
   </div>
 
   <!-- third contain -->
-  <div class="w-screen h-screen grid-cols-12 grid-rows-6 bg-sharkie bg-cover hidden" id="thirdContain">
+  <div class="h-full w-full grid-cols-12 grid-rows-6 bg-sharkie bg-cover hidden" id="thirdContain">
     <div class="w-full h-full col-start-4 col-span-6 row-start-2">
       <img id="imageYouWin" class="object-contain h-full w-full hidden" src="img/6.Botones/TryAgain/YouWin.png" alt="">
       <img id="imageGameOver" class="object-contain h-full w-full hidden" src="img/6.Botones/TryAgain/GameOver.png"
         alt="">
     </div>
-    <div class="w-full h-full cursor-pointer col-start-4 col-span-6 row-start-4 hover:opacity-75" id="start-icon" onclick="init()">
+    <div class="w-full h-full cursor-pointer col-start-4 col-span-6 row-start-4 hover:opacity-75" id="start-icon"
+      onclick="init()">
       <img id="imageTryAgain" onclick="init() " class="object-contain h-full w-full"
         src="img/6.Botones/TryAgain/TryAgain.png" alt="">
     </div>

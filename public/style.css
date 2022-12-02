@@ -31468,6 +31468,23 @@ body {
   line-height: inherit;
 }
 
+@media screen and (max-width: 560px) and (orientation: portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+
+  body {
+    width: 100vh !important;
+    height: 100vw !important;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -183662,4 +183679,3 @@ body {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-
