@@ -12,8 +12,8 @@ class EnemyClass extends MovableClass {
          if (!this.isDead) {
             this.autoMoveLeft(Math.random() * 6);
          } else {
-            this.x += 15;
-            this.y -= 15;
+            this.x += 20;
+            this.y -= 20;
             this.loadAllImgInCach(loadDeadImages);
          }
          this.loadOneImgFromCach();

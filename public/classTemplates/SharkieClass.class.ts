@@ -39,6 +39,12 @@ class Sharkie extends MovableClass {
                this.loadOneImgFromCach();
             } else {
                this.stopAllIntervals();
+               secondContain?.classList.add("hidden");
+               secondContain?.classList.remove("flex");
+               thirdContain?.classList.remove("hidden");
+               thirdContain?.classList.add("grid");
+               imageYouWin?.classList.add("hidden");
+               imageGameOver?.classList.remove("hidden");
             }
          }
       }, 1000 / 15);
@@ -86,7 +92,7 @@ class Sharkie extends MovableClass {
    }
    breatheAnimation() {
       setInterval(() => {
-         if (keyboard.SPACE || keyboard.F && gameworld.level.statusBarValue[2].counterBubble>0) {
+         if (keyboard.SPACE || (keyboard.F && gameworld.level.statusBarValue[2].counterBubble > 0)) {
             this.endFirCounter = keyboard.SPACE
                ? this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY.length
                : this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE.length;

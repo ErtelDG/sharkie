@@ -16,7 +16,6 @@ class MovableClass extends BaseClass {
    hasHurtElectric = false;
    isDead = false;
    isAttack = false;
-   
 
    autoMoveLeft(speedObject: number) {
       this.x -= speedObject;
@@ -53,8 +52,7 @@ class MovableClass extends BaseClass {
    hit() {
       this.energy -= 1;
       if (this.energy <= 0) {
-         console.log("gameover");
-         //   HIER GAME OVER ANIMATION
+         this.energy=0
       } else {
          this.lastHit = new Date().getTime();
       }

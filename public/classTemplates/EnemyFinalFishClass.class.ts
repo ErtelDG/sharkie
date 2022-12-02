@@ -30,6 +30,15 @@ class EnemyFinalFish extends EnemyClass {
       setInterval(() => {
          if (this.isDead) {
             this.loadAllImgInCach(this.deadImages);
+            setTimeout(() => {
+               this.stopAllIntervals();
+               secondContain?.classList.add("hidden");
+               secondContain?.classList.remove("flex");
+               thirdContain?.classList.remove("hidden");
+               thirdContain?.classList.add("grid");
+               imageYouWin?.classList.remove("hidden");
+               imageGameOver?.classList.add("hidden");
+            },1000);
          } else if (this.hasHurt) {
             this.loadAllImgInCach(this.hurtImages);
             this.autoMoveLeft(-22);
