@@ -6,6 +6,10 @@ module.exports = {
          fontFamily: {
             sans: ["MyWebFont", "Arial", "Helvetica", "sans - serif"],
          },
+         backgroundImage: {
+            "sharkie": "url('img/bg_sharkie.jpg')",
+            
+         },
       },
    },
    plugins: [],
