@@ -14,6 +14,7 @@ class GameWorld {
         this.gameplay();
         this.fireBubble(this.sharkie);
         this.createFinalFish();
+        this.playGameSound();
     }
     async gameplay() {
         setInterval(() => {
@@ -165,6 +166,8 @@ class GameWorld {
                     this.level.statusBar.forEach((checkStatusBar) => {
                         if (checkStatusBar.name == "coin") {
                             this.level.statusBarValue[1].counterCoin++;
+                            this.audioSounds.pickCoinSound.volume = 0.1;
+                            this.audioSounds.pickCoinSound.play();
                         }
                         if (checkStatusBar.name == "bubble") {
                             this.level.statusBarValue[2].counterCoin++;
@@ -189,6 +192,7 @@ class GameWorld {
                         else if (object.name != "EnemyFinalFish" && object.name == "EnemyJellyFishLila") {
                             sharkie.hasHurtElectric = true;
                             sharkie.checkHit = false;
+                            this.audioSounds.electricShock.play();
                             setTimeout(() => {
                                 if (sharkie.isDead != true) {
                                     sharkie.checkHit = true;
@@ -202,6 +206,7 @@ class GameWorld {
                             this.level.statusBar[3].counterFinalFish--;
                             console.log(object.energy);
                         }
+                        this.audioSounds.punshSound.play();
                         sharkie.checkHit = false;
                         setTimeout(() => {
                             if (sharkie.isDead != true) {
@@ -215,20 +220,24 @@ class GameWorld {
                 }
                 else if (this.collisionBreakepointsObjectWithEnemy(sharkie, object)) {
                     if (sharkie.checkHit == true) {
-                        console.log(object);
                         this.level.statusBar.forEach((checkStatusBar) => {
                             if (checkStatusBar.name == "life") {
                                 this.level.statusBarValue[0].counterLife--;
                             }
                             if (checkStatusBar.name == "life" && this.level.statusBarValue[0].counterLife == 0) {
                                 sharkie.isDead = true;
+                                //this.audioSounds.sharkieDeathSound.volume = 1;
+                                this.audioSounds.sharkieDeathSound.play();
                             }
                         });
                         if (object.name == "EnemyPufferFish") {
                             sharkie.hasHurt = true;
+                            this.audioSounds.damageSound.volume = 0.6;
+                            this.audioSounds.damageSound.play();
                         }
                         else if (object.name == "EnemyJellyFishLila") {
                             sharkie.hasHurtElectric = true;
+                            this.audioSounds.electricShock.play();
                         }
                         else {
                             sharkie.hasHurt = true;
@@ -261,6 +270,8 @@ class GameWorld {
                     this.level.statusBar.forEach((checkStatusBar) => {
                         if (checkStatusBar.name == "bubble") {
                             this.level.statusBarValue[2].counterBubble++;
+                            this.audioSounds.blobSound.volume = 0.6;
+                            this.audioSounds.blobSound.play();
                         }
                     });
                 }
@@ -349,6 +360,19 @@ class GameWorld {
                 this.level.statusBarValue.push(new StatusBarValue("finalFish"));
             }
         }, 100);
+    }
+    playGameSound() {
+        this.audioSounds.gameSound.play();
+        setInterval(() => {
+            if (!this.sharkie[0].isDead) {
+                this.audioSounds.gameSound.play();
+            }
+        }, 20000);
+        setInterval(() => {
+            if (this.sharkie[0].isDead) {
+                this.audioSounds.gameSound.pause();
+            }
+        }, 1000);
     }
     collisionBreakepointsObjectWithEnemy(object, enemy) {
         return (object.collisionPointX_LEFT < enemy.collisionPointX_LEFT + enemy.collisionPointX_RIGHT &&

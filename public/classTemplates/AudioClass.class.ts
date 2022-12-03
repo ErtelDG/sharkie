@@ -5,4 +5,8 @@ class AudioSounds {
    sharkieDeathSound = new Audio("audio/character_death.mp3");
    loseSound = new Audio("audio/lose.mp3");
    pickCoinSound = new Audio("audio/pick_coin.mp3");
+   electricShock = new Audio("audio/electricShock.mp3");
+   damageSound = new Audio("audio/damage.mp3");
+   punshSound = new Audio("audio/punsh.mp3");
+   gameSound = new Audio("audio/gameSound.mp3");
 }
