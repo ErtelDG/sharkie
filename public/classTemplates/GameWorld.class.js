@@ -1,6 +1,7 @@
 "use strict";
 class GameWorld {
     ctx = ctx;
+    audioSounds = new AudioSounds();
     level;
     sharkie;
     bubble = [];

@@ -1,5 +1,6 @@
 class GameWorld {
    ctx: any = ctx;
+   audioSounds = new AudioSounds();
    level;
    sharkie;
    bubble: any[] = [];
