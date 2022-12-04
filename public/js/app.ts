@@ -66,5 +66,6 @@ function soundOff() {
 function soundOn() {
    if (gameworld != null) {
       gameworld.background_sound_On_Off = true;
+       gameworld.audioSounds.gameSound.play();
    }
 }

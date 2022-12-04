@@ -50,10 +50,10 @@ class KeyboardKeys {
                 e.preventDefault();
             init();
         });
-        document.getElementById("sound-icon")?.addEventListener("touchstart", (e) => {
+        document.getElementById("soundOnOff")?.addEventListener("touchstart", (e) => {
             if (e.cancelable)
                 e.preventDefault();
-            //         soundOnOff();
+            soundOnOff();
         });
         document.getElementById("arrow-up")?.addEventListener("touchstart", (e) => {
             if (e.cancelable)
