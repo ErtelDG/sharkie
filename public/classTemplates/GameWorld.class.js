@@ -179,8 +179,7 @@ class GameWorld {
     resetSharkiesAttackValues(sharkie) {
         sharkie.checkHit = false;
         setTimeout(() => {
-            if (sharkie.isDead != true)
-                () => (sharkie.checkHit = true);
+            !sharkie.isDead ? (sharkie.checkHit = true) : false;
             sharkie.hasHurt = false;
             sharkie.hasHurtElectric = false;
             sharkie.isAttack = false;
