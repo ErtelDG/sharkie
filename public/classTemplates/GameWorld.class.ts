@@ -430,4 +430,6 @@ class GameWorld {
          sharkie.collisionPointY_TOP < object.collisionPointY_TOP + object.collisionPointY_BOTTOM
       );
    }
+
+
 }
