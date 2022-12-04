@@ -158,13 +158,12 @@ class GameWorld {
             if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt && !sharkie.hasHurtElectric) {
                if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                   sharkie.isAttack = true;
-                  if (this.finSlapPufferFish(object)) {
-                     this.removeEnemy(object, objectArray);
-                  } else if (this.finSlapJellyFish(object)) {
-                     this.sharkieAttackJellyFish(sharkie);
-                  } else {
-                     this.reduceFinalFishLifeValue(object);
-                  }
+                  this.finSlapPufferFish(object)
+                     ? this.removeEnemy(object, objectArray)
+                     : this.finSlapJellyFish(object)
+                     ? this.sharkieAttackJellyFish(sharkie)
+                     : this.reduceFinalFishLifeValue(object);
+
                   this.audioSounds.punshSound.play();
                   this.resetSharkiesAttackValues(sharkie);
                }
@@ -243,9 +242,7 @@ class GameWorld {
 
    resetSharkiesHurt(sharkie: { isDead: boolean; checkHit: boolean; hasHurt: boolean; hasHurtElectric: boolean }) {
       setTimeout(() => {
-         if (sharkie.isDead != true) {
-            sharkie.checkHit = true;
-         }
+         sharkie.isDead != true ? (sharkie.checkHit = true) : false;
          sharkie.hasHurt = false;
          sharkie.hasHurtElectric = false;
       }, 2000);
