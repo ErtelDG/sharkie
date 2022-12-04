@@ -17,7 +17,7 @@ class Coin extends BaseClass {
       setInterval(() => {
          this.lightUpAndDownAnimation();
       }, 100);
-       this.setColissionPointsObject(5, 5, 10, 10);
+      this.setColissionPointsObject(5, 5, 10, 10);
    }
 
    timer = 0;
@@ -26,22 +26,28 @@ class Coin extends BaseClass {
    speedUpAndDown = Math.random() * 10;
 
    lightUpAndDownAnimation() {
-      if (this.stopUp == false) {
-         this.y += this.speedUpAndDown;
-         this.timer++;
-         if (this.timer == 20) {
-            this.stopUp = true;
-         }
-      } else if (this.stopDown == false) {
-         this.y -= this.speedUpAndDown;
-         this.timer--;
-         if (this.timer == 0) {
-            this.stopDown = true;
-         }
+      if (!this.stopUp) {
+         this.getUp();
+      } else if (!this.stopDown) {
+         this.getDown();
       } else {
          (this.stopUp = false), (this.stopDown = false);
       }
    }
 
-  
+   getUp() {
+      this.y += this.speedUpAndDown;
+      this.timer++;
+      if (this.timer == 20) {
+         this.stopUp = true;
+      }
+   }
+
+   getDown() {
+      this.y -= this.speedUpAndDown;
+      this.timer--;
+      if (this.timer == 0) {
+         this.stopDown = true;
+      }
+   }
 }

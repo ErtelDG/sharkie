@@ -24,22 +24,28 @@ class Coin extends BaseClass {
     stopDown = false;
     speedUpAndDown = Math.random() * 10;
     lightUpAndDownAnimation() {
-        if (this.stopUp == false) {
-            this.y += this.speedUpAndDown;
-            this.timer++;
-            if (this.timer == 20) {
-                this.stopUp = true;
-            }
+        if (!this.stopUp) {
+            this.getUp();
         }
-        else if (this.stopDown == false) {
-            this.y -= this.speedUpAndDown;
-            this.timer--;
-            if (this.timer == 0) {
-                this.stopDown = true;
-            }
+        else if (!this.stopDown) {
+            this.getDown();
         }
         else {
             (this.stopUp = false), (this.stopDown = false);
+        }
+    }
+    getUp() {
+        this.y += this.speedUpAndDown;
+        this.timer++;
+        if (this.timer == 20) {
+            this.stopUp = true;
+        }
+    }
+    getDown() {
+        this.y -= this.speedUpAndDown;
+        this.timer--;
+        if (this.timer == 0) {
+            this.stopDown = true;
         }
     }
 }

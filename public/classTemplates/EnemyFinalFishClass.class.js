@@ -28,32 +28,44 @@ class EnemyFinalFish extends EnemyClass {
     loadCorrectImageArray() {
         setInterval(() => {
             if (this.isDead) {
-                this.loadAllImgInCach(this.deadImages);
-                setTimeout(() => {
-                    this.stopAllIntervals();
-                    secondContain?.classList.add("hidden");
-                    secondContain?.classList.remove("flex");
-                    thirdContain?.classList.remove("hidden");
-                    thirdContain?.classList.add("grid");
-                    imageYouWin?.classList.remove("hidden");
-                    imageGameOver?.classList.add("hidden");
-                    this.sounds.winSound.play();
-                }, 1000);
+                this.winAnimationSharkie();
             }
             else if (this.hasHurt) {
-                this.loadAllImgInCach(this.hurtImages);
-                this.autoMoveLeft(-22);
+                this.hasHurtAnimation();
             }
             else if (this.isAttack) {
-                this.loadAllImgInCach(this.attackImages);
-                this.autoMoveLeft(25);
+                this.atAttackAnimation();
             }
             else {
-                this.loadAllImgInCach(this.movableImages);
-                this.autoMoveLeft(16);
+                this.movableAnimation();
             }
             this.loadOneImgFromCach();
         }, 100);
+    }
+    movableAnimation() {
+        this.loadAllImgInCach(this.movableImages);
+        this.autoMoveLeft(16);
+    }
+    atAttackAnimation() {
+        this.loadAllImgInCach(this.attackImages);
+        this.autoMoveLeft(25);
+    }
+    hasHurtAnimation() {
+        this.loadAllImgInCach(this.hurtImages);
+        this.autoMoveLeft(-22);
+    }
+    winAnimationSharkie() {
+        this.loadAllImgInCach(this.deadImages);
+        setTimeout(() => {
+            this.stopAllIntervals();
+            secondContain?.classList.add("hidden");
+            secondContain?.classList.remove("flex");
+            thirdContain?.classList.remove("hidden");
+            thirdContain?.classList.add("grid");
+            imageYouWin?.classList.remove("hidden");
+            imageGameOver?.classList.add("hidden");
+            this.sounds.winSound.play();
+        }, 1000);
     }
     movableImages = [
         "img/2.Enemy/3FinalEnemy/2.floating/1.png",

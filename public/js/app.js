@@ -11,7 +11,6 @@ let imageYouWin = document.getElementById("imageYouWin");
 let imageGameOver = document.getElementById("imageGameOver");
 let imageTryAgain = document.getElementById("imageTryAgain");
 let isFullscreen = false;
-let background_sound_On_Off = true;
 async function init() {
     firstContain?.classList.remove("grid");
     firstContain?.classList.add("hidden");
@@ -40,14 +39,16 @@ function fullscreenOnOff() {
  * set sound on or off
  */
 function soundOnOff() {
-    return background_sound_On_Off ? soundOff() : soundOn();
+    if (gameworld != null) {
+        return gameworld.background_sound_On_Off ? soundOff() : soundOn();
+    }
 }
 /**
  *  sound off
  */
 function soundOff() {
-    background_sound_On_Off = false;
     if (gameworld != null) {
+        gameworld.background_sound_On_Off = false;
         gameworld.audioSounds.gameSound.pause();
     }
 }
@@ -55,9 +56,7 @@ function soundOff() {
  *  sound on
  */
 function soundOn() {
-    background_sound_On_Off = true;
-    background_sound_On_Off = false;
     if (gameworld != null) {
-        gameworld.audioSounds.gameSound.play();
+        gameworld.background_sound_On_Off = true;
     }
 }

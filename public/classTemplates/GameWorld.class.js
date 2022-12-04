@@ -6,6 +6,7 @@ class GameWorld {
     sharkie;
     bubble = [];
     enemyFinalFishExists = false;
+    background_sound_On_Off = true;
     constructor() {
         this.ctx.font = "48px MyWebFont";
         this.ctx.fillStyle = "white";
@@ -370,8 +371,10 @@ class GameWorld {
     playGameSound() {
         this.audioSounds.gameSound.play();
         setInterval(() => {
-            if (!this.sharkie[0].isDead) {
-                this.audioSounds.gameSound.play();
+            if (this.background_sound_On_Off) {
+                if (!this.sharkie[0].isDead) {
+                    this.audioSounds.gameSound.play();
+                }
             }
         }, 20000);
         setInterval(() => {
