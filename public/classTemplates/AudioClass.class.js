@@ -10,4 +10,6 @@ class AudioSounds {
     damageSound = new Audio("audio/damage.mp3");
     punshSound = new Audio("audio/punsh.mp3");
     gameSound = new Audio("audio/gameSound.mp3");
+    blobJellyFish = new Audio("audio/blobJellyFish.mp3");
+    ouchSound = new Audio("audio/ouch.mp3");
 }

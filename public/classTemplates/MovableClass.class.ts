@@ -7,7 +7,7 @@ class MovableClass extends BaseClass {
       this.x = 10;
       this.y = 10;
    }
-
+   sounds = new AudioSounds();
    speedStandard = 10;
    energy = 5;
    lastHit = 0;
@@ -52,7 +52,7 @@ class MovableClass extends BaseClass {
    hit() {
       this.energy -= 1;
       if (this.energy <= 0) {
-         this.energy=0
+         this.energy = 0;
       } else {
          this.lastHit = new Date().getTime();
       }

@@ -13,7 +13,8 @@ class EnemyFinalFish extends EnemyClass {
       this.setColissionPointsObject(140, 30, 210, 80);
       this.name = "EnemyFinalFish";
       this.loadImageIsDeadOrNot(this.deadImages);
-        }
+      this.checkIsDead();
+   }
 
    switchStatusFinalFish() {
       setInterval(() => {
@@ -38,6 +39,7 @@ class EnemyFinalFish extends EnemyClass {
                thirdContain?.classList.add("grid");
                imageYouWin?.classList.remove("hidden");
                imageGameOver?.classList.add("hidden");
+              this.sounds.winSound.play();
             }, 1000);
          } else if (this.hasHurt) {
             this.loadAllImgInCach(this.hurtImages);

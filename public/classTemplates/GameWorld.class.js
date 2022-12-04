@@ -226,7 +226,6 @@ class GameWorld {
                             }
                             if (checkStatusBar.name == "life" && this.level.statusBarValue[0].counterLife == 0) {
                                 sharkie.isDead = true;
-                                //this.audioSounds.sharkieDeathSound.volume = 1;
                                 this.audioSounds.sharkieDeathSound.play();
                             }
                         });
@@ -270,7 +269,7 @@ class GameWorld {
                     this.level.statusBar.forEach((checkStatusBar) => {
                         if (checkStatusBar.name == "bubble") {
                             this.level.statusBarValue[2].counterBubble++;
-                            this.audioSounds.blobSound.volume = 0.6;
+                            //   this.audioSounds.blobSound.volume = 0.6;
                             this.audioSounds.blobSound.play();
                         }
                     });
@@ -319,23 +318,30 @@ class GameWorld {
                 if (this.collisionBreakepointsObjectWithEnemy(bubble, enemy) == true) {
                     if (enemy.name == "EnemyJellyFishLila") {
                         enemy.isDead = true;
+                        this.audioSounds.blobJellyFish.play();
                         bubbles.splice(bubbles.indexOf(bubble), 1);
                     }
                     else if ((enemy.name == "EnemyPufferFish" || enemy.name == "EnemyFinalFish") && bubble.name == "BubbleClass") {
                         bubbles.splice(bubbles.indexOf(bubble), 1);
+                        this.audioSounds.blobJellyFish.play();
                     }
                     else if (enemy.name == "EnemyPufferFish" && bubble.name == "PoisonedBubble") {
                         bubbles.splice(bubbles.indexOf(bubble), 1);
+                        this.audioSounds.blobJellyFish.play();
                     }
                     else if (bubble.name == "PoisonedBubble") {
                         if (enemy.name == "PUFFERFISH") {
                             bubbles.splice(bubbles.indexOf(bubble), 1);
+                            this.audioSounds.blobJellyFish.play();
                         }
                         else if (enemy.name == "EnemyFinalFish") {
+                            this.audioSounds.blobJellyFish.play();
+                            this.audioSounds.ouchSound.play();
                             enemy.energy -= 1;
                             this.level.statusBar[3].counterFinalFish--;
                             if (enemy.energy <= 0) {
                                 enemy.isDead = true;
+                                this.audioSounds.gameSound.pause();
                             }
                             else {
                                 enemy.hasHurt = true;

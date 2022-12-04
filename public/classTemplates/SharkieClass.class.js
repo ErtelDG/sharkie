@@ -15,7 +15,6 @@ class Sharkie extends MovableClass {
         this.breatheAnimation();
         this.pressSpace();
     }
-    sounds = new AudioSounds();
     timeOver = true;
     fireBubble = false;
     pressSpace() {

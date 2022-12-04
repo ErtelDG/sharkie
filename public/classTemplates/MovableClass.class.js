@@ -8,6 +8,7 @@ class MovableClass extends BaseClass {
         this.x = 10;
         this.y = 10;
     }
+    sounds = new AudioSounds();
     speedStandard = 10;
     energy = 5;
     lastHit = 0;
