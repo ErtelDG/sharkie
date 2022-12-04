@@ -18,38 +18,10 @@ class Sharkie extends MovableClass {
     timeOver = true;
     fireBubble = false;
     pressSpace() {
-        setInterval(() => {
-            if (keyboard.SPACE == true) {
-                console.log("timeOver", this.timeOver);
-                this.timeOver = false;
-            }
-            else {
-                this.timeOver = true;
-            }
-        }, 5);
+        setInterval(() => (keyboard.SPACE == true ? (this.timeOver = false) : (this.timeOver = true)), 5);
     }
     loadInIntervallOneImg() {
-        setInterval(() => {
-            if (!this.isDead) {
-                this.loadOneImgFromCach();
-            }
-            else {
-                this.sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
-                if (this.sharkieLastImagesCounter < this.sharkieLastImages) {
-                    this.sharkieLastImagesCounter++;
-                    this.loadOneImgFromCach();
-                }
-                else {
-                    this.stopAllIntervals();
-                    secondContain?.classList.add("hidden");
-                    secondContain?.classList.remove("flex");
-                    thirdContain?.classList.remove("hidden");
-                    thirdContain?.classList.add("grid");
-                    imageYouWin?.classList.add("hidden");
-                    imageGameOver?.classList.remove("hidden");
-                }
-            }
-        }, 1000 / 15);
+        setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 1000 / 15);
     }
     checkDirectionOfMovement() {
         setInterval(() => {
@@ -60,11 +32,7 @@ class Sharkie extends MovableClass {
         }, 1000 / 30);
     }
     loadInIntervallAllImg() {
-        setInterval(() => {
-            if (keyboard.SPACE == false) {
-                this.loadAllImageArrayForCurrenttAnimation();
-            }
-        }, 50);
+        setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 50);
     }
     arrayAllImages_IDLE = [];
     arrayAllImages_LONG_IDLE = [];
@@ -82,14 +50,7 @@ class Sharkie extends MovableClass {
     endFirCounter = 0;
     fireCounter = 0;
     startTimerForIdleTime() {
-        setInterval(() => {
-            if (this.isIdle) {
-                this.timerForIdleTime--;
-            }
-            else {
-                this.resetTimerForIdle();
-            }
-        }, 1000);
+        setInterval(() => (this.isIdle ? this.timerForIdleTime-- : this.resetTimerForIdle()), 1000);
     }
     breatheAnimation() {
         setInterval(() => {
@@ -98,21 +59,21 @@ class Sharkie extends MovableClass {
                     ? this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY.length
                     : this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE.length;
                 this.isIdle = false;
-                if (this.endFirCounter > this.fireCounter) {
-                    this.imagesCach = [];
-                    let pathURL = keyboard.SPACE
-                        ? this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY[this.fireCounter]
-                        : this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE[this.fireCounter];
-                    this.imagesCach.push(pathURL);
-                    this.fireCounter++;
-                }
-                else {
-                    this.fireCounter = 0;
-                    this.fireBubble = false;
-                }
-                //this.loadAllImgInCach(this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY);
+                this.endFirCounter > this.fireCounter ? this.loadImagesForBreathPOisonedBubbles() : this.resetFireCounter();
             }
         }, 75);
+    }
+    loadImagesForBreathPOisonedBubbles() {
+        this.imagesCach = [];
+        let pathURL = keyboard.SPACE
+            ? this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY[this.fireCounter]
+            : this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE[this.fireCounter];
+        this.imagesCach.push(pathURL);
+        this.fireCounter++;
+    }
+    resetFireCounter() {
+        this.fireCounter = 0;
+        this.fireBubble = false;
     }
     loadAllImageArrayForCurrenttAnimation() {
         if (this.hasHurt && !this.isDead) {
@@ -140,9 +101,6 @@ class Sharkie extends MovableClass {
         }
         else if (this.isIdle == true) {
             this.loadAllImgInCach(this.arrayAllImages_IDLE);
-        }
-        else {
-            //this.isIdle = true;
         }
     }
     setAllImagesInArray() {
@@ -250,5 +208,21 @@ class Sharkie extends MovableClass {
     resetTimerForIdle() {
         this.timerForIdleTime = 5;
         this.isIdle = true;
+    }
+    loadSharkieDeadImages() {
+        this.sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
+        if (this.sharkieLastImagesCounter < this.sharkieLastImages) {
+            this.sharkieLastImagesCounter++;
+            this.loadOneImgFromCach();
+        }
+        else {
+            this.stopAllIntervals();
+            secondContain?.classList.add("hidden");
+            secondContain?.classList.remove("flex");
+            thirdContain?.classList.remove("hidden");
+            thirdContain?.classList.add("grid");
+            imageYouWin?.classList.add("hidden");
+            imageGameOver?.classList.remove("hidden");
+        }
     }
 }

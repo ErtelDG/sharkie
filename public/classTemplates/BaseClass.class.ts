@@ -58,4 +58,6 @@ class BaseClass {
          clearTimeout(i);
       }
    }
+
+   
 }

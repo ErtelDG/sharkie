@@ -18,18 +18,34 @@ class StatusBarValue extends BaseClass {
    setCorrectValueForStatusBarInAllArray(whichStatusBar: string) {
       setInterval(() => {
          if (whichStatusBar == "life") {
-            this.currentCounterForThisObject = this.counterLife;
-            this.x = 90;
+            this.setValueLifeBar();
          } else if (whichStatusBar == "coin") {
-            this.currentCounterForThisObject = this.counterCoin;
-            this.x = 260;
+            this.setValueCoinBar();
          } else if (whichStatusBar == "bubble") {
-            this.currentCounterForThisObject = this.counterBubble;
-            this.x = 420;
+            this.setValueBubbleBar();
          } else {
-            this.currentCounterForThisObject = this.counterFinalFish;
-            this.x = 600;
+            this.setValueFinalFishBar();
          }
       }, 500);
+   }
+
+   setValueFinalFishBar() {
+      this.currentCounterForThisObject = this.counterFinalFish;
+      this.x = 600;
+   }
+
+   setValueBubbleBar() {
+      this.currentCounterForThisObject = this.counterBubble;
+      this.x = 420;
+   }
+
+   setValueCoinBar() {
+      this.currentCounterForThisObject = this.counterCoin;
+      this.x = 260;
+   }
+
+   setValueLifeBar() {
+      this.currentCounterForThisObject = this.counterLife;
+      this.x = 90;
    }
 }

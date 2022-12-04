@@ -9,14 +9,14 @@ class EnemyClass extends MovableClass {
 
    loadImageIsDeadOrNot(loadDeadImages: string[]) {
       setInterval(() => {
-         if (!this.isDead) {
-            this.autoMoveLeft(Math.random() * 6);
-         } else {
-            this.x += 20;
-            this.y -= 20;
-            this.loadAllImgInCach(loadDeadImages);
-         }
+         !this.isDead ? this.autoMoveLeft(Math.random() * 6) : this.getDeadAnimation(loadDeadImages);
          this.loadOneImgFromCach();
       }, 50);
+   }
+
+   getDeadAnimation(loadDeadImages: string[]) {
+      this.x += 20;
+      this.y -= 20;
+      this.loadAllImgInCach(loadDeadImages);
    }
 }

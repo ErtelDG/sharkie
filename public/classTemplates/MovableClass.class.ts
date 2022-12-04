@@ -46,40 +46,19 @@ class MovableClass extends BaseClass {
       }
    }
 
-   /**
-    * function => when user with enemy collision, reduce lives user character and end the game when energy/lives is null
-    */
    hit() {
       this.energy -= 1;
-      if (this.energy <= 0) {
-         this.energy = 0;
-      } else {
-         this.lastHit = new Date().getTime();
-      }
+      this.energy <= 0 ? (this.energy = 0) : (this.lastHit = new Date().getTime());
    }
 
    checkIsDead() {
       setInterval(() => {
-         if (this.energy <= 0) {
-            this.isDead = true;
-         }
+         this.energy <= 0 ? (this.isDead = true) : false;
       }, 50);
    }
 
-   /**
-    * set colldown passed time for next hurt time
-    */
    isHurt() {
       let timepassed = (new Date().getTime() - this.lastHit) / 1000;
       return timepassed < 1;
    }
-
-   //    /**
-   //     * function set energy to null when character user dead is
-   //     *
-   //     * @returns set energy character to null
-   //     */
-   //    isDead() {
-   //       return this.energy == 0;
-   //    }
 }

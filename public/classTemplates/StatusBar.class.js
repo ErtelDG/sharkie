@@ -7,41 +7,49 @@ class StatusBar extends BaseClass {
         this.height = 80;
         this.setCorrectImageForStatusBarInAllArray(this.name);
         this.loadAllImgInCach(this.arrayAllImages);
-        setInterval(() => {
-            if (this.name != "finalFish") {
-                this.loadOneImgFromCach();
-            }
-            else {
-                this.imgPath.src = this.imagesCach[this.counterFinalFish];
-            }
-        }, 500);
+        this.loadImagStatusbarForFinalFish();
     }
     counterFinalFish = 5;
+    loadImagStatusbarForFinalFish() {
+        setInterval(() => (this.name != "finalFish" ? this.loadOneImgFromCach() : (this.imgPath.src = this.imagesCach[this.counterFinalFish])), 500);
+    }
     setCorrectImageForStatusBarInAllArray(whichStatusBar) {
         if (whichStatusBar == "life") {
-            this.arrayAllImages = this.imgStatusBarLife;
-            this.x = 10;
-            this.y = -3;
+            this.setDataLifeBar();
         }
         else if (whichStatusBar == "coin") {
-            this.arrayAllImages = this.imgStatusBarCoin;
-            this.x = 180;
-            this.y = 5;
+            this.setDataCoinBar();
         }
         else if (whichStatusBar == "bubble") {
-            this.arrayAllImages = this.imgStatusBarBubble;
-            this.x = 350;
+            this.setDataBubbleBar();
         }
         else if (whichStatusBar == "finalFish") {
-            this.arrayAllImages = [];
-            this.arrayAllImages = this.imgStatusFinalFish;
-            this.y = -10;
-            this.x = 750;
-            this.width = 200;
+            this.setDataFinalFishBar();
         }
         else {
             alert("Set for statusbar one the following parameters: life || coin || bubble || finalFish!");
         }
+    }
+    setDataFinalFishBar() {
+        this.arrayAllImages = [];
+        this.arrayAllImages = this.imgStatusFinalFish;
+        this.y = -10;
+        this.x = 750;
+        this.width = 200;
+    }
+    setDataBubbleBar() {
+        this.arrayAllImages = this.imgStatusBarBubble;
+        this.x = 350;
+    }
+    setDataCoinBar() {
+        this.arrayAllImages = this.imgStatusBarCoin;
+        this.x = 180;
+        this.y = 5;
+    }
+    setDataLifeBar() {
+        this.arrayAllImages = this.imgStatusBarLife;
+        this.x = 10;
+        this.y = -3;
     }
     imgStatusBarLife = ["img/4.Marcadores/green/100_copia_hp.png"];
     imgStatusBarCoin = ["img/4.Marcadores/green/100_copia_coin.png"];

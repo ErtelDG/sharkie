@@ -19,9 +19,7 @@ class EnemyFinalFish extends EnemyClass {
         setInterval(() => {
             if (!this.isDead && !this.hasHurt && !this.isAttack) {
                 this.isAttack = true;
-                setTimeout(() => {
-                    this.isAttack = false;
-                }, 1000);
+                setTimeout(() => !this.isAttack, 1000);
             }
         }, 2000);
     }
@@ -58,14 +56,17 @@ class EnemyFinalFish extends EnemyClass {
         this.loadAllImgInCach(this.deadImages);
         setTimeout(() => {
             this.stopAllIntervals();
-            secondContain?.classList.add("hidden");
-            secondContain?.classList.remove("flex");
-            thirdContain?.classList.remove("hidden");
-            thirdContain?.classList.add("grid");
-            imageYouWin?.classList.remove("hidden");
-            imageGameOver?.classList.add("hidden");
-            this.sounds.winSound.play();
+            this.getEndImages();
         }, 1000);
+    }
+    getEndImages() {
+        secondContain?.classList.add("hidden");
+        secondContain?.classList.remove("flex");
+        thirdContain?.classList.remove("hidden");
+        thirdContain?.classList.add("grid");
+        imageYouWin?.classList.remove("hidden");
+        imageGameOver?.classList.add("hidden");
+        this.sounds.winSound.play();
     }
     movableImages = [
         "img/2.Enemy/3FinalEnemy/2.floating/1.png",

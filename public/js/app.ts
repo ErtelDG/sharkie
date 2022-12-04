@@ -2,7 +2,7 @@ let keyboard = new KeyboardKeys();
 
 let canvas = document.getElementById("canvas") as HTMLCanvasElement;
 let ctx: any = canvas.getContext("2d");
-let gameworld: GameWorld | null;
+let gameworld: GameWorld;
 let level1: any;
 let firstContain = document.getElementById("firstContain");
 let secondContain = document.getElementById("secondContain");

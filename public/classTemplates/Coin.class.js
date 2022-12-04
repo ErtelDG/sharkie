@@ -31,7 +31,8 @@ class Coin extends BaseClass {
             this.getDown();
         }
         else {
-            (this.stopUp = false), (this.stopDown = false);
+            this.stopUp = false;
+            this.stopDown = false;
         }
     }
     getUp() {
