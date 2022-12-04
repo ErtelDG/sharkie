@@ -26,15 +26,19 @@ async function init() {
 }
 
 function fullscreenOnOff() {
-   if (!isFullscreen) {
-      canvas.classList.remove("lg:w-auto");
-      canvas.classList.remove("lg:h-auto");
-      isFullscreen = true;
-   } else {
-      canvas.classList.add("lg:w-auto");
-      canvas.classList.add("lg:h-auto");
-      isFullscreen = false;
-   }
+   !isFullscreen ? fullscreenOn() : fullscreenOff();
+}
+
+function fullscreenOff() {
+   canvas.classList.add("lg:w-auto");
+   canvas.classList.add("lg:h-auto");
+   isFullscreen = false;
+}
+
+function fullscreenOn() {
+   canvas.classList.remove("lg:w-auto");
+   canvas.classList.remove("lg:h-auto");
+   isFullscreen = true;
 }
 
 /**

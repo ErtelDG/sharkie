@@ -36,56 +36,8 @@ class GameWorld {
                 this.checkCollisionEnemies(this.sharkie, this.level.enemies);
                 this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
                 this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
-                //Rectangle DRAW!!
-                // this.drawRectangle(
-                //    ctx,
-                //    this.sharkie[0].collisionPointX_LEFT,
-                //    this.sharkie[0].collisionPointY_TOP,
-                //    this.sharkie[0].collisionPointX_RIGHT,
-                //    this.sharkie[0].collisionPointY_BOTTOM
-                // );
-                // this.bubble.forEach((drawBubble) => {
-                //    this.drawRectangle(
-                //       ctx,
-                //       drawBubble.collisionPointX_LEFT,
-                //       drawBubble.collisionPointY_TOP,
-                //       drawBubble.collisionPointX_RIGHT,
-                //       drawBubble.collisionPointY_BOTTOM
-                //    );
-                // });
-                // this.level.enemies.forEach(
-                //    (enemie: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
-                //       this.drawRectangle(
-                //          ctx,
-                //          enemie.collisionPointX_LEFT + 10,
-                //          enemie.collisionPointY_TOP,
-                //          enemie.collisionPointX_RIGHT,
-                //          enemie.collisionPointY_BOTTOM
-                //       );
-                //    }
-                // );
-                // this.level.coins.forEach((coin: { collisionPointX_LEFT: any; collisionPointY_TOP: any; collisionPointX_RIGHT: any; collisionPointY_BOTTOM: any }) => {
-                //    this.drawRectangle(ctx, coin.collisionPointX_LEFT, coin.collisionPointY_TOP, coin.collisionPointX_RIGHT, coin.collisionPointY_BOTTOM);
-                // });
-                //END RECTANGLE DRAW!
             }
         }, 1000 / 60);
-        // this.requestAnimation();
-    }
-    // drawRectangle(context: any, x: any, y: any, width: any, height: any) {
-    //    context.strokeRect(x, y, width, height);
-    //    context.lineWidth = 4;
-    //    context.strokeStyle = "white";
-    //    context.stroke();
-    // }
-    /**
-     * set the request animation
-     */
-    requestAnimation() {
-        let self = this;
-        requestAnimationFrame(function () {
-            self.gameplay();
-        });
     }
     moveBackgroundToLeft() {
         if (this.level.backgrounds[0].x < 0) {
@@ -163,20 +115,25 @@ class GameWorld {
         sharkieArray.forEach((sharkie) => {
             objectArray.forEach((object) => {
                 if (this.collisionBreakepointsObjectWithEnemy(sharkie, object)) {
-                    objectArray.splice(objectArray.indexOf(object), 1);
-                    this.level.statusBar.forEach((checkStatusBar) => {
-                        if (checkStatusBar.name == "coin") {
-                            this.level.statusBarValue[1].counterCoin++;
-                            this.audioSounds.pickCoinSound.volume = 0.1;
-                            this.audioSounds.pickCoinSound.play();
-                        }
-                        if (checkStatusBar.name == "bubble") {
-                            this.level.statusBarValue[2].counterCoin++;
-                        }
-                    });
+                    this.collisionWithCoinOrBubbleBottle(objectArray, object);
                 }
             });
         });
+    }
+    collisionWithCoinOrBubbleBottle(objectArray, object) {
+        objectArray.splice(objectArray.indexOf(object), 1);
+        this.level.statusBar.forEach((checkStatusBar) => {
+            if (checkStatusBar.name == "coin") {
+                this.addCoinCounter();
+            }
+            if (checkStatusBar.name == "bubble")
+                () => this.level.statusBarValue[2].counterCoin++;
+        });
+    }
+    addCoinCounter() {
+        this.level.statusBarValue[1].counterCoin++;
+        this.audioSounds.pickCoinSound.volume = 0.1;
+        this.audioSounds.pickCoinSound.play();
     }
     checkCollisionEnemies(sharkieArray, objectArray) {
         sharkieArray.forEach((sharkie) => {
@@ -184,178 +141,223 @@ class GameWorld {
                 if (keyboard.D && !sharkie.isAttack && !sharkie.hasHurt && !sharkie.hasHurtElectric) {
                     if (this.collisionBreakepointsSharkieObjectsFinSlap(sharkie, object)) {
                         sharkie.isAttack = true;
-                        if (object.name != "EnemyFinalFish" && object.name == "EnemyPufferFish") {
-                            object.isDead = true;
-                            setTimeout(() => {
-                                objectArray.splice(objectArray.indexOf(object), 1);
-                            }, 2500);
+                        if (this.finSlapPufferFish(object)) {
+                            this.removeEnemy(object, objectArray);
                         }
-                        else if (object.name != "EnemyFinalFish" && object.name == "EnemyJellyFishLila") {
-                            sharkie.hasHurtElectric = true;
-                            sharkie.checkHit = false;
-                            this.audioSounds.electricShock.play();
-                            setTimeout(() => {
-                                if (sharkie.isDead != true) {
-                                    sharkie.checkHit = true;
-                                }
-                                sharkie.hasHurt = false;
-                                sharkie.hasHurtElectric = false;
-                            }, 2000);
+                        else if (this.finSlapJellyFish(object)) {
+                            this.sharkieAttackJellyFish(sharkie);
                         }
                         else {
-                            object.energy--;
-                            this.level.statusBar[3].counterFinalFish--;
-                            console.log(object.energy);
+                            this.reduceFinalFishLifeValue(object);
                         }
                         this.audioSounds.punshSound.play();
-                        sharkie.checkHit = false;
-                        setTimeout(() => {
-                            if (sharkie.isDead != true) {
-                                sharkie.checkHit = true;
-                            }
-                            sharkie.hasHurt = false;
-                            sharkie.hasHurtElectric = false;
-                            sharkie.isAttack = false;
-                        }, 250);
+                        this.resetSharkiesAttackValues(sharkie);
                     }
                 }
                 else if (this.collisionBreakepointsObjectWithEnemy(sharkie, object)) {
                     if (sharkie.checkHit == true) {
-                        this.level.statusBar.forEach((checkStatusBar) => {
-                            if (checkStatusBar.name == "life") {
-                                this.level.statusBarValue[0].counterLife--;
-                            }
-                            if (checkStatusBar.name == "life" && this.level.statusBarValue[0].counterLife == 0) {
-                                sharkie.isDead = true;
-                                this.audioSounds.sharkieDeathSound.play();
-                            }
-                        });
-                        if (object.name == "EnemyPufferFish") {
-                            sharkie.hasHurt = true;
-                            this.audioSounds.damageSound.volume = 0.6;
-                            this.audioSounds.damageSound.play();
-                        }
-                        else if (object.name == "EnemyJellyFishLila") {
-                            sharkie.hasHurtElectric = true;
-                            this.audioSounds.electricShock.play();
-                        }
-                        else {
-                            sharkie.hasHurt = true;
-                        }
-                        sharkie.checkHit = false;
-                        sharkie.hit();
-                        // sharkie.isHurt();
-                        setTimeout(() => {
-                            if (sharkie.isDead != true) {
-                                sharkie.checkHit = true;
-                            }
-                            sharkie.hasHurt = false;
-                            sharkie.hasHurtElectric = false;
-                        }, 2000);
+                        this.checkStatusBarValues(sharkie);
+                        this.sharkieHasWhichHurt(object, sharkie);
                     }
-                    if (sharkie.isDead == true) {
-                        sharkie.checkHit = false;
-                    }
+                    if (sharkie.isDead == true)
+                        () => (sharkie.checkHit = false);
                 }
             });
         });
     }
+    finSlapJellyFish(object) {
+        return object.name != "EnemyFinalFish" && object.name == "EnemyJellyFishLila";
+    }
+    finSlapPufferFish(object) {
+        return object.name != "EnemyFinalFish" && object.name == "EnemyPufferFish";
+    }
+    reduceFinalFishLifeValue(object) {
+        object.energy--;
+        this.level.statusBar[3].counterFinalFish--;
+        console.log(object.energy);
+    }
+    resetSharkiesAttackValues(sharkie) {
+        sharkie.checkHit = false;
+        setTimeout(() => {
+            if (sharkie.isDead != true)
+                () => (sharkie.checkHit = true);
+            sharkie.hasHurt = false;
+            sharkie.hasHurtElectric = false;
+            sharkie.isAttack = false;
+        }, 250);
+    }
+    sharkieAttackJellyFish(sharkie) {
+        sharkie.hasHurtElectric = true;
+        sharkie.checkHit = false;
+        this.audioSounds.electricShock.play();
+        setTimeout(() => {
+            if (sharkie.isDead != true)
+                () => (sharkie.checkHit = true);
+            sharkie.hasHurt = false;
+            sharkie.hasHurtElectric = false;
+        }, 2000);
+    }
+    removeEnemy(object, objectArray) {
+        object.isDead = true;
+        setTimeout(() => {
+            objectArray.splice(objectArray.indexOf(object), 1);
+        }, 2500);
+    }
+    sharkieHasWhichHurt(object, sharkie) {
+        if (object.name == "EnemyPufferFish") {
+            this.sharkieHasNormalHurt(sharkie);
+        }
+        else if (object.name == "EnemyJellyFishLila") {
+            this.sharkieHasElectricHurt(sharkie);
+        }
+        else {
+            sharkie.hasHurt = true;
+        }
+        sharkie.checkHit = false;
+        sharkie.hit();
+        this.resetSharkiesHurt(sharkie);
+    }
+    checkStatusBarValues(sharkie) {
+        this.level.statusBar.forEach((checkStatusBar) => {
+            this.reduceSharkieLife(checkStatusBar);
+            this.checkSharkieIsDead(checkStatusBar, sharkie);
+        });
+    }
+    resetSharkiesHurt(sharkie) {
+        setTimeout(() => {
+            if (sharkie.isDead != true) {
+                sharkie.checkHit = true;
+            }
+            sharkie.hasHurt = false;
+            sharkie.hasHurtElectric = false;
+        }, 2000);
+    }
+    sharkieHasElectricHurt(sharkie) {
+        sharkie.hasHurtElectric = true;
+        this.audioSounds.electricShock.play();
+    }
+    sharkieHasNormalHurt(sharkie) {
+        sharkie.hasHurt = true;
+        this.audioSounds.damageSound.volume = 0.6;
+        this.audioSounds.damageSound.play();
+    }
+    reduceSharkieLife(checkStatusBar) {
+        if (checkStatusBar.name == "life") {
+            this.level.statusBarValue[0].counterLife--;
+        }
+    }
+    checkSharkieIsDead(checkStatusBar, sharkie) {
+        if (checkStatusBar.name == "life" && this.level.statusBarValue[0].counterLife == 0) {
+            sharkie.isDead = true;
+            this.audioSounds.sharkieDeathSound.play();
+        }
+    }
     checkCollisionPickTransformObjects(sharkieArray, objectArray) {
         sharkieArray.forEach((sharkie) => {
             objectArray.forEach((object) => {
-                if (sharkie.collisionPointX_LEFT < object.randomTranslate + 70 &&
-                    sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.randomTranslate - 20 &&
-                    sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.height + 205) {
+                if (this.collisionValuesSharkieTransformObjects(sharkie, object)) {
                     object.randomTranslate = -1000;
                     this.level.statusBar.forEach((checkStatusBar) => {
                         if (checkStatusBar.name == "bubble") {
-                            this.level.statusBarValue[2].counterBubble++;
-                            //   this.audioSounds.blobSound.volume = 0.6;
-                            this.audioSounds.blobSound.play();
+                            this.pickBubbleBottle();
                         }
                     });
                 }
             });
         });
     }
+    pickBubbleBottle() {
+        this.level.statusBarValue[2].counterBubble++;
+        this.audioSounds.blobSound.play();
+    }
+    collisionValuesSharkieTransformObjects(sharkie, object) {
+        return (sharkie.collisionPointX_LEFT < object.randomTranslate + 70 &&
+            sharkie.collisionPointX_LEFT + sharkie.collisionPointX_RIGHT > object.randomTranslate - 20 &&
+            sharkie.collisionPointY_TOP + sharkie.collisionPointY_BOTTOM > object.height + 205);
+    }
     fireBubble(sharkieArray) {
         sharkieArray.forEach((sharkie) => {
             setInterval(() => {
                 sharkie.fireBubble = true;
-                if ((keyboard.SPACE || (keyboard.F && this.level.statusBarValue[2].counterBubble > 0)) && sharkie.fireBubble) {
-                    this.createFireBubble(sharkie);
-                }
-                else {
-                    sharkie.fireBubble = false;
-                }
+                this.sharkieCanFirePoisonedBubble(sharkie) ? this.createFireBubble(sharkie) : (sharkie.fireBubble = false);
             }, 500);
         });
     }
     createFireBubble(sharkie) {
-        setTimeout(() => {
-            if (keyboard.SPACE && sharkie.fireBubble) {
-                this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
-                sharkie.fireBubble = false;
-                setTimeout(() => {
-                    sharkie.fireBubble = true;
-                }, 500);
-            }
-            else if (keyboard.F && sharkie.fireBubble == true) {
-                this.bubble.push(new PoisonedBubble("PoisonedBubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
-                this.level.statusBarValue[2].counterBubble--;
-                sharkie.fireBubble = false;
-                setTimeout(() => {
-                    sharkie.fireBubble = true;
-                }, 500);
-            }
-            else {
-                sharkie.fireBubble = false;
-            }
-        }, 120);
+        setTimeout(() => keyboard.SPACE && sharkie.fireBubble
+            ? this.createCurrentWhiteFireBubble(sharkie)
+            : keyboard.F && sharkie.fireBubble == true
+                ? this.createCurrentPoisonedFireBubble(sharkie)
+                : (sharkie.fireBubble = false), 120);
+    }
+    sharkieCanFirePoisonedBubble(sharkie) {
+        return (keyboard.SPACE || (keyboard.F && this.level.statusBarValue[2].counterBubble > 0)) && sharkie.fireBubble;
+    }
+    createCurrentPoisonedFireBubble(sharkie) {
+        this.bubble.push(new PoisonedBubble("PoisonedBubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
+        this.level.statusBarValue[2].counterBubble--;
+        sharkie.fireBubble = false;
+        setTimeout(() => (sharkie.fireBubble = true), 500);
+    }
+    createCurrentWhiteFireBubble(sharkie) {
+        this.bubble.push(new Bubble("Bubble", sharkie.x + sharkie.width / 1.3, sharkie.y + 100));
+        sharkie.fireBubble = false;
+        setTimeout(() => (sharkie.fireBubble = true), 500);
     }
     bubbleCollisionWithEnemies(bubbles, enemies) {
         setInterval(() => {
             bubbles.forEach((bubble) => enemies.forEach((enemy) => {
                 if (this.collisionBreakepointsObjectWithEnemy(bubble, enemy) == true) {
                     if (enemy.name == "EnemyJellyFishLila") {
-                        enemy.isDead = true;
-                        this.audioSounds.blobJellyFish.play();
-                        bubbles.splice(bubbles.indexOf(bubble), 1);
+                        this.removeEnemyJellyFish(enemy, bubbles, bubble);
                     }
                     else if ((enemy.name == "EnemyPufferFish" || enemy.name == "EnemyFinalFish") && bubble.name == "BubbleClass") {
-                        bubbles.splice(bubbles.indexOf(bubble), 1);
-                        this.audioSounds.blobJellyFish.play();
+                        this.removeCurrentFireBubble(bubbles, bubble);
                     }
                     else if (enemy.name == "EnemyPufferFish" && bubble.name == "PoisonedBubble") {
-                        bubbles.splice(bubbles.indexOf(bubble), 1);
-                        this.audioSounds.blobJellyFish.play();
+                        this.removeCurrentFireBubble(bubbles, bubble);
                     }
                     else if (bubble.name == "PoisonedBubble") {
-                        if (enemy.name == "PUFFERFISH") {
-                            bubbles.splice(bubbles.indexOf(bubble), 1);
-                            this.audioSounds.blobJellyFish.play();
-                        }
-                        else if (enemy.name == "EnemyFinalFish") {
-                            this.audioSounds.blobJellyFish.play();
-                            this.audioSounds.ouchSound.play();
-                            enemy.energy -= 1;
-                            this.level.statusBar[3].counterFinalFish--;
-                            if (enemy.energy <= 0) {
-                                enemy.isDead = true;
-                                this.audioSounds.gameSound.pause();
-                            }
-                            else {
-                                enemy.hasHurt = true;
-                                setTimeout(() => {
-                                    enemy.hasHurt = false;
-                                }, 1000);
-                            }
-                            bubbles.splice(bubbles.indexOf(bubble), 1);
-                        }
+                        this.collisionPoisonedBubbleWithEnemy(enemy, bubbles, bubble);
                     }
                 }
             }));
         }, 200);
+    }
+    removeCurrentFireBubble(bubbles, bubble) {
+        bubbles.splice(bubbles.indexOf(bubble), 1);
+        this.audioSounds.blobJellyFish.play();
+    }
+    removeEnemyJellyFish(enemy, bubbles, bubble) {
+        enemy.isDead = true;
+        this.audioSounds.blobJellyFish.play();
+        bubbles.splice(bubbles.indexOf(bubble), 1);
+    }
+    collisionPoisonedBubbleWithEnemy(enemy, bubbles, bubble) {
+        if (enemy.name == "PUFFERFISH") {
+            bubbles.splice(bubbles.indexOf(bubble), 1);
+            this.audioSounds.blobJellyFish.play();
+        }
+        else if (enemy.name == "EnemyFinalFish") {
+            this.audioSounds.blobJellyFish.play();
+            this.audioSounds.ouchSound.play();
+            enemy.energy -= 1;
+            this.level.statusBar[3].counterFinalFish--;
+            this.finalFishIsDeadOrHasHurt(enemy);
+            bubbles.splice(bubbles.indexOf(bubble), 1);
+        }
+    }
+    finalFishIsDeadOrHasHurt(enemy) {
+        if (enemy.energy <= 0) {
+            enemy.isDead = true;
+            this.audioSounds.gameSound.pause();
+        }
+        else {
+            enemy.hasHurt = true;
+            setTimeout(() => {
+                enemy.hasHurt = false;
+            }, 1000);
+        }
     }
     createFinalFish() {
         setInterval(() => {
