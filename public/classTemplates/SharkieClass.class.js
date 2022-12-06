@@ -18,7 +18,7 @@ class Sharkie extends MovableClass {
     timeOver = true;
     fireBubble = false;
     pressSpace() {
-        setInterval(() => (keyboard.SPACE == true ? (this.timeOver = false) : (this.timeOver = true)), 5);
+        setInterval(() => (keyboard.SPACE == true ? (this.timeOver = false) : (this.timeOver = true)), 1000 / 15);
     }
     loadInIntervallOneImg() {
         setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 1000 / 15);
@@ -32,7 +32,7 @@ class Sharkie extends MovableClass {
         }, 1000 / 30);
     }
     loadInIntervallAllImg() {
-        setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 50);
+        setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 1000 / 30);
     }
     arrayAllImages_IDLE = [];
     arrayAllImages_LONG_IDLE = [];
