@@ -27,7 +27,6 @@ class StatusBar extends BaseClass {
             this.setDataFinalFishBar();
         }
         else {
-            alert("Set for statusbar one the following parameters: life || coin || bubble || finalFish!");
         }
     }
     setDataFinalFishBar() {

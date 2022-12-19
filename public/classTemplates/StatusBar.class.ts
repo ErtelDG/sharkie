@@ -25,7 +25,6 @@ class StatusBar extends BaseClass {
       } else if (whichStatusBar == "finalFish") {
          this.setDataFinalFishBar();
       } else {
-         alert("Set for statusbar one the following parameters: life || coin || bubble || finalFish!");
       }
    }
 
