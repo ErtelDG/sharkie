@@ -3,11 +3,11 @@ class EnemyPufferFish extends EnemyClass {
     constructor() {
         super("EnemyPufferFish");
         this.setAllImagesInArray([
-            //"img/2.Enemy/1PufferFish/1.Swim/3.swim1.png",
-            //"img/2.Enemy/1PufferFish/1.Swim/3.swim2.png",
-            //"img/2.Enemy/1PufferFish/1.Swim/3.swim3.png",
-            //"img/2.Enemy/1PufferFish/1.Swim/3.swim4.png",
-            //"img/2.Enemy/1PufferFish/1.Swim/3.swim5.png",
+            "img/2.Enemy/1PufferFish/1.Swim/3.swim1.png",
+            "img/2.Enemy/1PufferFish/1.Swim/3.swim2.png",
+            "img/2.Enemy/1PufferFish/1.Swim/3.swim3.png",
+            "img/2.Enemy/1PufferFish/1.Swim/3.swim4.png",
+            "img/2.Enemy/1PufferFish/1.Swim/3.swim5.png",
             "img/2.Enemy/1PufferFish/2.transition/2.transition1.png",
             "img/2.Enemy/1PufferFish/2.transition/2.transition2.png",
             "img/2.Enemy/1PufferFish/2.transition/2.transition3.png",
