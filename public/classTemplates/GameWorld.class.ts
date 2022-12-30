@@ -19,7 +19,7 @@ class GameWorld {
    }
 
    async gameplay() {
-      //  setInterval(() => {
+       setInterval(() => {
       if (this.ctx != null) {
          this.ctx.clearRect(0, 0, canvas.width, canvas.height);
          this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
@@ -38,8 +38,8 @@ class GameWorld {
          this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
          this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
       }
-      //  }, 1000 / 30);
-      this.requestAnimation();
+       }, 1000 / 50);
+      //this.requestAnimation();
    }
 
    requestAnimation() {

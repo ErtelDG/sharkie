@@ -18,27 +18,27 @@ class GameWorld {
         this.playGameSound();
     }
     async gameplay() {
-        //  setInterval(() => {
-        if (this.ctx != null) {
-            this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-            this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
-            this.drawStaticObject(this.level.backgrounds);
-            this.drawStaticObject(this.level.coins);
-            this.drawStaticObject(this.bubble);
-            this.drawStaticObject(this.level.statusBar);
-            this.drawText(this.level.statusBarValue);
-            keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
-            this.ctx.restore();
-            keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
-            this.drawMovableObject(this.level.enemies);
-            this.drawRotateStaticObject(this.level.bubbleBottles);
-            this.checkCollisionPickObjects(this.sharkie, this.level.coins);
-            this.checkCollisionEnemies(this.sharkie, this.level.enemies);
-            this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
-            this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
-        }
-        //  }, 1000 / 30);
-        this.requestAnimation();
+        setInterval(() => {
+            if (this.ctx != null) {
+                this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+                this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
+                this.drawStaticObject(this.level.backgrounds);
+                this.drawStaticObject(this.level.coins);
+                this.drawStaticObject(this.bubble);
+                this.drawStaticObject(this.level.statusBar);
+                this.drawText(this.level.statusBarValue);
+                keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
+                this.ctx.restore();
+                keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
+                this.drawMovableObject(this.level.enemies);
+                this.drawRotateStaticObject(this.level.bubbleBottles);
+                this.checkCollisionPickObjects(this.sharkie, this.level.coins);
+                this.checkCollisionEnemies(this.sharkie, this.level.enemies);
+                this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
+                this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
+            }
+        }, 1000 / 50);
+        //this.requestAnimation();
     }
     requestAnimation() {
         let self = this;
