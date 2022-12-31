@@ -6,9 +6,10 @@ class Bubble extends BaseClass {
       this.height = 60;
       this.x = x;
       this.y = y;
+      this.loadImage("img/1.Sharkie/4.Attack/Bubble_Trap/Bubble.png");
       this.loadAllImgInCach(this.arrayAllImages);
       this.animation(100);
-      this.setColissionPointsObject(0,0, 0, 0);
+      this.setColissionPointsObject(0, 0, 0, 0);
       this.moveBubble();
    }
 

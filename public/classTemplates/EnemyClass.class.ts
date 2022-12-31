@@ -12,7 +12,7 @@ class EnemyClass extends MovableClass {
    loadImageIsDeadOrNot(cach_DEAD_IMAGES: string[]) {
       setInterval(() => {
          !this.isDead ? this.autoMoveLeft(Math.random() * 6) : this.getDeadAnimation(cach_DEAD_IMAGES);
-         this.loadOneImgFromCach();
+         this.loadOneImgFromCach(this.imagesCach);
       }, 120);
    }
 

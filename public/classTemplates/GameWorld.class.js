@@ -71,7 +71,7 @@ class GameWorld {
         objectsToDraw.forEach((objectX) => {
             this.ctx.save();
             this.ctx.scale(-1, 1);
-            this.ctx.drawImage(objectX.imgPath, objectX.x * -1, objectX.y, objectX.width * -1, objectX.height);
+            this.ctx.drawImage(objectX.img, objectX.x * -1, objectX.y, objectX.width * -1, objectX.height);
             this.ctx.restore();
         });
     }
@@ -79,7 +79,7 @@ class GameWorld {
         this.level.background[0].loadOneImgFromCach(this.level.background[0].imageCach);
     }
     drawStaticObject(objectToDraw) {
-        objectToDraw.forEach((objectElement) => this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height));
+        objectToDraw.forEach((objectElement) => this.ctx.drawImage(objectElement.img, objectElement.x, objectElement.y, objectElement.width, objectElement.height));
     }
     drawRotateStaticObject(objectToDraw) {
         let counterForSetImgToLeftRight = 0;
@@ -96,7 +96,7 @@ class GameWorld {
         this.ctx.save();
         this.ctx.translate(objectElement.randomTranslate, 300);
         this.ctx.rotate((rotate * Math.PI) / 180);
-        this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
+        this.ctx.drawImage(objectElement.img, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
         // this.drawRectangle(ctx, objectElement.x + 10, objectElement.y + 10, objectElement.width - 20, objectElement.height - 20);
         this.ctx.restore();
     }
@@ -116,8 +116,8 @@ class GameWorld {
     }
     drawMovableObject(movableObjectArray) {
         movableObjectArray.forEach((movableObject) => {
-            if (movableObject.imgPath != undefined) {
-                this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+            if (movableObject.img != undefined) {
+                this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
             }
         });
     }

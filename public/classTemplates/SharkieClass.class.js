@@ -4,6 +4,7 @@ class Sharkie extends MovableClass {
         super("Sharkie");
         this.width = 300;
         this.height = 250;
+        this.loadImage("img/1.Sharkie/1.IDLE/1-min.png");
         this.setAllImagesInArray();
         this.loadAllImgInCorrectCach(this.arrayAllImages_ATTACK_FIN_SLAP, this.cach_ATTACK_FIN_SLAP);
         this.loadAllImgInCorrectCach(this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE, this.cach_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE);
@@ -29,7 +30,7 @@ class Sharkie extends MovableClass {
         setInterval(() => (keyboard.SPACE == true ? (this.timeOver = false) : (this.timeOver = true)), 120);
     }
     loadInIntervallOneImg() {
-        setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 120);
+        setInterval(() => (!this.isDead ? this.loadOneImgFromCach(this.imagesCach) : this.loadSharkieDeadImages()), 120);
     }
     checkDirectionOfMovement() {
         setInterval(() => {
@@ -76,16 +77,17 @@ class Sharkie extends MovableClass {
                     ? this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY.length
                     : this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE.length;
                 this.isIdle = false;
-                this.endFirCounter > this.fireCounter ? this.loadImagesForBreathPOisonedBubbles() : this.resetFireCounter();
+                this.endFirCounter > this.fireCounter ? this.loadImagesForBreathPoisonedBubbles() : this.resetFireCounter();
             }
         }, 75);
     }
-    loadImagesForBreathPOisonedBubbles() {
+    loadImagesForBreathPoisonedBubbles() {
         this.imagesCach = [];
-        let pathURL = keyboard.SPACE
+        let img = new Image();
+        img.src = keyboard.SPACE
             ? this.arrayAllImages_ATTACK_INFLATE_WHITE_BUBBLE_FOR_JELLY[this.fireCounter]
             : this.arrayAllImages_ATTACK_INFLATE_POISONED_BUBBLE_FOR_WHALE[this.fireCounter];
-        this.imagesCach.push(pathURL);
+        this.imagesCach.push(img);
         this.fireCounter++;
     }
     resetFireCounter() {
@@ -230,7 +232,7 @@ class Sharkie extends MovableClass {
         this.sharkieLastImages = this.cach_IS_DEAD.length;
         if (this.sharkieLastImagesCounter < this.sharkieLastImages) {
             this.sharkieLastImagesCounter++;
-            this.loadOneImgFromCach();
+            this.loadOneImgFromCach(this.imagesCach);
         }
         else {
             this.stopAllIntervals();

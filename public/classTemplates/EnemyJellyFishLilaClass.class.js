@@ -34,7 +34,7 @@ class EnemyJellyFishLila extends EnemyClass {
     loadImageAndAutoMove() {
         setInterval(() => {
             this.imagesCach = this.cach_MOVABLE_IMAGES;
-            this.loadOneImgFromCach();
+            this.loadOneImgFromCach(this.imagesCach);
             this.autoMoveLeft(Math.random() * 6);
         }, 120);
     }

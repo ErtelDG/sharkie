@@ -20,7 +20,7 @@ class BubbleBottle extends BaseClass {
 
       this.loadAllImgInCach(this.arrayAllImages);
       setInterval(() => {
-         this.loadOneImgFromCach();
+         this.loadOneImgFromCach(this.imagesCach);
       }, 100);
       this.setColissionPointsObject(0, 0, 10, 10);
    }

@@ -8,6 +8,7 @@ class BaseClass {
    arrayAllImages: string[] = [];
    width = 0;
    height = 0;
+   img: any;
 
    y = 0;
    x = 0;
@@ -20,24 +21,37 @@ class BaseClass {
    async loadAllImgInCach(array: string[]) {
       this.imagesCach = [];
       array.forEach(async (path: string) => {
-         let pathURL = path;
-         await this.imagesCach.push(pathURL);
+         let img = new Image();
+         img.src = path;
+         await this.imagesCach.push(img);
       });
    }
 
    counterForLoadOneImgFromCachArray = 0;
 
-   loadOneImgFromCach() {
+   // loadImage ('img/test.png')
+   loadImage(path: string) {
+      this.img = new Image(); //Image() analog=> this.img = document.getElementById('image') <img id="image" src>
+      this.img.src = path;
+   }
+
+   loadOneImgFromCach(chach: any) {
       let positionArray = this.counterForLoadOneImgFromCachArray % this.imagesCach.length;
-      if (this.imagesCach[positionArray] != undefined) {
-         this.imgPath.src = this.imagesCach[positionArray];
+
+      this.img = new Image();
+      try {
+         this.img = chach[positionArray];
+      } catch (e) {
+         console.log("STOP", chach[positionArray]);
+         debugger;
       }
+
       this.counterForLoadOneImgFromCachArray++;
    }
 
    animation(time: number) {
       setInterval(() => {
-         this.loadOneImgFromCach();
+         this.loadOneImgFromCach(this.imagesCach);
       }, time);
    }
 

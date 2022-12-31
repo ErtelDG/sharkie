@@ -18,9 +18,16 @@ class MovableClass extends BaseClass {
    isAttack = false;
 
    loadAllImgInCorrectCach(array: string[], getInCach: any) {
-       array.forEach(async (path: string) => {
-         let pathURL = path;
-        await getInCach.push(pathURL);
+      array.forEach( (path: string) => {
+         let newImage = new Image();
+         newImage.src = path;
+         try {
+             getInCach.push(newImage);
+         } catch (e) {
+            console.warn("STOP", e);
+            console.warn("STOP", newImage.src);
+            debugger;
+         }
       });
    }
 

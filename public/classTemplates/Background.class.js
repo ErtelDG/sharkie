@@ -8,6 +8,6 @@ class Background extends BaseClass {
         this.x = x;
         this.y = y;
         this.loadAllImgInCach(this.arrayAllImages);
-        this.loadOneImgFromCach();
+        this.loadOneImgFromCach(this.imagesCach);
     }
 }

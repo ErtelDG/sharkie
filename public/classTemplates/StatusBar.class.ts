@@ -12,7 +12,7 @@ class StatusBar extends BaseClass {
    counterFinalFish = 5;
 
    loadImagStatusbarForFinalFish() {
-      setInterval(() => (this.name != "finalFish" ? this.loadOneImgFromCach() : (this.imgPath.src = this.imagesCach[this.counterFinalFish])), 500);
+      setInterval(() => (this.name != "finalFish" ? this.loadOneImgFromCach(this.imagesCach) : (this.img = this.imagesCach[this.counterFinalFish])), 500);
    }
 
    setCorrectImageForStatusBarInAllArray(whichStatusBar: string) {

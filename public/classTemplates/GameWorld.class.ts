@@ -74,10 +74,10 @@ class GameWorld {
    }
 
    drawMirrowObjectToCanvas(objectsToDraw: any[]) {
-      objectsToDraw.forEach((objectX: { imgPath: any; x: number; y: any; width: number; height: any }) => {
+      objectsToDraw.forEach((objectX: { img: any; x: number; y: any; width: number; height: any }) => {
          this.ctx.save();
          this.ctx.scale(-1, 1);
-         this.ctx.drawImage(objectX.imgPath, objectX.x * -1, objectX.y, objectX.width * -1, objectX.height);
+         this.ctx.drawImage(objectX.img, objectX.x * -1, objectX.y, objectX.width * -1, objectX.height);
          this.ctx.restore();
       });
    }
@@ -87,14 +87,14 @@ class GameWorld {
    }
 
    drawStaticObject(objectToDraw: any) {
-      objectToDraw.forEach((objectElement: { imgPath: any; x: any; y: any; width: any; height: any }) =>
-         this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height)
+      objectToDraw.forEach((objectElement: any) =>
+         this.ctx.drawImage(objectElement.img, objectElement.x, objectElement.y, objectElement.width, objectElement.height)
       );
    }
 
    drawRotateStaticObject(objectToDraw: any) {
       let counterForSetImgToLeftRight = 0;
-      objectToDraw.forEach((objectElement: { randomTranslate: any; imgPath: any; x: any; y: any; width: any; height: any }) => {
+      objectToDraw.forEach((objectElement: { randomTranslate: any; img: any; x: any; y: any; width: any; height: any }) => {
          let value = counterForSetImgToLeftRight % 2 ? true : false;
          objectElement.y = value ? (objectElement.y = -45) : false;
          objectElement.x = value ? objectElement.x : (objectElement.x = -45);
@@ -104,11 +104,11 @@ class GameWorld {
       });
    }
 
-   drawTheRotateStaticObject(objectElement: { randomTranslate: any; imgPath: any; x: any; y: any; width: any; height: any }, rotate: number) {
+   drawTheRotateStaticObject(objectElement: { randomTranslate: any; img: any; x: any; y: any; width: any; height: any }, rotate: number) {
       this.ctx.save();
       this.ctx.translate(objectElement.randomTranslate, 300);
       this.ctx.rotate((rotate * Math.PI) / 180);
-      this.ctx.drawImage(objectElement.imgPath, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
+      this.ctx.drawImage(objectElement.img, objectElement.x, objectElement.y, objectElement.width, objectElement.height);
       // this.drawRectangle(ctx, objectElement.x + 10, objectElement.y + 10, objectElement.width - 20, objectElement.height - 20);
       this.ctx.restore();
    }
@@ -128,9 +128,9 @@ class GameWorld {
    }
 
    drawMovableObject(movableObjectArray: any) {
-      movableObjectArray.forEach((movableObject: { imgPath: any; x: any; y: any; width: any; height: any }) => {
-         if (movableObject.imgPath != undefined) {
-            this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+      movableObjectArray.forEach((movableObject: { img: any; x: any; y: any; width: any; height: any }) => {
+         if (movableObject.img != undefined) {
+            this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
          }
       });
    }
