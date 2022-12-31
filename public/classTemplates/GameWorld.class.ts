@@ -38,7 +38,7 @@ class GameWorld {
             this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
             this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
          }
-      }, 1000 / 50);
+      }, 1000 / 60);
       //this.requestAnimation();
    }
 

@@ -41,7 +41,7 @@ class Sharkie extends MovableClass {
         }, 1000 / 30);
     }
     loadInIntervallAllImg() {
-        setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 1000 / 15);
+        setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 1000 / 30);
     }
     cach_IDLE = [];
     cach_LONG_IDLE = [];
