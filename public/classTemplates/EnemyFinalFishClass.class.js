@@ -2,8 +2,10 @@
 class EnemyFinalFish extends EnemyClass {
     constructor() {
         super("EnemyFinalFish");
-        this.setAllImagesInArray(this.movableImages);
-        this.loadAllImgInCach(this.arrayAllImages);
+        this.loadAllImgInCorrectCach(this.movableImages, this.cach_MOVABLE_IMAGES);
+        this.loadAllImgInCorrectCach(this.deadImages, this.cach_DEAD_IMAGES);
+        this.loadAllImgInCorrectCach(this.hurtImages, this.cach_HURT_IMAGES);
+        this.loadAllImgInCorrectCach(this.attackImages, this.cach_ATTACK_IMAGES);
         this.loadCorrectImageArray();
         this.switchStatusFinalFish();
         this.width = 400;
@@ -12,7 +14,7 @@ class EnemyFinalFish extends EnemyClass {
         this.y = 0;
         this.setColissionPointsObject(140, 30, 210, 80);
         this.name = "EnemyFinalFish";
-        this.loadImageIsDeadOrNot(this.deadImages);
+        this.loadImageIsDeadOrNot(this.cach_DEAD_IMAGES);
         this.checkIsDead();
     }
     switchStatusFinalFish() {
@@ -41,19 +43,19 @@ class EnemyFinalFish extends EnemyClass {
         }, 100);
     }
     movableAnimation() {
-        this.loadAllImgInCach(this.movableImages);
+        this.imagesCach = this.cach_MOVABLE_IMAGES;
         this.autoMoveLeft(16);
     }
     atAttackAnimation() {
-        this.loadAllImgInCach(this.attackImages);
+        this.imagesCach = this.cach_ATTACK_IMAGES;
         this.autoMoveLeft(25);
     }
     hasHurtAnimation() {
-        this.loadAllImgInCach(this.hurtImages);
+        this.imagesCach = this.cach_HURT_IMAGES;
         this.autoMoveLeft(-22);
     }
     winAnimationSharkie() {
-        this.loadAllImgInCach(this.deadImages);
+        this.imagesCach = this.cach_DEAD_IMAGES;
         setTimeout(() => {
             this.stopAllIntervals();
             this.getEndImages();
@@ -68,6 +70,7 @@ class EnemyFinalFish extends EnemyClass {
         imageGameOver?.classList.add("hidden");
         this.sounds.winSound.play();
     }
+    cach_MOVABLE_IMAGES = [];
     movableImages = [
         "img/2.Enemy/3FinalEnemy/2.floating/1-min.png",
         "img/2.Enemy/3FinalEnemy/2.floating/2-min.png",
@@ -83,6 +86,7 @@ class EnemyFinalFish extends EnemyClass {
         "img/2.Enemy/3FinalEnemy/2.floating/12-min.png",
         "img/2.Enemy/3FinalEnemy/2.floating/13-min.png",
     ];
+    cach_DEAD_IMAGES = [];
     deadImages = [
         "img/2.Enemy/3FinalEnemy/Dead/dead1-min.png",
         "img/2.Enemy/3FinalEnemy/Dead/dead2-min.png",
@@ -91,12 +95,14 @@ class EnemyFinalFish extends EnemyClass {
         "img/2.Enemy/3FinalEnemy/Dead/dead5-min.png",
         "img/2.Enemy/3FinalEnemy/Dead/dead6-min.png",
     ];
+    cach_HURT_IMAGES = [];
     hurtImages = [
         "img/2.Enemy/3FinalEnemy/Hurt/1-min.png",
         "img/2.Enemy/3FinalEnemy/Hurt/2-min.png",
         "img/2.Enemy/3FinalEnemy/Hurt/3-min.png",
         "img/2.Enemy/3FinalEnemy/Hurt/4-min.png",
     ];
+    cach_ATTACK_IMAGES = [];
     attackImages = [
         "img/2.Enemy/3FinalEnemy/Attack/1-min.png",
         "img/2.Enemy/3FinalEnemy/Attack/2-min.png",

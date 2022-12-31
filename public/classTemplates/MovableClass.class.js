@@ -18,9 +18,9 @@ class MovableClass extends BaseClass {
     isDead = false;
     isAttack = false;
     loadAllImgInCorrectCach(array, getInCach) {
-        array.forEach(async (path) => {
+        array.forEach((path) => {
             let pathURL = path;
-            await getInCach.push(pathURL);
+            getInCach.push(pathURL);
         });
     }
     autoMoveLeft(speedObject) {
