@@ -15,7 +15,8 @@ class EnemyPufferFish extends EnemyClass {
             "img/2.Enemy/1PufferFish/2.transition/2.transition5.png",
         ]);
         this.loadAllImgInCach(this.arrayAllImages);
-        this.loadImageIsDeadOrNot(this.loadDeadImages);
+        this.loadAllImgInCorrectCach(this.loadDeadImages, this.cach_DEAD_IMAGES);
+        this.loadImageIsDeadOrNot(this.cach_DEAD_IMAGES);
         this.width = 100;
         this.height = 80;
         this.x = Math.random() * (10000 - 500) + 500;

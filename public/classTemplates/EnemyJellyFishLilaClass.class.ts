@@ -8,7 +8,9 @@ class EnemyJellyFishLila extends EnemyClass {
          "img/2.Enemy/2JellyFish/RegularDamage/Lila3.png",
          "img/2.Enemy/2JellyFish/RegularDamage/Lila4.png",
       ]);
+      this.loadOneImgFromCach("img/2.Enemy/2JellyFish/RegularDamage/Lila1.png");
       this.loadAllImgInCach(this.arrayAllImages);
+      this.loadAllImgInCorrectCach(this.loadDeadImages, this.cach_DEAD_IMAGES);
       this.loadImageAndAutoMove();
       this.width = 80;
       this.height = 150;

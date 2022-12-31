@@ -27,9 +27,9 @@ class BaseClass {
 
    counterForLoadOneImgFromCachArray = 0;
 
-   async loadOneImgFromCach() {
+   loadOneImgFromCach() {
       let positionArray = this.counterForLoadOneImgFromCachArray % this.imagesCach.length;
-      this.imgPath.src = await this.imagesCach[positionArray];
+      this.imgPath.src = this.imagesCach[positionArray];
       this.counterForLoadOneImgFromCachArray++;
    }
 
@@ -58,6 +58,4 @@ class BaseClass {
          clearTimeout(i);
       }
    }
-
-   
 }

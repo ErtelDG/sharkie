@@ -3,20 +3,22 @@ class EnemyClass extends MovableClass {
       super("Enemy");
    }
 
+   cach_DEAD_IMAGES = [];
+
    setAllImagesInArray(array: string[]) {
       return (this.arrayAllImages = array);
    }
 
-   loadImageIsDeadOrNot(loadDeadImages: string[]) {
+   loadImageIsDeadOrNot(cach_DEAD_IMAGES: string[]) {
       setInterval(() => {
-         !this.isDead ? this.autoMoveLeft(Math.random() * 6) : this.getDeadAnimation(loadDeadImages);
+         !this.isDead ? this.autoMoveLeft(Math.random() * 6) : this.getDeadAnimation(cach_DEAD_IMAGES);
          this.loadOneImgFromCach();
       }, 50);
    }
 
-   getDeadAnimation(loadDeadImages: string[]) {
+   getDeadAnimation(cach_DEAD_IMAGES: string[]) {
       this.x += 20;
       this.y -= 20;
-      this.loadAllImgInCach(loadDeadImages);
+      this.imagesCach = cach_DEAD_IMAGES;
    }
 }

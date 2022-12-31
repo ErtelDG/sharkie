@@ -17,6 +17,12 @@ class MovableClass extends BaseClass {
     hasHurtElectric = false;
     isDead = false;
     isAttack = false;
+    loadAllImgInCorrectCach(array, getInCach) {
+        array.forEach(async (path) => {
+            let pathURL = path;
+            await getInCach.push(pathURL);
+        });
+    }
     autoMoveLeft(speedObject) {
         this.x -= speedObject;
     }
