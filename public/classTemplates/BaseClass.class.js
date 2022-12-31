@@ -16,12 +16,12 @@ class BaseClass {
     collisionPointX_LEFT = 0;
     collisionPointY_BOTTOM = 0;
     collisionPointX_RIGHT = 0;
-    async loadAllImgInCach(array) {
+    loadAllImgInCach(array) {
         this.imagesCach = [];
-        array.forEach(async (path) => {
+        array.forEach((path) => {
             let img = new Image();
             img.src = path;
-            await this.imagesCach.push(img);
+            this.imagesCach.push(img);
         });
     }
     counterForLoadOneImgFromCachArray = 0;
