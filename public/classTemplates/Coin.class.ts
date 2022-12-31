@@ -7,7 +7,7 @@ class Coin extends BaseClass {
          "img/4.Marcadores/1.Coins/3.png",
          "img/4.Marcadores/1.Coins/3.png",
       ];
-
+      this.loadImage("img/4.Marcadores/1.Coins/1.png");
       this.width = 50;
       this.height = 50;
       this.x = Math.random() * (6000 - 500) + 500;

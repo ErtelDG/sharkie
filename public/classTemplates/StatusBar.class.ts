@@ -17,12 +17,16 @@ class StatusBar extends BaseClass {
 
    setCorrectImageForStatusBarInAllArray(whichStatusBar: string) {
       if (whichStatusBar == "life") {
+         this.loadImage("img/4.Marcadores/green/100_copia_hp.png");
          this.setDataLifeBar();
       } else if (whichStatusBar == "coin") {
+         this.loadImage("img/4.Marcadores/green/100_copia_coin.png");
          this.setDataCoinBar();
       } else if (whichStatusBar == "bubble") {
+         this.loadImage("img/4.Marcadores/green/100_copia_poisoned_bubble.png");
          this.setDataBubbleBar();
       } else if (whichStatusBar == "finalFish") {
+         this.loadImage("img/4.Marcadores/green/FinalFish/0_copia.png");
          this.setDataFinalFishBar();
       } else {
       }

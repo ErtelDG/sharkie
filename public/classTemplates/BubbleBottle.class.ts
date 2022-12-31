@@ -11,6 +11,7 @@ class BubbleBottle extends BaseClass {
          "img/4.Marcadores/PosionedBubble/Animada/7.png",
          "img/4.Marcadores/PosionedBubble/Animada/8.png",
       ];
+      this.loadImage("img/4.Marcadores/PosionedBubble/Animada/1.png");
       this.randomTranslate = this.randomTranslate;
 
       this.width = 80;
