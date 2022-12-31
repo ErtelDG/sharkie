@@ -11,6 +11,12 @@ let imageYouWin = document.getElementById("imageYouWin");
 let imageGameOver = document.getElementById("imageGameOver");
 let imageTryAgain = document.getElementById("imageTryAgain");
 let isFullscreen = false;
+let sharkie: Sharkie;
+
+function loadLevel() {
+   level1 = new Level();
+   sharkie = new Sharkie();
+}
 
 async function init() {
    firstContain?.classList.remove("grid");
@@ -21,7 +27,6 @@ async function init() {
    thirdContain?.classList.remove("grid");
    imageYouWin?.classList.remove("hidden");
    imageGameOver?.classList.remove("hidden");
-   level1 = new Level();
    gameworld = new GameWorld();
 }
 
@@ -66,6 +71,6 @@ function soundOff() {
 function soundOn() {
    if (gameworld != null) {
       gameworld.background_sound_On_Off = true;
-       gameworld.audioSounds.gameSound.play();
+      gameworld.audioSounds.gameSound.play();
    }
 }

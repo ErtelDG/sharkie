@@ -11,7 +11,7 @@ class GameWorld {
         this.ctx.font = "48px MyWebFont";
         this.ctx.fillStyle = "white";
         this.level = level1;
-        this.sharkie = [new Sharkie()];
+        this.sharkie = [sharkie];
         this.gameplay();
         this.fireBubble(this.sharkie);
         this.createFinalFish();

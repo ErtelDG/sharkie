@@ -11,6 +11,11 @@ let imageYouWin = document.getElementById("imageYouWin");
 let imageGameOver = document.getElementById("imageGameOver");
 let imageTryAgain = document.getElementById("imageTryAgain");
 let isFullscreen = false;
+let sharkie;
+function loadLevel() {
+    level1 = new Level();
+    sharkie = new Sharkie();
+}
 async function init() {
     firstContain?.classList.remove("grid");
     firstContain?.classList.add("hidden");
@@ -20,7 +25,6 @@ async function init() {
     thirdContain?.classList.remove("grid");
     imageYouWin?.classList.remove("hidden");
     imageGameOver?.classList.remove("hidden");
-    level1 = new Level();
     gameworld = new GameWorld();
 }
 function fullscreenOnOff() {

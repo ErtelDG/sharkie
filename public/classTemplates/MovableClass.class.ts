@@ -18,7 +18,7 @@ class MovableClass extends BaseClass {
    isAttack = false;
 
    loadAllImgInCorrectCach(array: string[], getInCach: any) {
-      array.forEach(async (path: string) => {
+       array.forEach(async (path: string) => {
          let pathURL = path;
         await getInCach.push(pathURL);
       });

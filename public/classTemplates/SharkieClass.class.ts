@@ -26,11 +26,11 @@ class Sharkie extends MovableClass {
    timeOver = true;
    fireBubble = false;
    pressSpace() {
-      setInterval(() => (keyboard.SPACE == true ? (this.timeOver = false) : (this.timeOver = true)), 1000 / 15);
+      setInterval(() => (keyboard.SPACE == true ? (this.timeOver = false) : (this.timeOver = true)), 120);
    }
 
    loadInIntervallOneImg() {
-      setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 1000 / 30);
+      setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 120);
    }
 
    checkDirectionOfMovement() {

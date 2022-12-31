@@ -40,7 +40,7 @@ class EnemyFinalFish extends EnemyClass {
                 this.movableAnimation();
             }
             this.loadOneImgFromCach();
-        }, 1000 / 30);
+        }, 120);
     }
     movableAnimation() {
         this.imagesCach = this.cach_MOVABLE_IMAGES;
