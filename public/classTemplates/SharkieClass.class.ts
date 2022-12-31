@@ -13,15 +13,14 @@ class Sharkie extends MovableClass {
       this.loadAllImgInCorrectCach(this.arrayAllImages_IS_DEAD, this.cach_IS_DEAD);
       this.loadAllImgInCorrectCach(this.arrayAllImages_LONG_IDLE, this.cach_LONG_IDLE);
       this.loadAllImgInCorrectCach(this.arrayAllImages_SWIM, this.cach_SWIM);
-
       this.loadInIntervallAllImg();
       this.checkDirectionOfMovement();
       this.setColissionPointsObject(120, 60, 180, 120);
       this.checkIsDead();
       this.startTimerForIdleTime();
-      this.loadInIntervallOneImg();
       this.breatheAnimation();
       this.pressSpace();
+      this.loadInIntervallOneImg();
    }
 
    timeOver = true;
@@ -31,7 +30,7 @@ class Sharkie extends MovableClass {
    }
 
    loadInIntervallOneImg() {
-      setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 1000 / 15);
+      setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 1000 / 30);
    }
 
    checkDirectionOfMovement() {
@@ -42,7 +41,7 @@ class Sharkie extends MovableClass {
    }
 
    loadInIntervallAllImg() {
-      setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 1000 / 30);
+      setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 1000 / 15);
    }
 
    cach_IDLE = [];
@@ -103,7 +102,7 @@ class Sharkie extends MovableClass {
    loadAllImageArrayForCurrenttAnimation() {
       if (this.hasHurt && !this.isDead) {
          this.isIdle = false;
-         this.imagesCach = this.cach_IS_DEAD;
+         this.imagesCach = this.cach_HAS_HURT;
       } else if (this.hasHurtElectric == true) {
          this.isIdle = false;
          this.imagesCach = this.cach_HAS_HURT_ELECTRIC;
@@ -235,7 +234,7 @@ class Sharkie extends MovableClass {
    }
 
    loadSharkieDeadImages() {
-      this.sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
+      this.sharkieLastImages = this.cach_IS_DEAD.length;
       if (this.sharkieLastImagesCounter < this.sharkieLastImages) {
          this.sharkieLastImagesCounter++;
          this.loadOneImgFromCach();

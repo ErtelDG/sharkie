@@ -29,7 +29,9 @@ class BaseClass {
 
    loadOneImgFromCach() {
       let positionArray = this.counterForLoadOneImgFromCachArray % this.imagesCach.length;
-      this.imgPath.src = this.imagesCach[positionArray];
+      if (this.imagesCach[positionArray] != undefined) {
+         this.imgPath.src = this.imagesCach[positionArray];
+      }
       this.counterForLoadOneImgFromCachArray++;
    }
 

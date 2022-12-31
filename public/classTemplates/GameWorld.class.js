@@ -17,7 +17,7 @@ class GameWorld {
         this.createFinalFish();
         this.playGameSound();
     }
-    async gameplay() {
+    gameplay() {
         setInterval(() => {
             if (this.ctx != null) {
                 this.ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -102,19 +102,22 @@ class GameWorld {
     }
     drawText(objectToDraw) {
         objectToDraw.forEach((objectElement) => {
-            if (objectElement.name != "finalFish") {
-                this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
+            try {
+                if (objectElement.name != "finalFish") {
+                    this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
+                }
+            }
+            catch (e) {
+                console.warn("Error loading Image", e);
+                console.warn("Could not load", objectElement.currentCounterForThisObject);
+                debugger;
             }
         });
     }
     drawMovableObject(movableObjectArray) {
         movableObjectArray.forEach((movableObject) => {
-            try {
+            if (movableObject.imgPath != undefined) {
                 this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
-            }
-            catch (e) {
-                console.warn("Error loading Image", e);
-                console.warn("Could not load", movableObject.imgPath);
             }
         });
     }

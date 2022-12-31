@@ -39,17 +39,17 @@ class EnemyFinalFish extends EnemyClass {
             this.movableAnimation();
          }
          this.loadOneImgFromCach();
-      }, 100);
+      }, 1000 / 30);
    }
 
    movableAnimation() {
       this.imagesCach = this.cach_MOVABLE_IMAGES;
-      this.autoMoveLeft(16);
+      this.autoMoveLeft(10);
    }
 
    atAttackAnimation() {
       this.imagesCach = this.cach_ATTACK_IMAGES;
-      this.autoMoveLeft(25);
+      this.autoMoveLeft(15);
    }
 
    hasHurtAnimation() {
@@ -57,8 +57,8 @@ class EnemyFinalFish extends EnemyClass {
       this.autoMoveLeft(-22);
    }
 
-   winAnimationSharkie() {
-      this.imagesCach = this.cach_DEAD_IMAGES;
+   async winAnimationSharkie() {
+      this.imagesCach = await this.cach_DEAD_IMAGES;
       setTimeout(() => {
          this.stopAllIntervals();
          this.getEndImages();

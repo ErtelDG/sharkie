@@ -19,9 +19,9 @@ class Sharkie extends MovableClass {
         this.setColissionPointsObject(120, 60, 180, 120);
         this.checkIsDead();
         this.startTimerForIdleTime();
-        this.loadInIntervallOneImg();
         this.breatheAnimation();
         this.pressSpace();
+        this.loadInIntervallOneImg();
     }
     timeOver = true;
     fireBubble = false;
@@ -29,7 +29,7 @@ class Sharkie extends MovableClass {
         setInterval(() => (keyboard.SPACE == true ? (this.timeOver = false) : (this.timeOver = true)), 1000 / 15);
     }
     loadInIntervallOneImg() {
-        setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 1000 / 15);
+        setInterval(() => (!this.isDead ? this.loadOneImgFromCach() : this.loadSharkieDeadImages()), 1000 / 30);
     }
     checkDirectionOfMovement() {
         setInterval(() => {
@@ -40,7 +40,7 @@ class Sharkie extends MovableClass {
         }, 1000 / 30);
     }
     loadInIntervallAllImg() {
-        setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 1000 / 30);
+        setInterval(() => (keyboard.SPACE == false ? this.loadAllImageArrayForCurrenttAnimation() : false), 1000 / 15);
     }
     cach_IDLE = [];
     cach_LONG_IDLE = [];
@@ -95,7 +95,7 @@ class Sharkie extends MovableClass {
     loadAllImageArrayForCurrenttAnimation() {
         if (this.hasHurt && !this.isDead) {
             this.isIdle = false;
-            this.imagesCach = this.cach_IS_DEAD;
+            this.imagesCach = this.cach_HAS_HURT;
         }
         else if (this.hasHurtElectric == true) {
             this.isIdle = false;
@@ -227,7 +227,7 @@ class Sharkie extends MovableClass {
         this.isIdle = true;
     }
     loadSharkieDeadImages() {
-        this.sharkieLastImages = this.arrayAllImages_IS_DEAD.length;
+        this.sharkieLastImages = this.cach_IS_DEAD.length;
         if (this.sharkieLastImagesCounter < this.sharkieLastImages) {
             this.sharkieLastImagesCounter++;
             this.loadOneImgFromCach();

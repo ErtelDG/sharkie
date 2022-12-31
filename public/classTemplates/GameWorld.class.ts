@@ -18,27 +18,27 @@ class GameWorld {
       this.playGameSound();
    }
 
-   async gameplay() {
-       setInterval(() => {
-      if (this.ctx != null) {
-         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-         this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
-         this.drawStaticObject(this.level.backgrounds);
-         this.drawStaticObject(this.level.coins);
-         this.drawStaticObject(this.bubble);
-         this.drawStaticObject(this.level.statusBar);
-         this.drawText(this.level.statusBarValue);
-         keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
-         this.ctx.restore();
-         keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
-         this.drawMovableObject(this.level.enemies);
-         this.drawRotateStaticObject(this.level.bubbleBottles);
-         this.checkCollisionPickObjects(this.sharkie, this.level.coins);
-         this.checkCollisionEnemies(this.sharkie, this.level.enemies);
-         this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
-         this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
-      }
-       }, 1000 / 50);
+   gameplay() {
+      setInterval(() => {
+         if (this.ctx != null) {
+            this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+            this.checkPositionMovableobjectIsInTheCorrectRange(this.sharkie, -50, 200);
+            this.drawStaticObject(this.level.backgrounds);
+            this.drawStaticObject(this.level.coins);
+            this.drawStaticObject(this.bubble);
+            this.drawStaticObject(this.level.statusBar);
+            this.drawText(this.level.statusBarValue);
+            keyboard.LEFT ? this.drawMirrowObjectToCanvas(this.sharkie) : this.drawMovableObject(this.sharkie);
+            this.ctx.restore();
+            keyboard.LEFT ? this.moveBackgroundToLeft() : keyboard.RIGHT ? this.moveBackgroundToRight() : false;
+            this.drawMovableObject(this.level.enemies);
+            this.drawRotateStaticObject(this.level.bubbleBottles);
+            this.checkCollisionPickObjects(this.sharkie, this.level.coins);
+            this.checkCollisionEnemies(this.sharkie, this.level.enemies);
+            this.checkCollisionPickTransformObjects(this.sharkie, this.level.bubbleBottles);
+            this.bubbleCollisionWithEnemies(this.bubble, this.level.enemies);
+         }
+      }, 1000 / 50);
       //this.requestAnimation();
    }
 
@@ -115,19 +115,22 @@ class GameWorld {
 
    drawText(objectToDraw: any) {
       objectToDraw.forEach((objectElement: { name: any; currentCounterForThisObject: any; x: any; y: any }) => {
-         if (objectElement.name != "finalFish") {
-            this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
+         try {
+            if (objectElement.name != "finalFish") {
+               this.ctx.fillText(objectElement.currentCounterForThisObject, objectElement.x, objectElement.y);
+            }
+         } catch (e) {
+            console.warn("Error loading Image", e);
+            console.warn("Could not load", objectElement.currentCounterForThisObject);
+            debugger;
          }
       });
    }
 
    drawMovableObject(movableObjectArray: any) {
       movableObjectArray.forEach((movableObject: { imgPath: any; x: any; y: any; width: any; height: any }) => {
-         try {
+         if (movableObject.imgPath != undefined) {
             this.ctx.drawImage(movableObject.imgPath, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
-         } catch (e) {
-            console.warn("Error loading Image", e);
-            console.warn("Could not load", movableObject.imgPath);
          }
       });
    }
@@ -432,6 +435,7 @@ class GameWorld {
             }
          }
       }, 20000);
+
       setInterval(() => {
          if (this.sharkie[0].isDead) {
             this.audioSounds.gameSound.pause();
